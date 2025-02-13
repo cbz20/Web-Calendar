@@ -1,0 +1,85 @@
+/*
+    web-calendar to display multiple ics-calendars in a browser
+    source code available at https://github.com/cbz20/Web-Calendar/
+    Copyright (C) 2025 Claudius Zibrowius
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
+.calendar-monthview {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	gap: 3px;
+	margin-top: 20px;
+}
+
+.monthview-day-header {
+	color: var(--rub-blue);
+	font-weight: bold;
+	text-align: center;
+	padding: 10px 0;
+	background-color: #eee;
+}
+
+.monthview-weekend-header {
+	color: var(--rub-blue);
+	font-weight: bold;
+	text-align: center;
+	padding: 10px 0;
+	background-color: #bbb;
+}
+
+.monthview-day {
+	overflow: hidden;
+	padding: 3px;
+	min-height: 150px;
+	border: 1px solid #ddd;
+	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+}
+
+.monthview-day-outside-month {
+	background-color: #eee;
+	border: #eee;
+	color: #999;
+}
+
+.monthview-weekend {
+	border: 2px solid #bbb;
+}
+
+.monthview-today {
+	border: 2px solid var(--rub-blue);
+	font-weight: bold;
+	background-color: var(--rub-grey);
+}
+
+.monthview-day-outside-month .monthview-today {
+	border: 2px solid #888;
+}
+
+.monthview-day-event {
+	font-weight: normal;
+	font-size: 14px;
+	margin: 1px 0;
+	padding: 3px;
+	border-radius: 4px;
+	text-align: left;
+	cursor: pointer;
+	color: white;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

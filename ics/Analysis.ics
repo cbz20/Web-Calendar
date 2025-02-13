@@ -1,0 +1,434 @@
+BEGIN:VCALENDAR
+PRODID:-//Mozilla.org/NONSGML Mozilla Calendar V1.1//EN
+VERSION:2.0
+BEGIN:VTIMEZONE
+TZID:Europe/Berlin
+X-TZINFO:Europe/Berlin[2024a]
+BEGIN:STANDARD
+TZOFFSETTO:+010000
+TZOFFSETFROM:+005328
+TZNAME:Europe/Berlin(STD)
+DTSTART:18930401T000000
+RDATE:18930401T000000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+010000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19160430T230000
+RDATE:19160430T230000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETTO:+010000
+TZOFFSETFROM:+020000
+TZNAME:Europe/Berlin(STD)
+DTSTART:19161001T010000
+RDATE:19161001T010000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+010000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19170416T020000
+RRULE:FREQ=YEARLY;BYMONTH=4;BYDAY=3MO;UNTIL=19180415T020000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETTO:+010000
+TZOFFSETFROM:+020000
+TZNAME:Europe/Berlin(STD)
+DTSTART:19170917T030000
+RRULE:FREQ=YEARLY;BYMONTH=9;BYDAY=3MO;UNTIL=19180916T030000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+010000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19400401T020000
+RDATE:19400401T020000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETTO:+010000
+TZOFFSETFROM:+020000
+TZNAME:Europe/Berlin(STD)
+DTSTART:19421102T030000
+RDATE:19421102T030000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+010000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19430329T020000
+RDATE:19430329T020000
+END:DAYLIGHT
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+010000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19440403T020000
+RRULE:FREQ=YEARLY;BYMONTH=4;BYDAY=1MO;UNTIL=19450402T020000
+END:DAYLIGHT
+BEGIN:DAYLIGHT
+TZOFFSETTO:+030000
+TZOFFSETFROM:+020000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19450524T020000
+RDATE:19450524T020000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETTO:+010000
+TZOFFSETFROM:+020000
+TZNAME:Europe/Berlin(STD)
+DTSTART:19431004T030000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=1MO;UNTIL=19441002T030000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+030000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19450924T030000
+RDATE:19450924T030000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETTO:+010000
+TZOFFSETFROM:+020000
+TZNAME:Europe/Berlin(STD)
+DTSTART:19451118T030000
+RDATE:19451118T030000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+010000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19460414T020000
+RDATE:19460414T020000
+END:DAYLIGHT
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+010000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19470406T030000
+RDATE:19470406T030000
+END:DAYLIGHT
+BEGIN:DAYLIGHT
+TZOFFSETTO:+030000
+TZOFFSETFROM:+020000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19470511T030000
+RDATE:19470511T030000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETTO:+010000
+TZOFFSETFROM:+020000
+TZNAME:Europe/Berlin(STD)
+DTSTART:19461007T030000
+RDATE:19461007T030000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+030000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19470629T030000
+RDATE:19470629T030000
+END:DAYLIGHT
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+010000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19480418T020000
+RDATE:19480418T020000
+END:DAYLIGHT
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+010000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19490410T020000
+RDATE:19490410T020000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETTO:+010000
+TZOFFSETFROM:+020000
+TZNAME:Europe/Berlin(STD)
+DTSTART:19471005T030000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=1SU;UNTIL=19491002T030000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+010000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19800406T020000
+RDATE:19800406T020000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETTO:+010000
+TZOFFSETFROM:+020000
+TZNAME:Europe/Berlin(STD)
+DTSTART:19800928T030000
+RRULE:FREQ=YEARLY;BYMONTH=9;BYDAY=-1SU;UNTIL=19950924T030000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+010000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19810329T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU;UNTIL=19960331T020000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETTO:+010000
+TZOFFSETFROM:+020000
+TZNAME:Europe/Berlin(STD)
+DTSTART:19961027T030000
+RDATE:19961027T030000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+010000
+TZNAME:(DST)
+DTSTART:19970330T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETTO:+010000
+TZOFFSETFROM:+020000
+TZNAME:(STD)
+DTSTART:19971026T030000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+CREATED:20240920T072726Z
+LAST-MODIFIED:20241111T093755Z
+DTSTAMP:20240920T072726Z
+UID:9241-66ED2200-D-53FB8680
+SUMMARY:Test Analysis
+CATEGORIES:Oberseminar Globale Analysis
+DTSTART;TZID=Europe/Berlin:20240912T080000
+DTEND;TZID=Europe/Berlin:20240912T180000
+CLASS:PUBLIC
+TRANSP:OPAQUE
+SEQUENCE:1
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241111T143906Z
+LAST-MODIFIED:20241111T143956Z
+DTSTAMP:20241111T143956Z
+UID:29948d1e-4e08-49d6-a43a-d08c1c0d0328
+SUMMARY:Abstract Test
+CATEGORIES:Arbeitsseminar Symplektische Geometrie
+DTSTART;TZID=Europe/Berlin:20241207T160000
+DTEND;TZID=Europe/Berlin:20241207T170000
+TRANSP:OPAQUE
+LOCATION:irgendwo in IA
+DESCRIPTION;ALTREP="data:text/html,Abstract%20Abstract%20Abstract%20Abstrac
+ t%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstr
+ act%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abs
+ tract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20A
+ bstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%2
+ 0Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract
+ %20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstra
+ ct%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abst
+ ract%20Abstract%20Abstract%20":Abstract Abstract Abstract Abstract Abstract
+  Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Ab
+ stract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstr
+ act Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract
+  Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Ab
+ stract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstr
+ act Abstract Abstract Abstract Abstract Abstract Abstract Abstract 
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241111T143906Z
+LAST-MODIFIED:20250205T080849Z
+DTSTAMP:20250205T080849Z
+UID:39f848cb-7a75-4221-b478-4f27777d1670
+SUMMARY:Abstract Test
+CATEGORIES:Arbeitsseminar Symplektische Geometrie
+DTSTART;TZID=Europe/Berlin:20250206T160000
+DTEND;TZID=Europe/Berlin:20250206T170000
+TRANSP:OPAQUE
+LOCATION:irgendwo in IA
+DESCRIPTION;ALTREP="data:text/html,Abstract%20Abstract%20Abstract%20Abstrac
+ t%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstr
+ act%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abs
+ tract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20A
+ bstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%2
+ 0Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract
+ %20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstra
+ ct%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abst
+ ract%20Abstract%20Abstract%20":Abstract Abstract Abstract Abstract Abstract
+  Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Ab
+ stract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstr
+ act Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract
+  Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Ab
+ stract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstr
+ act Abstract Abstract Abstract Abstract Abstract Abstract Abstract 
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241111T143906Z
+LAST-MODIFIED:20250205T080852Z
+DTSTAMP:20250205T080852Z
+UID:1d8b770f-2aa2-4df3-a653-45173e1f39e0
+SUMMARY:Abstract Test
+CATEGORIES:Arbeitsseminar Symplektische Geometrie
+DTSTART;TZID=Europe/Berlin:20250213T160000
+DTEND;TZID=Europe/Berlin:20250213T170000
+TRANSP:OPAQUE
+LOCATION:irgendwo in IA
+DESCRIPTION;ALTREP="data:text/html,Abstract%20Abstract%20Abstract%20Abstrac
+ t%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstr
+ act%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abs
+ tract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20A
+ bstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%2
+ 0Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract
+ %20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstra
+ ct%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abst
+ ract%20Abstract%20Abstract%20":Abstract Abstract Abstract Abstract Abstract
+  Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Ab
+ stract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstr
+ act Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract
+  Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Ab
+ stract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstr
+ act Abstract Abstract Abstract Abstract Abstract Abstract Abstract 
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241111T143906Z
+LAST-MODIFIED:20250205T080854Z
+DTSTAMP:20250205T080854Z
+UID:179724ed-688b-403b-aa27-02e0288bbc5c
+SUMMARY:Abstract Test
+CATEGORIES:Arbeitsseminar Symplektische Geometrie
+DTSTART;TZID=Europe/Berlin:20250220T160000
+DTEND;TZID=Europe/Berlin:20250220T170000
+TRANSP:OPAQUE
+LOCATION:irgendwo in IA
+DESCRIPTION;ALTREP="data:text/html,Abstract%20Abstract%20Abstract%20Abstrac
+ t%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstr
+ act%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abs
+ tract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20A
+ bstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%2
+ 0Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract
+ %20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstra
+ ct%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abst
+ ract%20Abstract%20Abstract%20":Abstract Abstract Abstract Abstract Abstract
+  Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Ab
+ stract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstr
+ act Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract
+  Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Ab
+ stract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstr
+ act Abstract Abstract Abstract Abstract Abstract Abstract Abstract 
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241111T143906Z
+LAST-MODIFIED:20250205T080901Z
+DTSTAMP:20250205T080901Z
+UID:5ced9fdc-2212-4da7-a1a1-21402462974a
+SUMMARY:Abstract Test
+CATEGORIES:Arbeitsseminar Symplektische Geometrie
+DTSTART;TZID=Europe/Berlin:20250227T160000
+DTEND;TZID=Europe/Berlin:20250227T170000
+TRANSP:OPAQUE
+LOCATION:irgendwo in IA
+DESCRIPTION;ALTREP="data:text/html,Abstract%20Abstract%20Abstract%20Abstrac
+ t%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstr
+ act%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abs
+ tract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20A
+ bstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%2
+ 0Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract
+ %20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstra
+ ct%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abst
+ ract%20Abstract%20Abstract%20":Abstract Abstract Abstract Abstract Abstract
+  Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Ab
+ stract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstr
+ act Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract
+  Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Ab
+ stract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstr
+ act Abstract Abstract Abstract Abstract Abstract Abstract Abstract 
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241111T143906Z
+LAST-MODIFIED:20250205T080904Z
+DTSTAMP:20250205T080904Z
+UID:2f5b4863-0011-45cd-aaba-26229b17f051
+SUMMARY:Abstract Test
+CATEGORIES:Arbeitsseminar Symplektische Geometrie
+DTSTART;TZID=Europe/Berlin:20250306T160000
+DTEND;TZID=Europe/Berlin:20250306T170000
+TRANSP:OPAQUE
+LOCATION:irgendwo in IA
+DESCRIPTION;ALTREP="data:text/html,Abstract%20Abstract%20Abstract%20Abstrac
+ t%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstr
+ act%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abs
+ tract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20A
+ bstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%2
+ 0Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract
+ %20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstra
+ ct%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abst
+ ract%20Abstract%20Abstract%20":Abstract Abstract Abstract Abstract Abstract
+  Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Ab
+ stract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstr
+ act Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract
+  Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Ab
+ stract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstr
+ act Abstract Abstract Abstract Abstract Abstract Abstract Abstract 
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241111T143906Z
+LAST-MODIFIED:20250205T080906Z
+DTSTAMP:20250205T080906Z
+UID:eef89636-bd39-4218-ad69-9e5b55308758
+SUMMARY:Abstract Test
+CATEGORIES:Arbeitsseminar Symplektische Geometrie
+DTSTART;TZID=Europe/Berlin:20250313T160000
+DTEND;TZID=Europe/Berlin:20250313T170000
+TRANSP:OPAQUE
+LOCATION:irgendwo in IA
+DESCRIPTION;ALTREP="data:text/html,Abstract%20Abstract%20Abstract%20Abstrac
+ t%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstr
+ act%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abs
+ tract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20A
+ bstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%2
+ 0Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract
+ %20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstra
+ ct%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abst
+ ract%20Abstract%20Abstract%20":Abstract Abstract Abstract Abstract Abstract
+  Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Ab
+ stract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstr
+ act Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract
+  Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Ab
+ stract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstr
+ act Abstract Abstract Abstract Abstract Abstract Abstract Abstract 
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241111T143906Z
+LAST-MODIFIED:20250205T080907Z
+DTSTAMP:20250205T080907Z
+UID:9e6f8ccf-6d73-49da-942f-1d83884b6f9d
+SUMMARY:Abstract Test
+CATEGORIES:Arbeitsseminar Symplektische Geometrie
+DTSTART;TZID=Europe/Berlin:20250320T160000
+DTEND;TZID=Europe/Berlin:20250320T170000
+TRANSP:OPAQUE
+LOCATION:irgendwo in IA
+DESCRIPTION;ALTREP="data:text/html,Abstract%20Abstract%20Abstract%20Abstrac
+ t%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstr
+ act%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abs
+ tract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20A
+ bstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%2
+ 0Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract
+ %20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstra
+ ct%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abstract%20Abst
+ ract%20Abstract%20Abstract%20":Abstract Abstract Abstract Abstract Abstract
+  Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Ab
+ stract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstr
+ act Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract
+  Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Ab
+ stract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstr
+ act Abstract Abstract Abstract Abstract Abstract Abstract Abstract 
+CLASS:PUBLIC
+END:VEVENT
+END:VCALENDAR

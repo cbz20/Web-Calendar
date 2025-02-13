@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 256 256"
+   version="1.1"
+   id="svg16"
+   sodipodi:docname="favicon.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs20" />
+  <sodipodi:namedview
+     id="namedview18"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="3.15625"
+     inkscape:cx="127.84158"
+     inkscape:cy="127.84158"
+     inkscape:window-width="1874"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg16" />
+  <rect
+     fill="none"
+     height="256"
+     width="256"
+     id="rect2" />
+  <circle
+     cx="128"
+     cy="128"
+     fill="#ddd"
+     r="118"
+     stroke="#ddd"
+     stroke-width="20"
+     id="circle4"/>
+  <circle
+     cx="128"
+     cy="128"
+     fill="none"
+     r="100"
+     stroke="#000"
+     stroke-width="20"
+     id="circle6" />
+  <line
+     stroke="#000"
+     stroke-width="16"
+     x1="128"
+     x2="128"
+     y1="128"
+     y2="224"
+     id="line8" />
+  <line
+     stroke="#000"
+     stroke-width="16"
+     x1="128"
+     x2="208"
+     y1="128"
+     y2="185"
+     id="line10" />
+  <line
+     stroke="#000"
+     stroke-width="16"
+     x1="128"
+     x2="48"
+     y1="128"
+     y2="185"
+     id="line12" />
+  <line
+     stroke="#000"
+     stroke-width="16"
+     x1="128"
+     x2="128"
+     y1="128"
+     y2="32"
+     id="line14" />
+</svg>

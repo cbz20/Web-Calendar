@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<!-- 
+    web-calendar to display multiple ics-calendars in a browser
+    source code available at https://github.com/cbz20/Web-Calendar/
+    Copyright (C) 2025 Claudius Zibrowius
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="svg/favicon.svg">
+    <title>Kalender der Fakultät für Mathematik an der Ruhr-Universität Bochum</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/weekview.css"/>
+    <link rel="stylesheet" type="text/css" href="css/monthview.css"/>
+</head>
+
+<body>
+    <div class="calendar-container">
+        <div id="error-message"></div>
+        <div class="calendar-header" id="calendar-header">...Kalender wird geladen...</div>
+        <div class="toggle-buttons-header" id="toggle-buttons-header"></div>
+        <div class="calendar-monthview" id="calendar-monthview"></div>
+        <table class="calendar-weekview" id="calendar-weekview"></table>
+    </div>
+
+    <!-- modal for event details -->
+    <div id="event-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header" id="modal-title"></div>
+            <div class="modal-body" id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- load the newest version of the ical.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ical.js/1.5.0/ical.min.js"></script>
+    <script src="js/weekmonthview.js"></script>
+    <script>
+        name = 'Fakultätskalender Mathematik'; // calendar title
+        colours = {// categories of displayed events and their colors
+            // an event needs to belong to at least one of these categories to be displayed
+            'Dekanat': 'var(--rub-blue)',
+            'Algebra': '#347037',
+            'Analysis': '#b61e3e',//rub-darkred
+            'Didaktik': '#be9800',//rub-yellow, but with some grey tones added
+            'Numerik': '#0073ff',//rub-blue but all grey tones removed
+            'Stochastik': '#ed7102',//rub-orange
+            'Topologie': '#8e44ad'
+        };
+        links = {// keys must agree with the keys of 'colours'
+            'Dekanat': 'ics/Dekanat.ics',
+            'Algebra': 'ics/Algebra.ics',
+            'Analysis': 'ics/Analysis.ics',
+            'Didaktik': 'ics/Didaktik.ics',
+            'Numerik': 'ics/Numerik.ics',
+            'Stochastik': 'ics/Stochastik.ics',
+            'Topologie': 'ics/Topologie.ics'
+        };
+        svgs = {
+            'month':'svg/month.svg',
+            'week':'svg/week.svg',
+            'save':'svg/save-icon.svg',
+            'question': 'svg/question-mark.svg'
+        };
+        loadICS(name, colours, links, svgs);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,692 @@
+BEGIN:VCALENDAR
+PRODID:-//Mozilla.org/NONSGML Mozilla Calendar V1.1//EN
+VERSION:2.0
+BEGIN:VTIMEZONE
+TZID:Europe/Berlin
+X-TZINFO:Europe/Berlin[2024a]
+BEGIN:STANDARD
+TZOFFSETTO:+010000
+TZOFFSETFROM:+005328
+TZNAME:Europe/Berlin(STD)
+DTSTART:18930401T000000
+RDATE:18930401T000000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+010000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19160430T230000
+RDATE:19160430T230000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETTO:+010000
+TZOFFSETFROM:+020000
+TZNAME:Europe/Berlin(STD)
+DTSTART:19161001T010000
+RDATE:19161001T010000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+010000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19170416T020000
+RRULE:FREQ=YEARLY;BYMONTH=4;BYDAY=3MO;UNTIL=19180415T020000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETTO:+010000
+TZOFFSETFROM:+020000
+TZNAME:Europe/Berlin(STD)
+DTSTART:19170917T030000
+RRULE:FREQ=YEARLY;BYMONTH=9;BYDAY=3MO;UNTIL=19180916T030000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+010000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19400401T020000
+RDATE:19400401T020000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETTO:+010000
+TZOFFSETFROM:+020000
+TZNAME:Europe/Berlin(STD)
+DTSTART:19421102T030000
+RDATE:19421102T030000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+010000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19430329T020000
+RDATE:19430329T020000
+END:DAYLIGHT
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+010000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19440403T020000
+RRULE:FREQ=YEARLY;BYMONTH=4;BYDAY=1MO;UNTIL=19450402T020000
+END:DAYLIGHT
+BEGIN:DAYLIGHT
+TZOFFSETTO:+030000
+TZOFFSETFROM:+020000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19450524T020000
+RDATE:19450524T020000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETTO:+010000
+TZOFFSETFROM:+020000
+TZNAME:Europe/Berlin(STD)
+DTSTART:19431004T030000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=1MO;UNTIL=19441002T030000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+030000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19450924T030000
+RDATE:19450924T030000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETTO:+010000
+TZOFFSETFROM:+020000
+TZNAME:Europe/Berlin(STD)
+DTSTART:19451118T030000
+RDATE:19451118T030000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+010000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19460414T020000
+RDATE:19460414T020000
+END:DAYLIGHT
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+010000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19470406T030000
+RDATE:19470406T030000
+END:DAYLIGHT
+BEGIN:DAYLIGHT
+TZOFFSETTO:+030000
+TZOFFSETFROM:+020000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19470511T030000
+RDATE:19470511T030000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETTO:+010000
+TZOFFSETFROM:+020000
+TZNAME:Europe/Berlin(STD)
+DTSTART:19461007T030000
+RDATE:19461007T030000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+030000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19470629T030000
+RDATE:19470629T030000
+END:DAYLIGHT
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+010000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19480418T020000
+RDATE:19480418T020000
+END:DAYLIGHT
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+010000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19490410T020000
+RDATE:19490410T020000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETTO:+010000
+TZOFFSETFROM:+020000
+TZNAME:Europe/Berlin(STD)
+DTSTART:19471005T030000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=1SU;UNTIL=19491002T030000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+010000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19800406T020000
+RDATE:19800406T020000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETTO:+010000
+TZOFFSETFROM:+020000
+TZNAME:Europe/Berlin(STD)
+DTSTART:19800928T030000
+RRULE:FREQ=YEARLY;BYMONTH=9;BYDAY=-1SU;UNTIL=19950924T030000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+010000
+TZNAME:Europe/Berlin(DST)
+DTSTART:19810329T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU;UNTIL=19960331T020000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETTO:+010000
+TZOFFSETFROM:+020000
+TZNAME:Europe/Berlin(STD)
+DTSTART:19961027T030000
+RDATE:19961027T030000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETTO:+020000
+TZOFFSETFROM:+010000
+TZNAME:(DST)
+DTSTART:19970330T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETTO:+010000
+TZOFFSETFROM:+020000
+TZNAME:(STD)
+DTSTART:19971026T030000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+CREATED:20241122T113318Z
+LAST-MODIFIED:20250205T081649Z
+DTSTAMP:20250205T081649Z
+UID:3f053bd8-e814-413f-90aa-b249dca96a4c
+SUMMARY:speaker (institution): Title
+CATEGORIES:Oberseminar Numerik
+DTSTART;TZID=Europe/Berlin:20250115T130000
+DTEND;TZID=Europe/Berlin:20250115T140000
+TRANSP:OPAQUE
+LOCATION:IB 123
+DESCRIPTION;ALTREP="data:text/html,abstract%20ab%20stract%20strac%20tab%20r
+ ac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20
+ stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%
+ 20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%
+ 20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stra
+ ct%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%
+ 20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac
+ %20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20st
+ ac%20tat%3Cbr%3E%3Cbr%3Eabstract%20ab%20stract%20strac%20tab%20rac%20tac%20
+ stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%
+ 20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%
+ 20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stra
+ ct%20strac%20tab%20rac%20tac%20stac%20tat%3Cbr%3E%3Cbr%3Eabstract%20ab%20st
+ ract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20stra
+ c%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20r
+ ac%20tac%20stac%20tat%20":abstract ab stract strac tab rac tac stac tat abs
+ tract ab stract strac tab rac tac stac tat abstract ab stract strac tab rac
+  tac stac tat abstract ab stract strac tab rac tac stac tat abstract ab str
+ act strac tab rac tac stac tat abstract ab stract strac tab rac tac stac ta
+ t abstract ab stract strac tab rac tac stac tat abstract ab stract strac ta
+ b rac tac stac tat abstract ab stract strac tab rac tac stac tat\n\nabstrac
+ t ab stract strac tab rac tac stac tat abstract ab stract strac tab rac tac
+  stac tat abstract ab stract strac tab rac tac stac tat abstract ab stract 
+ strac tab rac tac stac tat abstract ab stract strac tab rac tac stac tat\n\
+ nabstract ab stract strac tab rac tac stac tat abstract ab stract strac tab
+  rac tac stac tat abstract ab stract strac tab rac tac stac tat 
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241122T113318Z
+LAST-MODIFIED:20250205T081653Z
+DTSTAMP:20250205T081653Z
+UID:805766c3-b3df-42c0-8794-87f07f62cca6
+SUMMARY:speaker (institution): Title
+CATEGORIES:Oberseminar Numerik
+DTSTART;TZID=Europe/Berlin:20250122T130000
+DTEND;TZID=Europe/Berlin:20250122T140000
+TRANSP:OPAQUE
+LOCATION:IB 123
+DESCRIPTION;ALTREP="data:text/html,abstract%20ab%20stract%20strac%20tab%20r
+ ac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20
+ stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%
+ 20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%
+ 20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stra
+ ct%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%
+ 20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac
+ %20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20st
+ ac%20tat%3Cbr%3E%3Cbr%3Eabstract%20ab%20stract%20strac%20tab%20rac%20tac%20
+ stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%
+ 20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%
+ 20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stra
+ ct%20strac%20tab%20rac%20tac%20stac%20tat%3Cbr%3E%3Cbr%3Eabstract%20ab%20st
+ ract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20stra
+ c%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20r
+ ac%20tac%20stac%20tat%20":abstract ab stract strac tab rac tac stac tat abs
+ tract ab stract strac tab rac tac stac tat abstract ab stract strac tab rac
+  tac stac tat abstract ab stract strac tab rac tac stac tat abstract ab str
+ act strac tab rac tac stac tat abstract ab stract strac tab rac tac stac ta
+ t abstract ab stract strac tab rac tac stac tat abstract ab stract strac ta
+ b rac tac stac tat abstract ab stract strac tab rac tac stac tat\n\nabstrac
+ t ab stract strac tab rac tac stac tat abstract ab stract strac tab rac tac
+  stac tat abstract ab stract strac tab rac tac stac tat abstract ab stract 
+ strac tab rac tac stac tat abstract ab stract strac tab rac tac stac tat\n\
+ nabstract ab stract strac tab rac tac stac tat abstract ab stract strac tab
+  rac tac stac tat abstract ab stract strac tab rac tac stac tat 
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241122T113318Z
+LAST-MODIFIED:20250205T081655Z
+DTSTAMP:20250205T081655Z
+UID:a4bb0a09-1f48-49d5-8021-dfc190c20eb6
+SUMMARY:speaker (institution): Title
+CATEGORIES:Oberseminar Numerik
+DTSTART;TZID=Europe/Berlin:20250129T130000
+DTEND;TZID=Europe/Berlin:20250129T140000
+TRANSP:OPAQUE
+LOCATION:IB 123
+DESCRIPTION;ALTREP="data:text/html,abstract%20ab%20stract%20strac%20tab%20r
+ ac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20
+ stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%
+ 20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%
+ 20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stra
+ ct%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%
+ 20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac
+ %20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20st
+ ac%20tat%3Cbr%3E%3Cbr%3Eabstract%20ab%20stract%20strac%20tab%20rac%20tac%20
+ stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%
+ 20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%
+ 20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stra
+ ct%20strac%20tab%20rac%20tac%20stac%20tat%3Cbr%3E%3Cbr%3Eabstract%20ab%20st
+ ract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20stra
+ c%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20r
+ ac%20tac%20stac%20tat%20":abstract ab stract strac tab rac tac stac tat abs
+ tract ab stract strac tab rac tac stac tat abstract ab stract strac tab rac
+  tac stac tat abstract ab stract strac tab rac tac stac tat abstract ab str
+ act strac tab rac tac stac tat abstract ab stract strac tab rac tac stac ta
+ t abstract ab stract strac tab rac tac stac tat abstract ab stract strac ta
+ b rac tac stac tat abstract ab stract strac tab rac tac stac tat\n\nabstrac
+ t ab stract strac tab rac tac stac tat abstract ab stract strac tab rac tac
+  stac tat abstract ab stract strac tab rac tac stac tat abstract ab stract 
+ strac tab rac tac stac tat abstract ab stract strac tab rac tac stac tat\n\
+ nabstract ab stract strac tab rac tac stac tat abstract ab stract strac tab
+  rac tac stac tat abstract ab stract strac tab rac tac stac tat 
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241122T113318Z
+LAST-MODIFIED:20250205T081659Z
+DTSTAMP:20250205T081659Z
+UID:7d1a5f6b-7b16-44c7-8f3f-03242b99694f
+SUMMARY:speaker (institution): Title
+CATEGORIES:Oberseminar Numerik
+DTSTART;TZID=Europe/Berlin:20250205T130000
+DTEND;TZID=Europe/Berlin:20250205T140000
+TRANSP:OPAQUE
+LOCATION:IB 123
+DESCRIPTION;ALTREP="data:text/html,abstract%20ab%20stract%20strac%20tab%20r
+ ac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20
+ stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%
+ 20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%
+ 20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stra
+ ct%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%
+ 20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac
+ %20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20st
+ ac%20tat%3Cbr%3E%3Cbr%3Eabstract%20ab%20stract%20strac%20tab%20rac%20tac%20
+ stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%
+ 20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%
+ 20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stra
+ ct%20strac%20tab%20rac%20tac%20stac%20tat%3Cbr%3E%3Cbr%3Eabstract%20ab%20st
+ ract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20stra
+ c%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20r
+ ac%20tac%20stac%20tat%20":abstract ab stract strac tab rac tac stac tat abs
+ tract ab stract strac tab rac tac stac tat abstract ab stract strac tab rac
+  tac stac tat abstract ab stract strac tab rac tac stac tat abstract ab str
+ act strac tab rac tac stac tat abstract ab stract strac tab rac tac stac ta
+ t abstract ab stract strac tab rac tac stac tat abstract ab stract strac ta
+ b rac tac stac tat abstract ab stract strac tab rac tac stac tat\n\nabstrac
+ t ab stract strac tab rac tac stac tat abstract ab stract strac tab rac tac
+  stac tat abstract ab stract strac tab rac tac stac tat abstract ab stract 
+ strac tab rac tac stac tat abstract ab stract strac tab rac tac stac tat\n\
+ nabstract ab stract strac tab rac tac stac tat abstract ab stract strac tab
+  rac tac stac tat abstract ab stract strac tab rac tac stac tat 
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241122T113318Z
+LAST-MODIFIED:20250205T081700Z
+DTSTAMP:20250205T081700Z
+UID:a15a252e-0446-40d5-b702-cca4c81c5a7e
+SUMMARY:speaker (institution): Title
+CATEGORIES:Oberseminar Numerik
+DTSTART;TZID=Europe/Berlin:20250212T130000
+DTEND;TZID=Europe/Berlin:20250212T140000
+TRANSP:OPAQUE
+LOCATION:IB 123
+DESCRIPTION;ALTREP="data:text/html,abstract%20ab%20stract%20strac%20tab%20r
+ ac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20
+ stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%
+ 20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%
+ 20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stra
+ ct%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%
+ 20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac
+ %20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20st
+ ac%20tat%3Cbr%3E%3Cbr%3Eabstract%20ab%20stract%20strac%20tab%20rac%20tac%20
+ stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%
+ 20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%
+ 20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stra
+ ct%20strac%20tab%20rac%20tac%20stac%20tat%3Cbr%3E%3Cbr%3Eabstract%20ab%20st
+ ract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20stra
+ c%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20r
+ ac%20tac%20stac%20tat%20":abstract ab stract strac tab rac tac stac tat abs
+ tract ab stract strac tab rac tac stac tat abstract ab stract strac tab rac
+  tac stac tat abstract ab stract strac tab rac tac stac tat abstract ab str
+ act strac tab rac tac stac tat abstract ab stract strac tab rac tac stac ta
+ t abstract ab stract strac tab rac tac stac tat abstract ab stract strac ta
+ b rac tac stac tat abstract ab stract strac tab rac tac stac tat\n\nabstrac
+ t ab stract strac tab rac tac stac tat abstract ab stract strac tab rac tac
+  stac tat abstract ab stract strac tab rac tac stac tat abstract ab stract 
+ strac tab rac tac stac tat abstract ab stract strac tab rac tac stac tat\n\
+ nabstract ab stract strac tab rac tac stac tat abstract ab stract strac tab
+  rac tac stac tat abstract ab stract strac tab rac tac stac tat 
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241122T113318Z
+LAST-MODIFIED:20250205T081702Z
+DTSTAMP:20250205T081702Z
+UID:6eb94186-0fe9-4550-b626-b851608f5f34
+SUMMARY:speaker (institution): Title
+CATEGORIES:Oberseminar Numerik
+DTSTART;TZID=Europe/Berlin:20250219T130000
+DTEND;TZID=Europe/Berlin:20250219T140000
+TRANSP:OPAQUE
+LOCATION:IB 123
+DESCRIPTION;ALTREP="data:text/html,abstract%20ab%20stract%20strac%20tab%20r
+ ac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20
+ stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%
+ 20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%
+ 20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stra
+ ct%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%
+ 20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac
+ %20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20st
+ ac%20tat%3Cbr%3E%3Cbr%3Eabstract%20ab%20stract%20strac%20tab%20rac%20tac%20
+ stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%
+ 20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%
+ 20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stra
+ ct%20strac%20tab%20rac%20tac%20stac%20tat%3Cbr%3E%3Cbr%3Eabstract%20ab%20st
+ ract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20stra
+ c%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20r
+ ac%20tac%20stac%20tat%20":abstract ab stract strac tab rac tac stac tat abs
+ tract ab stract strac tab rac tac stac tat abstract ab stract strac tab rac
+  tac stac tat abstract ab stract strac tab rac tac stac tat abstract ab str
+ act strac tab rac tac stac tat abstract ab stract strac tab rac tac stac ta
+ t abstract ab stract strac tab rac tac stac tat abstract ab stract strac ta
+ b rac tac stac tat abstract ab stract strac tab rac tac stac tat\n\nabstrac
+ t ab stract strac tab rac tac stac tat abstract ab stract strac tab rac tac
+  stac tat abstract ab stract strac tab rac tac stac tat abstract ab stract 
+ strac tab rac tac stac tat abstract ab stract strac tab rac tac stac tat\n\
+ nabstract ab stract strac tab rac tac stac tat abstract ab stract strac tab
+  rac tac stac tat abstract ab stract strac tab rac tac stac tat 
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241122T113318Z
+LAST-MODIFIED:20250205T081703Z
+DTSTAMP:20250205T081703Z
+UID:55002416-e297-4f1f-8e07-41f1d81a1137
+SUMMARY:speaker (institution): Title
+CATEGORIES:Oberseminar Numerik
+DTSTART;TZID=Europe/Berlin:20250226T130000
+DTEND;TZID=Europe/Berlin:20250226T140000
+TRANSP:OPAQUE
+LOCATION:IB 123
+DESCRIPTION;ALTREP="data:text/html,abstract%20ab%20stract%20strac%20tab%20r
+ ac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20
+ stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%
+ 20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%
+ 20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stra
+ ct%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%
+ 20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac
+ %20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20st
+ ac%20tat%3Cbr%3E%3Cbr%3Eabstract%20ab%20stract%20strac%20tab%20rac%20tac%20
+ stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%
+ 20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%
+ 20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stra
+ ct%20strac%20tab%20rac%20tac%20stac%20tat%3Cbr%3E%3Cbr%3Eabstract%20ab%20st
+ ract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20stra
+ c%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20r
+ ac%20tac%20stac%20tat%20":abstract ab stract strac tab rac tac stac tat abs
+ tract ab stract strac tab rac tac stac tat abstract ab stract strac tab rac
+  tac stac tat abstract ab stract strac tab rac tac stac tat abstract ab str
+ act strac tab rac tac stac tat abstract ab stract strac tab rac tac stac ta
+ t abstract ab stract strac tab rac tac stac tat abstract ab stract strac ta
+ b rac tac stac tat abstract ab stract strac tab rac tac stac tat\n\nabstrac
+ t ab stract strac tab rac tac stac tat abstract ab stract strac tab rac tac
+  stac tat abstract ab stract strac tab rac tac stac tat abstract ab stract 
+ strac tab rac tac stac tat abstract ab stract strac tab rac tac stac tat\n\
+ nabstract ab stract strac tab rac tac stac tat abstract ab stract strac tab
+  rac tac stac tat abstract ab stract strac tab rac tac stac tat 
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241122T113318Z
+LAST-MODIFIED:20250205T081707Z
+DTSTAMP:20250205T081707Z
+UID:50dbf11c-e091-4947-a002-dab5bf7d6b64
+SUMMARY:speaker (institution): Title
+CATEGORIES:Oberseminar Numerik
+DTSTART;TZID=Europe/Berlin:20250305T130000
+DTEND;TZID=Europe/Berlin:20250305T140000
+TRANSP:OPAQUE
+LOCATION:IB 123
+DESCRIPTION;ALTREP="data:text/html,abstract%20ab%20stract%20strac%20tab%20r
+ ac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20
+ stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%
+ 20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%
+ 20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stra
+ ct%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%
+ 20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac
+ %20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20st
+ ac%20tat%3Cbr%3E%3Cbr%3Eabstract%20ab%20stract%20strac%20tab%20rac%20tac%20
+ stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%
+ 20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%
+ 20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stra
+ ct%20strac%20tab%20rac%20tac%20stac%20tat%3Cbr%3E%3Cbr%3Eabstract%20ab%20st
+ ract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20stra
+ c%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20r
+ ac%20tac%20stac%20tat%20":abstract ab stract strac tab rac tac stac tat abs
+ tract ab stract strac tab rac tac stac tat abstract ab stract strac tab rac
+  tac stac tat abstract ab stract strac tab rac tac stac tat abstract ab str
+ act strac tab rac tac stac tat abstract ab stract strac tab rac tac stac ta
+ t abstract ab stract strac tab rac tac stac tat abstract ab stract strac ta
+ b rac tac stac tat abstract ab stract strac tab rac tac stac tat\n\nabstrac
+ t ab stract strac tab rac tac stac tat abstract ab stract strac tab rac tac
+  stac tat abstract ab stract strac tab rac tac stac tat abstract ab stract 
+ strac tab rac tac stac tat abstract ab stract strac tab rac tac stac tat\n\
+ nabstract ab stract strac tab rac tac stac tat abstract ab stract strac tab
+  rac tac stac tat abstract ab stract strac tab rac tac stac tat 
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241122T113318Z
+LAST-MODIFIED:20250205T081709Z
+DTSTAMP:20250205T081709Z
+UID:aa0c4351-26dd-470d-847e-2f9b8de58c28
+SUMMARY:speaker (institution): Title
+CATEGORIES:Oberseminar Numerik
+DTSTART;TZID=Europe/Berlin:20250312T130000
+DTEND;TZID=Europe/Berlin:20250312T140000
+TRANSP:OPAQUE
+LOCATION:IB 123
+DESCRIPTION;ALTREP="data:text/html,abstract%20ab%20stract%20strac%20tab%20r
+ ac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20
+ stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%
+ 20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%
+ 20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stra
+ ct%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%
+ 20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac
+ %20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20st
+ ac%20tat%3Cbr%3E%3Cbr%3Eabstract%20ab%20stract%20strac%20tab%20rac%20tac%20
+ stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%
+ 20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%
+ 20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stra
+ ct%20strac%20tab%20rac%20tac%20stac%20tat%3Cbr%3E%3Cbr%3Eabstract%20ab%20st
+ ract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20stra
+ c%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20r
+ ac%20tac%20stac%20tat%20":abstract ab stract strac tab rac tac stac tat abs
+ tract ab stract strac tab rac tac stac tat abstract ab stract strac tab rac
+  tac stac tat abstract ab stract strac tab rac tac stac tat abstract ab str
+ act strac tab rac tac stac tat abstract ab stract strac tab rac tac stac ta
+ t abstract ab stract strac tab rac tac stac tat abstract ab stract strac ta
+ b rac tac stac tat abstract ab stract strac tab rac tac stac tat\n\nabstrac
+ t ab stract strac tab rac tac stac tat abstract ab stract strac tab rac tac
+  stac tat abstract ab stract strac tab rac tac stac tat abstract ab stract 
+ strac tab rac tac stac tat abstract ab stract strac tab rac tac stac tat\n\
+ nabstract ab stract strac tab rac tac stac tat abstract ab stract strac tab
+  rac tac stac tat abstract ab stract strac tab rac tac stac tat 
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241122T113318Z
+LAST-MODIFIED:20250205T081711Z
+DTSTAMP:20250205T081711Z
+UID:2d6d846d-7b48-4c35-aa7a-254dc1a94468
+SUMMARY:speaker (institution): Title
+CATEGORIES:Oberseminar Numerik
+DTSTART;TZID=Europe/Berlin:20250319T130000
+DTEND;TZID=Europe/Berlin:20250319T140000
+TRANSP:OPAQUE
+LOCATION:IB 123
+DESCRIPTION;ALTREP="data:text/html,abstract%20ab%20stract%20strac%20tab%20r
+ ac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20
+ stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%
+ 20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%
+ 20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stra
+ ct%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%
+ 20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac
+ %20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20st
+ ac%20tat%3Cbr%3E%3Cbr%3Eabstract%20ab%20stract%20strac%20tab%20rac%20tac%20
+ stac%20tat%20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%
+ 20abstract%20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%
+ 20ab%20stract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stra
+ ct%20strac%20tab%20rac%20tac%20stac%20tat%3Cbr%3E%3Cbr%3Eabstract%20ab%20st
+ ract%20strac%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20stra
+ c%20tab%20rac%20tac%20stac%20tat%20abstract%20ab%20stract%20strac%20tab%20r
+ ac%20tac%20stac%20tat%20":abstract ab stract strac tab rac tac stac tat abs
+ tract ab stract strac tab rac tac stac tat abstract ab stract strac tab rac
+  tac stac tat abstract ab stract strac tab rac tac stac tat abstract ab str
+ act strac tab rac tac stac tat abstract ab stract strac tab rac tac stac ta
+ t abstract ab stract strac tab rac tac stac tat abstract ab stract strac ta
+ b rac tac stac tat abstract ab stract strac tab rac tac stac tat\n\nabstrac
+ t ab stract strac tab rac tac stac tat abstract ab stract strac tab rac tac
+  stac tat abstract ab stract strac tab rac tac stac tat abstract ab stract 
+ strac tab rac tac stac tat abstract ab stract strac tab rac tac stac tat\n\
+ nabstract ab stract strac tab rac tac stac tat abstract ab stract strac tab
+  rac tac stac tat abstract ab stract strac tab rac tac stac tat 
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241111T143231Z
+LAST-MODIFIED:20250205T081735Z
+DTSTAMP:20250205T081735Z
+UID:f1fdd2c0-eee1-4334-aa7f-3aaac2b78af8
+SUMMARY:Oberseminar Test
+CATEGORIES:Oberseminar Numerik
+DTSTART;TZID=Europe/Berlin:20250116T080000
+DTEND;TZID=Europe/Berlin:20250116T090000
+TRANSP:OPAQUE
+CLASS:PUBLIC
+X-MOZ-GENERATION:1
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241111T143231Z
+LAST-MODIFIED:20250205T081740Z
+DTSTAMP:20250205T081740Z
+UID:6fa3885b-dc4d-4f30-b38d-82c03c742637
+SUMMARY:Oberseminar Test
+CATEGORIES:Oberseminar Numerik
+DTSTART;TZID=Europe/Berlin:20250123T080000
+DTEND;TZID=Europe/Berlin:20250123T090000
+TRANSP:OPAQUE
+CLASS:PUBLIC
+X-MOZ-GENERATION:1
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241111T143231Z
+LAST-MODIFIED:20250205T081742Z
+DTSTAMP:20250205T081742Z
+UID:8c8c506f-0bc4-4e17-bf64-2be5c9bedfcd
+SUMMARY:Oberseminar Test
+CATEGORIES:Oberseminar Numerik
+DTSTART;TZID=Europe/Berlin:20250130T080000
+DTEND;TZID=Europe/Berlin:20250130T090000
+TRANSP:OPAQUE
+CLASS:PUBLIC
+X-MOZ-GENERATION:1
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241111T143231Z
+LAST-MODIFIED:20250205T081745Z
+DTSTAMP:20250205T081745Z
+UID:66806989-3687-4699-9d1c-f279b1fb4e47
+SUMMARY:Oberseminar Test
+CATEGORIES:Oberseminar Numerik
+DTSTART;TZID=Europe/Berlin:20250206T080000
+DTEND;TZID=Europe/Berlin:20250206T090000
+TRANSP:OPAQUE
+CLASS:PUBLIC
+X-MOZ-GENERATION:1
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241111T143231Z
+LAST-MODIFIED:20250205T081747Z
+DTSTAMP:20250205T081747Z
+UID:1c01c8bf-e180-4466-97b0-8ed86cc1a544
+SUMMARY:Oberseminar Test
+CATEGORIES:Oberseminar Numerik
+DTSTART;TZID=Europe/Berlin:20250213T080000
+DTEND;TZID=Europe/Berlin:20250213T090000
+TRANSP:OPAQUE
+CLASS:PUBLIC
+X-MOZ-GENERATION:1
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241111T143231Z
+LAST-MODIFIED:20250205T081748Z
+DTSTAMP:20250205T081748Z
+UID:2b1720ec-3797-4635-a806-3c8e0807ccf5
+SUMMARY:Oberseminar Test
+CATEGORIES:Oberseminar Numerik
+DTSTART;TZID=Europe/Berlin:20250220T080000
+DTEND;TZID=Europe/Berlin:20250220T090000
+TRANSP:OPAQUE
+CLASS:PUBLIC
+X-MOZ-GENERATION:1
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241111T143231Z
+LAST-MODIFIED:20250205T081750Z
+DTSTAMP:20250205T081750Z
+UID:a8262acf-a549-4e03-b841-6b304ee56d2c
+SUMMARY:Oberseminar Test
+CATEGORIES:Oberseminar Numerik
+DTSTART;TZID=Europe/Berlin:20250227T080000
+DTEND;TZID=Europe/Berlin:20250227T090000
+TRANSP:OPAQUE
+CLASS:PUBLIC
+X-MOZ-GENERATION:1
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241122T131932Z
+LAST-MODIFIED:20250205T081803Z
+DTSTAMP:20250205T081803Z
+UID:9e8b6b3a-5496-42ec-b00d-08e50ec89b9f
+SUMMARY: singleDayEvent | from midnight to one minute before midnight
+CATEGORIES:Oberseminar Numerik
+DTSTART;TZID=Europe/Berlin:20250108T000000
+DTEND;TZID=Europe/Berlin:20250108T235900
+TRANSP:OPAQUE
+X-MOZ-GENERATION:1
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20241122T131932Z
+LAST-MODIFIED:20250205T081809Z
+DTSTAMP:20250205T081809Z
+UID:ff3df52d-4119-4ff4-9d2d-d857ebf70777
+SUMMARY: singleDayEvent | from midnight to one minute before midnight
+CATEGORIES:Oberseminar Numerik
+DTSTART;TZID=Europe/Berlin:20250129T000000
+DTEND;TZID=Europe/Berlin:20250129T235900
+TRANSP:OPAQUE
+X-MOZ-GENERATION:1
+END:VEVENT
+END:VCALENDAR

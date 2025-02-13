@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<!--
+    web-calendar to display multiple ics-calendars in a browser
+    source code available at https://github.com/cbz20/Web-Calendar/
+    Copyright (C) 2025 Claudius Zibrowius
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="svg/favicon.svg">
+    <title>Kalender des Oberseminars Topologie</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/semesterview.css"/>
+</head>
+
+<body>
+    <div class="calendar-container">
+        <div id="error-message"></div>
+        <div class="calendar-header" id="calendar-header">...Kalender wird geladen...</div>
+        <div class="toggle-buttons-header" id="toggle-buttons-header"></div>
+        <table class="calendar-semesterview" id="calendar-semesterview"></table>
+    </div>
+
+    <!-- modal for event details -->
+    <div id="event-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header" id="modal-title"></div>
+            <div class="modal-body" id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- load the newest version of the ical.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ical.js/1.5.0/ical.min.js"></script>
+    <script src="js/semesterview.min.js"></script>
+    <script>
+        icsFile = 'ics/Topologie.ics'; //calendar source file/url
+        name = 'Oberseminar Topologie'; // calendar title
+        categories = ["Oberseminar Topologie", "Topologie"]; // event categories
+        // an event needs to belong to at least one of the above categories to be displayed
+        loadICS(icsFile, name, categories);
+    </script>
+</body>
+
+</html>

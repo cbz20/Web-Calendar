@@ -1,0 +1,107 @@
+/*
+    web-calendar to display multiple ics-calendars in a browser
+    source code available at https://github.com/cbz20/Web-Calendar/
+    Copyright (C) 2025 Claudius Zibrowius
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
+.calendar-weekview {
+	width: 100%;
+	border-spacing: 0 2px;
+	table-layout: fixed;
+	text-align: center;
+	border-collapse: separate;
+}
+
+.calendar-weekview tr {
+	padding: 0;
+	margin: 0;
+}
+
+.calendar-weekview td {
+	padding: 2px 2px;
+}
+
+.calendar-weekview th {
+	color: var(--rub-blue);
+}
+
+.calendar-weekview tr hr {
+	/* horizontal line */
+	border: 1px solid #ddd;
+	padding: 0;
+	margin: 0;
+}
+
+.today-separator-top td {
+	padding: 0 2px 2px 2px;
+}
+
+.today-separator-bottom td {
+	padding: 2px 2px 0 2px;
+}
+
+.today-separator td hr {
+	border: 2px solid var(--rub-blue);
+}
+
+.weekview-col-date {
+	width: 6em;
+}
+
+.weekview-col-time {
+	width: 4em;
+}
+
+.weekview-col-summary {
+}
+
+.weekview-col-location {
+	width: 6em;
+}
+
+.weekview-event {
+	color: white;
+	cursor: pointer;
+	background-color: var(--rub-grey);
+	border-color: #ddd;
+}
+
+.weekview-event-past {
+	cursor: pointer;
+	color: #777;
+	border-color: #e4e4e4;
+	background-color: #f4f4f4;
+}
+
+.weekview-event-time {
+	border-radius: 4px 0 0 4px;
+	padding: 2px 6px;
+}
+
+.weekview-event-summary {
+	text-align: left;
+}
+
+.weekview-event-location {
+	border-radius: 0 4px 4px 0;
+	padding: 2px 6px;
+}
+
+.weekview-today-date {
+	font-weight: bold;
+	padding: 6px 0;
+	color: var(--rub-blue);
+}

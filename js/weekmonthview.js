@@ -46,7 +46,7 @@ function loadICS(name, colours, links,svgs) {
 
 async function parseICS(links) {
     //console.log(links);
-    for (const category of categoriesAll){
+    await Promise.all(categoriesAll.map(async category => {
     	const response = await fetch(links[category]);
 	if (!response.ok) {
 	   throw new Error(`Response status: ${response.status}`);
@@ -59,7 +59,7 @@ async function parseICS(links) {
 	newevents = newevents.filter(event => Object.keys(event).length > 0);
 	events.push(...newevents);
         //console.log(events);
-    };
+    }));
 }
 
 function parse_event(event,category) {

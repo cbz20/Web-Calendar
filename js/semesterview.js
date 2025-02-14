@@ -34,7 +34,7 @@ function loadICS(icsFile, name, categories) {
         .catch(error => {
             console.error('FATAL ERROR: Fehler beim Laden der ICS-Datei:', error);
             parseICS("BEGIN:VCALENDAR\nEND:VCALENDAR");
-            document.getElementById('error-message').innerHTML = "Fehler beim Laden der Kalender-Quelldatei.<br/>Bitte kontaktieren Sie den Serveradministrator.";
+            document.getElementById('error-message').innerHTML = "Fehler beim Laden der Kalender-Quelldateien.<br/>Bitte kontaktieren Sie <div class='modal-center-container'>Termine-Mathe@ruhr-uni-bochum.de.</div>";
         });
 }
 

@@ -40,7 +40,7 @@ function loadICS(name, colours, links,svgs) {
     	.catch(error => {
             console.error('FATAL ERROR: Fehler beim Laden der ICS-Dateien:', error);
             displayCalendar()
-            document.getElementById('error-message').innerHTML = "Fehler beim Laden der Kalender-Quelldateien.<br/>Bitte kontaktieren Sie den Serveradministrator.";
+            document.getElementById('error-message').innerHTML = "Fehler beim Laden der Kalender-Quelldateien.<br/>Bitte kontaktieren Sie <div class='modal-center-container'>Termine-Mathe@ruhr-uni-bochum.de.</div>";
         });
 }
 
@@ -748,22 +748,27 @@ function showHelp(event) {
     document.body.classList.add('no-scroll');
     document.getElementById('modal-title').textContent = "Hilfe zur Benutzung des Fakultätskalenders";
     let urls = `<li>
-    alle Kalender: https://mail.ruhr-uni-bochum.de/SOGo/dav/public/termixxd/Calendar/
+    <b>alle Kalender:</b> 
+    <a href='https://mail.ruhr-uni-bochum.de/SOGo/dav/public/termixxd/Calendar/'>https://mail.ruhr-uni-bochum.de/SOGo/dav/public/termixxd/Calendar/</a>
     </li>`;
     for (const category of categoriesAll){
-    	urls += "<li>";
+    	urls += "<li><b>";
     	urls += category;
-    	urls += ": ";
+    	urls += ":</b> <a href='";
     	urls += links[category];
-    	urls += "</li>";
+    	urls += "'>";
+    	urls += links[category];
+    	urls += "</a></li>";
     };
     let urls_with_auth = "";
     for (const category of categoriesAll){
-    	urls_with_auth += "<li>";
+    	urls_with_auth += "<li><b>";
     	urls_with_auth += category;
-    	urls_with_auth += ": ";
+    	urls_with_auth += ":</b> <a href='";
     	urls_with_auth += links[category].replace(/public\//g,'').replace(/.ics/g,'\/');
-    	urls_with_auth += "</li>";
+    	urls_with_auth += "'>";
+    	urls_with_auth += links[category].replace(/public\//g,'').replace(/.ics/g,'\/');
+    	urls_with_auth += "</a></li>";
     };
     
     document.getElementById('modal-body').innerHTML = `
@@ -876,18 +881,25 @@ function showHelp(event) {
 		Es empfielt sich, Kalendereinträge zu kopieren statt neu zu erstellen.
 		</li>
 		<li>
-		Sich wiederholende Veranstaltungen (VEVENTS mit RRULE) werden grundsätzlich nicht angezeigt.
+		Sich wiederholende Veranstaltungen (technisch: VEVENTS mit RRULE) werden grundsätzlich nicht angezeigt.
 		</li>
 		<li>
 		Mehrtägige Veranstaltungen werden grundsätzlich als ganztägige Veranstaltungen angezeigt.
 		</li>
 		</ul>
 		</p>
+		<div class="helpsection">
+		Weitergehende Informationen
+		</div>
+		<p>
+		Der Quellcode für den Kalender ist unter AGPL-3.0-Lizenz 
+		<a href="https://github.com/cbz20/Web-Calendar" target="_blank"><b>hier</b></a> veröffentlicht.
+		</p>
 		<p>
 		<i>
 		Bei technischen Problemen oder Fragen wenden Sie sich bitte per E-Mail an 
-		<div class="modal-center-container">Termine-Mathe@ruhr-uni-bochum.de.</div>
 		</i>
+		<div class="modal-center-container"><i>Termine-Mathe@ruhr-uni-bochum.de.</i></div>
 		</p>
 		`;
     document.getElementById('modal-body').appendChild(closeModalButton());

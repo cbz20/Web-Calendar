@@ -747,28 +747,28 @@ function openModal(event) {
 function showHelp(event) {
     document.body.classList.add('no-scroll');
     document.getElementById('modal-title').textContent = "Hilfe zur Benutzung des Fakultätskalenders";
-    let urls = `<li>
-    <b>alle Kalender:</b> 
-    <a href='https://mail.ruhr-uni-bochum.de/SOGo/dav/public/termixxd/Calendar/'>https://mail.ruhr-uni-bochum.de/SOGo/dav/public/termixxd/Calendar/</a>
-    </li>`;
+    let urls = "<li><b>";
+    urls += "alle Kalender";
+    urls += ": </b>"; 
+    urls += copyButton("https://mail.ruhr-uni-bochum.de/SOGo/dav/public/termixxd/Calendar/");
+    urls += "https://mail.ruhr-uni-bochum.de/SOGo/dav/public/termixxd/Calendar/"
+    urls += "</li>";
     for (const category of categoriesAll){
     	urls += "<li><b>";
     	urls += category;
-    	urls += ":</b> <a href='";
+    	urls += ": </b>";
+    	urls += copyButton(links[category]);
     	urls += links[category];
-    	urls += "'>";
-    	urls += links[category];
-    	urls += "</a></li>";
+    	urls += "</li>";
     };
     let urls_with_auth = "";
     for (const category of categoriesAll){
     	urls_with_auth += "<li><b>";
     	urls_with_auth += category;
-    	urls_with_auth += ":</b> <a href='";
+    	urls_with_auth += ": </b>";
+    	urls_with_auth += copyButton(links[category].replace(/public\//g,'').replace(/.ics/g,'\/'));
     	urls_with_auth += links[category].replace(/public\//g,'').replace(/.ics/g,'\/');
-    	urls_with_auth += "'>";
-    	urls_with_auth += links[category].replace(/public\//g,'').replace(/.ics/g,'\/');
-    	urls_with_auth += "</a></li>";
+    	urls_with_auth += "</li>";
     };
     
     document.getElementById('modal-body').innerHTML = `
@@ -836,15 +836,28 @@ function showHelp(event) {
 		<ul>` + urls + `
 		</ul>
 		<p>
-		Die Kalender sind öffentlich. Zum Lesen brauchen Sie sich nicht authentifizieren. 
+		Diese URLs geben Sie als Adresse beim Hinzufügen eines neuen Kalenders in dem entsprechenden Dialog bzw. den Einstellungen Ihres Kalenderprogramms an.
 		</p>
+		<p> 
+		<b>Wichtige Hinweise fürs Abonnieren</b>
+		<ul>
+		<li>	
+		Abonnieren Sie keinen Kalender, den Sie auch editieren möchten, sondern folgen Sie stattdessen den Anweisungen im nächsten Abschnitt.
+		</li>
+		<li>
+		Die Kalender sind öffentlich. Zum Lesen brauchen Sie sich nicht authentifizieren.
+		</li>
+		</ul>
+		</p>
+		
 		<div class="helpsection">
 		Kalender editieren
 		</div>
 		<p> 
 		Kalendereinträge hinzufügen, bearbeiten und löschen können nur authentifizierte Benutzer. 
 		In der Regel sind dies Professoren und deren Sekretariate.  
-		Dazu muss dem Benutzer eine entsprechende Zugangsberechtigung gegeben werden.  
+		Die Authentifizierung erfolgt über die RUB-LoginID. 
+		Zudem muss dem Benutzer eine entsprechende Zugangsberechtigung gegeben werden.  
 		Falls Sie eine neue Zugangsberechtigung wünschen, wenden Sie sich bitte per E-Mail an 
 		<div class="modal-center-container">Termine-Mathe@ruhr-uni-bochum.de.</div>
 		</p>
@@ -906,6 +919,20 @@ function showHelp(event) {
     document.getElementById('event-modal').style.display = 'flex'; //necessary to show modal
 }
 
+function copyButton(url) {
+    return `<button 
+    	class='toggle-buttons setting-buttons' 
+    	title="url kopieren" 
+    	onclick='navigator.clipboard.writeText("` + url + `").then(function() {
+	    console.log("copied url");
+	}, function() {
+	    console.warn("error trying to copy url");
+	});'>
+	<img 
+		src="`+svgFiles['copy']+`" 
+		class="svg-icon">
+	</button> `
+};
 
 function closeModalButton() {
     let el = document.createElement('div');

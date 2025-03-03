@@ -598,8 +598,10 @@ function drawToggleButtons() {
         button.textContent = category;
         if (categoriesSelected.includes(category)) { // Kategorie an
             button.classList.remove('button-switched-off');
+            button.classList.add('button-switched-on');
             button.style.backgroundColor = categoryColors[category];
         } else { // Kategorie aus
+            button.classList.remove('button-switched-on');
             button.classList.add('button-switched-off');
         };
         buttons.appendChild(button);
@@ -866,7 +868,16 @@ function showHelp(event) {
 		</p>
 		<p>
 		<b>Option 1:</b> 
-		Falls Sie bereits ein Kalenderprogramm wie beispielsweise Thunderbird benutzen, ist das die einfachste Option.  Abonnieren Sie den Kalender in Ihrem Programm mit Schreibberechtigungen unter Verwendung der folgenden URLs (die von den oben angegebenen URLs abweichen!): 
+		Falls Sie bereits ein Kalenderprogramm benutzen, 
+		ist das die einfachste Option.
+		</p>
+		<p>
+		Voraussetzung ist, 
+		dass Ihr Kalenderprogramm den offenen Standard CalDAV unterstützt. 
+		Dies ist bei Programmen wie beispielsweise Thunderbird und Apple iCal der Fall, bei Google Calendar jedoch nicht; siehe auch <b><a href="https://de.wikipedia.org/wiki/CalDAV#Client" target="_blank">diese Liste</a></b> bei Wikipedia.
+		</p>
+		<p>
+		Abonnieren Sie den Kalender in Ihrem Programm mit Schreibberechtigungen unter Verwendung der folgenden URLs (die von den oben angegebenen URLs abweichen!): 
 		</p>
 		<ul>` + urls_with_auth + `
 		</ul>

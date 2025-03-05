@@ -201,6 +201,13 @@ button:hover:not(.setting-buttons, .dummy-button):hover {
 	user-select: none;
 }
 
+#help {
+	font-size: 16px;
+	padding: 10px 10px;
+	color: var(--rub-blue);
+	cursor: pointer;
+}
+
 #error-message {
 	color: red;
 	font-weight: 600;

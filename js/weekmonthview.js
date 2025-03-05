@@ -633,7 +633,6 @@ function drawToggleButtons() {
     buttonImage.classList.add('svg-icon');
     buttonImage.src = svgFiles['save'];
     button.classList.add('toggle-buttons', 'setting-buttons');
-    button.id = "save";
     button.title = "kopiere alle Anzeigeeinstellungen in die URL\n(z.B. um sie als Lesezeichen im Browser zu speichern)";
     button.appendChild(buttonImage);
     button.addEventListener('click', function() {
@@ -641,19 +640,14 @@ function drawToggleButtons() {
     });
     buttons.appendChild(button);
     // Show Help Button
-    button = document.createElement('button');
-    buttonImage = document.createElement('img');
-    buttonImage.src = svgFiles['question'];
-    buttonImage.classList.add('svg-icon');
-    button.classList.add('toggle-buttons');
-    button.classList.add('setting-buttons');
-    button.id = "save";
-    button.title = "Hilfe anzeigen";
-    button.appendChild(buttonImage);
-    button.addEventListener('click', function() {
+    help = document.createElement('a');
+    help.title = "Hilfe anzeigen";
+    help.innerHTML = "Hilfe";
+    help.id = "help";
+    help.addEventListener('click', function() {
         showHelp();
     });
-    buttons.appendChild(button);
+    buttons.appendChild(help);
 }
 
 function openModal(event) {

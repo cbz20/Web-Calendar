@@ -795,7 +795,7 @@ function showHelp(event) {
 		</p>
 		
 		<div class="helpsection">
-		Gewählten Anzeigeeinstellungen abspeichern
+		Gewählte Anzeigeeinstellungen abspeichern
 		</div>
 		<p> 
 		Klicken Sie den Schalter 

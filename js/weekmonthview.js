@@ -786,7 +786,7 @@ function showHelp(event) {
 	        Zwischen Wochen- und Monatsansicht wechseln
 		</div>
 		<p> 
-		Klicken Sie dazu die Schalter 
+		Klicken Sie dazu den Schalter 
 		<button class='toggle-buttons setting-buttons dummy-button' disabled>
 		<img src="`+svgFiles['week']+`" class="svg-icon">
 		</button> 
@@ -794,17 +794,20 @@ function showHelp(event) {
 		<button class='toggle-buttons setting-buttons dummy-button' disabled>
 		<img src="`+svgFiles['month']+`" class="svg-icon">
 		</button>
-		oben rechts über dem Kalender.
+		oben links über dem Kalender.
 		</p>
 		
 		<div class="helpsection">
 		Veranstaltungen bestimmter Fachbereiche ein- und ausblenden
 		</div>
 		<p> 
-		Klicken Sie dazu die farbigen Schalter
-		<button class='toggle-buttons dummy-button' id='dummy-category-button' disabled>
+		Klicken Sie dazu die Kontrollkästchen
+		<a class="toggle-buttons dummy-checkbox">
+		<input type="checkbox" class="dummy-checkbox" checked>
+		<label class='dummy-checkbox'>
 		Fachbereich
-		</button>
+		</label>
+		</a>
 		direkt über dem Kalender.
 		</p>
 		

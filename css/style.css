@@ -158,6 +158,12 @@ input{
 	cursor: pointer;
 }
 
+.dummy-checkbox{
+	color: var(--rub-green);
+	accent-color: var(--rub-green);
+	cursor: default;
+}
+
 button:hover:not(.setting-buttons, .dummy-button):hover {
 	background-image: linear-gradient(rgba(0, 0, 0, 0.2) 0 0);
 }

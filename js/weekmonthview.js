@@ -587,28 +587,8 @@ function drawMonthView() {
 }
 
 function drawToggleButtons() {
-    // Toggle-Buttons generieren
     let buttons = document.getElementById('toggle-buttons-header');
     buttons.innerHTML = '';
-    for (const category of categoriesAll) {
-        button = document.createElement('button');
-        button.classList.add('toggle-buttons');
-        button.id = category;
-        button.title = "Kalender ein- bzw. ausschalten";
-        button.textContent = category;
-        if (categoriesSelected.includes(category)) { // Kategorie an
-            button.classList.remove('button-switched-off');
-            button.classList.add('button-switched-on');
-            button.style.backgroundColor = categoryColors[category];
-        } else { // Kategorie aus
-            button.classList.remove('button-switched-on');
-            button.classList.add('button-switched-off');
-        };
-        buttons.appendChild(button);
-        document.getElementById(category).addEventListener('click', function() {
-            toggleCategory(category); // Kategorie ein/ausschalten
-        });
-    };
     // Toggle Week/Month View Button
     button = document.createElement('button');
     buttonImage = document.createElement('img');
@@ -627,6 +607,49 @@ function drawToggleButtons() {
         toggleWeekMonth();
     });
     buttons.appendChild(button);
+    // Toggle-Buttons generieren
+    for (const category of categoriesAll) {
+        button = document.createElement('a');
+        button.classList.add("toggle-buttons");
+        input = document.createElement('input');
+        input.type = "checkbox";
+        input.id = category;
+        input.title = "Kalender ein- bzw. ausschalten";
+        if (categoriesSelected.includes(category)) { // Kategorie an
+            //button.classList.remove('button-switched-off');
+            //.classList.add('button-switched-on');
+            input.checked = true;
+            input.style.accentColor = categoryColors[category];
+        } else { // Kategorie aus
+            //button.classList.remove('button-switched-on');
+            input.checked = false;
+            input.classList.add('button-switched-off');
+        };
+        input.addEventListener('click', function() {
+            toggleCategory(category); // Kategorie ein/ausschalten
+        });
+        button.appendChild(input);
+        label = document.createElement('label');
+        label.textContent = category;
+        label.htmlFor = category;
+        if (categoriesSelected.includes(category)) { // Kategorie an
+            button.classList.remove('label-switched-off');
+            label.style.color = categoryColors[category];
+        } else { // Kategorie aus
+            button.classList.add('label-switched-off');
+        };
+        button.appendChild(label);
+        buttons.appendChild(button);
+    };
+    // Show Help Button
+    help = document.createElement('a');
+    help.title = "Hilfe anzeigen";
+    help.innerHTML = "Hilfe";
+    help.id = "help";
+    help.addEventListener('click', function() {
+        showHelp();
+    });
+    buttons.appendChild(help);
     // Save URL Parameters Button
     button = document.createElement('button');
     buttonImage = document.createElement('img');
@@ -639,15 +662,6 @@ function drawToggleButtons() {
         addParamsToURL();
     });
     buttons.appendChild(button);
-    // Show Help Button
-    help = document.createElement('a');
-    help.title = "Hilfe anzeigen";
-    help.innerHTML = "Hilfe";
-    help.id = "help";
-    help.addEventListener('click', function() {
-        showHelp();
-    });
-    buttons.appendChild(help);
 }
 
 function openModal(event) {

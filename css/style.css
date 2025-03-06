@@ -145,6 +145,19 @@ b {
 
 /* buttons */
 
+img {
+	height="100%";
+}
+
+label {
+	color: #999;
+	cursor: pointer;
+	padding-left: 3px;
+}
+input{
+	cursor: pointer;
+}
+
 button:hover:not(.setting-buttons, .dummy-button):hover {
 	background-image: linear-gradient(rgba(0, 0, 0, 0.2) 0 0);
 }
@@ -171,8 +184,8 @@ button:hover:not(.setting-buttons, .dummy-button):hover {
 
 .toggle-buttons,
 .calendar-header button {
-	padding: 10px 10px;
-	margin: 1px 2px;
+	padding: 6px 8px;
+	margin: 2px 2px;
 	font-size: 16px;
 	color: white;
 	border: none;

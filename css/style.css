@@ -83,7 +83,7 @@ b {
 
 /* Modal */
 
-.modal {
+.my-modal {
 	display: none;
 	position: fixed;
 	z-index: 1;
@@ -96,8 +96,8 @@ b {
 	align-items: center;
 }
 
-.modal-content {
-	background-color: var(--rub-grey);
+.my-modal-content {
+	background-color: white;
 	border: 2px solid var(--rub-blue);
 	padding: 10px;
 	margin-top: 0px;
@@ -105,17 +105,17 @@ b {
 	display: inline-block;
 	overflow-y: initial !important;
 	word-wrap: break-word;
-	max-width: 700px;
+	width: 720px;
 	max-height: 90vh;
 }
 
-.modal-header {
+.my-modal-header {
 	font-size: 18px;
 	margin-bottom: 5px;
 	padding: 10px 10px 0px 10px;
 }
 
-.modal-body {
+.my-modal-body {
 	font-size: 14px;
 	padding: 0px 10px 0px 10px;
 	margin-top: 0px;
@@ -124,7 +124,7 @@ b {
 	overflow-y: auto;
 }
 
-.modal-body h2 {
+.my-modal-body h2 {
 	color: var(--rub-blue);
 }
 
@@ -134,7 +134,7 @@ b {
 
 }
 
-.modal-content p {
+.my-modal-content p {
 	text-align: justify;
 }
 
@@ -203,18 +203,6 @@ button:hover:not(.setting-buttons, .dummy-button):hover {
 	background-color: var(--rub-green);
 }
 
-.button-switched-off {
-	background-color: #eee;
-	color: #555;
-}
-.button-switched-off:before {
-	content: "☐ ";
-}
-
-.button-switched-on:before {
-	content: "☑ ";
-}
-
 .svg-icon {
 	width: 15px;
 	user-select: none;
@@ -237,4 +225,55 @@ button:hover:not(.setting-buttons, .dummy-button):hover {
 
 .hide-me {
 	display: none;
+}
+
+/* accordion */
+
+.accordion {
+            width: 100%;
+            width: 670px;
+            margin: 5px auto;
+            border: 0px solid var(--rub-grey);
+            border-radius: 5px;
+            overflow: hidden;
+}
+
+.accordion-header {
+            background: var(--rub-grey);
+            color: var(--rub-blue);
+            padding: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            border-bottom: 0px solid var(--rub-grey);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+}
+
+.accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            padding: 5px 10px;
+            border-bottom: 0px solid var(--rub-grey);
+            background: #f9f9f9;
+            transition: max-height 0.3s ease-out;
+}
+
+.accordion-content p{
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.arrow {
+            font-family: FontAwesome;
+            transition: transform 0.3s ease;
+}
+
+.active .arrow {
+            transform: rotate(90deg);
+}
+
+.active + .accordion-content {
+            max-height: 2000px;
+            padding: 0px 10px;
 }

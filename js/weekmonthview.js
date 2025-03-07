@@ -667,7 +667,7 @@ function drawToggleButtons() {
 function openModal(event) {
     document.body.classList.add('no-scroll');
     if (event.singleDayEvent) {
-        document.getElementById('modal-title').textContent =
+        document.getElementById('my-modal-title').textContent =
             event.startDate.toLocaleDateString('de-de', {
                 weekday: "long",
                 year: "numeric",
@@ -676,7 +676,7 @@ function openModal(event) {
             });
     } else if (event.allDayEvent) {
         // event.singleDayEvent = false 
-        document.getElementById('modal-title').textContent =
+        document.getElementById('my-modal-title').textContent =
             event.startDate.toLocaleDateString('de-de', {
                 weekday: "long",
                 year: "numeric",
@@ -690,7 +690,7 @@ function openModal(event) {
                 day: "numeric",
             });
     } else {
-        document.getElementById('modal-title').textContent =
+        document.getElementById('my-modal-title').textContent =
             event.startDate.toLocaleDateString('de-de', {
                 weekday: "long",
                 year: "numeric",
@@ -708,11 +708,11 @@ function openModal(event) {
                 minute: "2-digit"
             });
     };
-    document.getElementById('modal-body').innerHTML = "";
+    document.getElementById('my-modal-body').innerHTML = "";
     el = document.createElement('div');
     el.classList.add("eventsummary");
     el.innerHTML = event.summary;
-    document.getElementById('modal-body').appendChild(el);
+    document.getElementById('my-modal-body').appendChild(el);
     el = document.createElement('div');
     el.classList.add("eventlocation");
     if (event.location == missingEntrySymbol) {
@@ -720,14 +720,14 @@ function openModal(event) {
     } else {
         el.innerHTML = event.location;
     };
-    document.getElementById('modal-body').appendChild(el);
+    document.getElementById('my-modal-body').appendChild(el);
 
     //el = document.createElement('button');
     //el.classList.add('toggle-buttons');
     //el.disabled = true;
     //el.innerHTML = event.mainCategory;
     //el.style.backgroundColor = categoryColors[event.mainCategory];
-    //document.getElementById('modal-body').appendChild(el);
+    //document.getElementById('my-modal-body').appendChild(el);
     //console.log(event.allCategoriesRaw);
     //console.log(event.allCategories);
     event.allCategories.forEach(cat => {
@@ -740,7 +740,7 @@ function openModal(event) {
         } else {
             el.style.backgroundColor = categoryColors[event.mainCategory];
         };
-        document.getElementById('modal-body').appendChild(el);
+        document.getElementById('my-modal-body').appendChild(el);
     });
 
     el = document.createElement('p');
@@ -749,14 +749,14 @@ function openModal(event) {
     // the following regex hack is taken from
     // https://stackoverflow.com/questions/784539/how-do-i-replace-all-line-breaks-in-a-string-with-br-elements
     el.innerHTML = event.description.replace(/(?:\r\n|\r|\n)/g, '<br>');
-    document.getElementById('modal-body').appendChild(el);
-    document.getElementById('modal-body').appendChild(closeModalButton());
+    document.getElementById('my-modal-body').appendChild(el);
+    document.getElementById('my-modal-body').appendChild(closeModalButton());
     document.getElementById('event-modal').style.display = 'flex'; //necessary to show modal
 }
 
 function showHelp(event) {
     document.body.classList.add('no-scroll');
-    document.getElementById('modal-title').textContent = "Hilfe zur Benutzung des Fakultätskalenders";
+    document.getElementById('my-modal-title').textContent = "Hilfe zur Benutzung des Fakultätskalenders";
     let urls = "<li><b>";
     urls += "alle Kalender";
     urls += ": </b>"; 
@@ -781,11 +781,11 @@ function showHelp(event) {
     	urls_with_auth += "</li>";
     };
     
-    document.getElementById('modal-body').innerHTML = `
-	        <div class="helpsection">
-	        Zwischen Wochen- und Monatsansicht wechseln
-		</div>
-		<p> 
+    document.getElementById('my-modal-body').innerHTML = "";
+    
+    document.getElementById('my-modal-body').innerHTML += accordionElement(
+    	"Zwischen Wochen- und Monatsansicht wechseln",
+    	`<p> 
 		Klicken Sie dazu den Schalter 
 		<button class='toggle-buttons setting-buttons dummy-button' disabled>
 		<img src="`+svgFiles['week']+`" class="svg-icon">
@@ -795,12 +795,11 @@ function showHelp(event) {
 		<img src="`+svgFiles['month']+`" class="svg-icon">
 		</button>
 		oben links über dem Kalender.
-		</p>
+		</p>`);
 		
-		<div class="helpsection">
-		Veranstaltungen bestimmter Fachbereiche ein- und ausblenden
-		</div>
-		<p> 
+	document.getElementById('my-modal-body').innerHTML += accordionElement(
+		"Veranstaltungen bestimmter Fachbereiche ein- und ausblenden",
+		`<p> 
 		Klicken Sie dazu die Kontrollkästchen
 		<a class="toggle-buttons dummy-checkbox">
 		<input type="checkbox" class="dummy-checkbox" checked>
@@ -809,12 +808,10 @@ function showHelp(event) {
 		</label>
 		</a>
 		direkt über dem Kalender.
-		</p>
-		
-		<div class="helpsection">
-		Gewählte Anzeigeeinstellungen abspeichern
-		</div>
-		<p> 
+		</p>`);
+	document.getElementById('my-modal-body').innerHTML += accordionElement(
+		"Gewählte Anzeigeeinstellungen abspeichern",
+		`<p> 
 		Klicken Sie den Schalter 
 		</p>
 		<div class="modal-center-container">
@@ -824,26 +821,20 @@ function showHelp(event) {
 		</div>
 		<p>
 		rechts oberhalb des Kalenders, so werden die gewählten Anzeigeeinstellungen als Parameter in die URL übertragen. Diese URL können Sie nun bequem als Lesezeichen in Ihrem Browser setzen.
-		</p>
-		
-		<div class="helpsection">
-		Navigation
-		</div>
-		<p> 
+		</p>`);
+	document.getElementById('my-modal-body').innerHTML += accordionElement(
+		"Navigation",
+		`<p> 
 		Mit der rechten oder linken Pfeiltaste (←/→) auf Ihrer Tastatur können Sie eine Woche bzw. einen Monat vor oder zurück navigieren.  Alternativ klicken Sie die entsprechenden Schalter oberhalb des Kalenders. 
-		</p>
-				
-                <div class="helpsection">
-		Details zu Veranstaltungen anzeigen
-		</div>
-		<p>
-        Klicken Sie einfach auf eine Veranstaltung, so erscheint ein Fenster mit allen verfügbaren Details.
-		</p>
-				
-		<div class="helpsection">
-		Kalender abonnieren
-		</div>
-		<p> 
+		</p>`);
+	document.getElementById('my-modal-body').innerHTML += accordionElement(
+		"Details zu Veranstaltungen anzeigen",
+		`<p>
+		Klicken Sie einfach auf eine Veranstaltung, so erscheint ein Fenster mit allen verfügbaren Details.
+		</p>`);
+	document.getElementById('my-modal-body').innerHTML += accordionElement(
+		"Kalender abonnieren",
+		`<p> 
 		Um die Kalender der Fachbereiche in einem Programm wie Thunderbird anzuzeigen, können folgende URLs genutzt werden:
 		</p>
 		<ul>` + urls + `
@@ -861,12 +852,10 @@ function showHelp(event) {
 		Die Kalender sind öffentlich. Zum Lesen brauchen Sie sich nicht authentifizieren.
 		</li>
 		</ul>
-		</p>
-		
-		<div class="helpsection">
-		Kalender editieren
-		</div>
-		<p> 
+		</p>`);
+	document.getElementById('my-modal-body').innerHTML += accordionElement(
+		"Kalender editieren",
+		`<p> 
 		Kalendereinträge hinzufügen, bearbeiten und löschen können nur authentifizierte Benutzer. 
 		In der Regel sind dies Professoren und deren Sekretariate.  
 		Die Authentifizierung erfolgt über die RUB-LoginID. 
@@ -922,11 +911,10 @@ function showHelp(event) {
 		Mehrtägige Veranstaltungen werden grundsätzlich als ganztägige Veranstaltungen angezeigt.
 		</li>
 		</ul>
-		</p>
-		<div class="helpsection">
-		Weitergehende Informationen
-		</div>
-		<p>
+		</p>`);
+	document.getElementById('my-modal-body').innerHTML += accordionElement(
+		"Weitergehende Informationen",
+		`<p>
 		Der Quellcode für den Kalender ist unter AGPL-3.0-Lizenz 
 		<a href="https://github.com/cbz20/Web-Calendar" target="_blank"><b>hier</b></a> veröffentlicht.
 		</p>
@@ -935,9 +923,8 @@ function showHelp(event) {
 		Bei technischen Problemen oder Fragen wenden Sie sich bitte per E-Mail an 
 		</i>
 		<div class="modal-center-container"><i>Termine-Mathe@ruhr-uni-bochum.de.</i></div>
-		</p>
-		`;
-    document.getElementById('modal-body').appendChild(closeModalButton());
+		</p>`);
+    document.getElementById('my-modal-body').appendChild(closeModalButton());
     document.getElementById('event-modal').style.display = 'flex'; //necessary to show modal
 }
 
@@ -1104,5 +1091,23 @@ function updateToday() {
         displayCalendar();
     };
 }
+
+function accordionElement(title,content){
+	return `<div class="accordion">
+        <div class="accordion-header" onclick="toggleAccordion(this)">`+title+`<span class="arrow">&#xf054;</span></div>
+        <div class="accordion-content">`+content+`</div>
+    </div>
+    `
+}
+function toggleAccordion(element) {
+            var content = element.nextElementSibling;
+            var arrow = element.querySelector('.arrow');
+            
+            if (element.classList.contains("active")) {
+                element.classList.remove("active");
+            } else {
+                element.classList.add("active");
+            }
+        }
 
 setInterval(updateToday, 60000); // check every minute if today's date has changed

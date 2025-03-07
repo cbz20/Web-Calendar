@@ -83,7 +83,7 @@ b {
 
 /* Modal */
 
-.my-modal {
+.modal {
 	display: none;
 	position: fixed;
 	z-index: 1;
@@ -96,7 +96,7 @@ b {
 	align-items: center;
 }
 
-.my-modal-content {
+.modal-content {
 	background-color: white;
 	border: 2px solid var(--rub-blue);
 	padding: 10px;
@@ -105,17 +105,17 @@ b {
 	display: inline-block;
 	overflow-y: initial !important;
 	word-wrap: break-word;
-	width: 720px;
+	max-width: 730px;
 	max-height: 90vh;
 }
 
-.my-modal-header {
+.modal-header {
 	font-size: 18px;
 	margin-bottom: 5px;
 	padding: 10px 10px 0px 10px;
 }
 
-.my-modal-body {
+.modal-body {
 	font-size: 14px;
 	padding: 0px 10px 0px 10px;
 	margin-top: 0px;
@@ -124,7 +124,7 @@ b {
 	overflow-y: auto;
 }
 
-.my-modal-body h2 {
+.modal-body h2 {
 	color: var(--rub-blue);
 }
 
@@ -134,7 +134,7 @@ b {
 
 }
 
-.my-modal-content p {
+.modal-content p {
 	text-align: justify;
 }
 
@@ -146,7 +146,7 @@ b {
 /* buttons */
 
 img {
-	height="100%";
+	height: "100%";
 }
 
 label {
@@ -268,6 +268,13 @@ button:hover:not(.setting-buttons, .dummy-button):hover {
             font-family: FontAwesome;
             transition: transform 0.3s ease;
 }
+
+.arrow::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\f054";
+}
+
 
 .active .arrow {
             transform: rotate(90deg);

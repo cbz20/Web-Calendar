@@ -784,8 +784,11 @@ function showHelp(event) {
     document.getElementById('my-modal-body').innerHTML = "";
     
     document.getElementById('my-modal-body').innerHTML += accordionElement(
-    	"Zwischen Wochen- und Monatsansicht wechseln",
+    	"Grundlegende Anzeigefunktionen des Kalenders",
     	`<p> 
+	<b>Zwischen Wochen- und Monatsansicht wechseln</b>
+	</p>
+	<p> 
 		Klicken Sie dazu den Schalter 
 		<button class='toggle-buttons setting-buttons dummy-button' disabled>
 		<img src="`+svgFiles['week']+`" class="svg-icon">
@@ -795,11 +798,11 @@ function showHelp(event) {
 		<img src="`+svgFiles['month']+`" class="svg-icon">
 		</button>
 		oben links über dem Kalender.
-		</p>`);
-		
-	document.getElementById('my-modal-body').innerHTML += accordionElement(
-		"Veranstaltungen bestimmter Fachbereiche ein- und ausblenden",
-		`<p> 
+	</p>
+	<p> 
+	<b>Veranstaltungen bestimmter Fachbereiche ein- und ausblenden</b>
+	</p>
+	<p> 
 		Klicken Sie dazu die Kontrollkästchen
 		<a class="toggle-buttons dummy-checkbox">
 		<input type="checkbox" class="dummy-checkbox" checked>
@@ -808,10 +811,11 @@ function showHelp(event) {
 		</label>
 		</a>
 		direkt über dem Kalender.
-		</p>`);
-	document.getElementById('my-modal-body').innerHTML += accordionElement(
-		"Gewählte Anzeigeeinstellungen abspeichern",
-		`<p> 
+	</p>
+	<p> 
+	<b>Gewählte Anzeigeeinstellungen abspeichern</b>
+	</p>
+	<p>
 		Klicken Sie den Schalter 
 		</p>
 		<div class="modal-center-container">
@@ -821,17 +825,20 @@ function showHelp(event) {
 		</div>
 		<p>
 		rechts oberhalb des Kalenders, so werden die gewählten Anzeigeeinstellungen als Parameter in die URL übertragen. Diese URL können Sie nun bequem als Lesezeichen in Ihrem Browser setzen.
-		</p>`);
-	document.getElementById('my-modal-body').innerHTML += accordionElement(
-		"Navigation",
-		`<p> 
+		</p>
+	</p>
+	<p> 
+	<b>Navigation</b>
+	</p>
+	<p> 
 		Mit der rechten oder linken Pfeiltaste (←/→) auf Ihrer Tastatur können Sie eine Woche bzw. einen Monat vor oder zurück navigieren.  Alternativ klicken Sie die entsprechenden Schalter oberhalb des Kalenders. 
-		</p>`);
-	document.getElementById('my-modal-body').innerHTML += accordionElement(
-		"Details zu Veranstaltungen anzeigen",
-		`<p>
+	</p>
+	<p> 
+	<b>Details zu Veranstaltungen anzeigen</b>
+	</p>
+	<p> 
 		Klicken Sie einfach auf eine Veranstaltung, so erscheint ein Fenster mit allen verfügbaren Details.
-		</p>`);
+	</p>`);
 	document.getElementById('my-modal-body').innerHTML += accordionElement(
 		"Kalender abonnieren",
 		`<p> 
@@ -1107,6 +1114,27 @@ function toggleAccordion(element) {
                 element.classList.remove("active");
             } else {
                 element.classList.add("active");
+            }
+       }
+function toggleAccordion(element) {
+            var accordions = document.querySelectorAll('.accordion-header');
+            accordions.forEach(header => {
+                if (header !== element) {
+                    header.classList.remove("active");
+                    header.nextElementSibling.style.maxHeight = null;
+                    header.nextElementSibling.style.padding = "0 10px";
+                }
+            });
+            
+            element.classList.toggle("active");
+            var content = element.nextElementSibling;
+            if (element.classList.contains("active")) {
+                content.style.maxHeight = "2000px";
+                content.style.padding = "10px";
+                element.scrollIntoView({ behavior: "smooth", block: "start" });
+            } else {
+                content.style.maxHeight = null;
+                content.style.padding = "0 10px";
             }
         }
 

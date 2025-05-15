@@ -572,7 +572,7 @@ function openModal(event) {
     // now replace all line breaks with <br. tags
     // the following regex hack is taken from
     // https://stackoverflow.com/questions/784539/how-do-i-replace-all-line-breaks-in-a-string-with-br-elements
-    el.innerHTML = event.description.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    el.innerHTML = linkifyStr(event.description,{className: "linkInAbstract"}).replace(/(?:\r\n|\r|\n)/g, '<br>');
     document.getElementById('modal-body').appendChild(el);
     document.getElementById('modal-body').appendChild(closeModalButton());
     document.getElementById('event-modal').style.display = 'flex'; //necessary to show modal

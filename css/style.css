@@ -143,6 +143,10 @@ b {
 	overflow: hidden;
 }
 
+.linkInAbstract {
+	font-weight: 550;
+};
+
 /* buttons */
 
 img {

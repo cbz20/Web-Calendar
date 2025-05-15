@@ -748,7 +748,7 @@ function openModal(event) {
     // now replace all line breaks with <br. tags
     // the following regex hack is taken from
     // https://stackoverflow.com/questions/784539/how-do-i-replace-all-line-breaks-in-a-string-with-br-elements
-    el.innerHTML = event.description.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    el.innerHTML = linkifyStr(event.description,{className: "linkInAbstract"}).replace(/(?:\r\n|\r|\n)/g, '<br>');
     document.getElementById('modal-body').appendChild(el);
     document.getElementById('modal-body').appendChild(closeModalButton());
     document.getElementById('event-modal').style.display = 'flex'; //necessary to show modal
@@ -923,7 +923,24 @@ function showHelp(event) {
 		"Weitergehende Informationen",
 		`<p>
 		Der Quellcode für den Kalender ist unter AGPL-3.0-Lizenz 
-		<a href="https://github.com/cbz20/Web-Calendar" target="_blank"><b>hier</b></a> veröffentlicht.
+		<a href="https://github.com/cbz20/Web-Calendar" target="_blank"><b>hier</b></a> veröffentlicht. 
+		</p>
+		<p> 
+		Dank an die Autoren der verwendeten Javascript-Plugins:
+		<ul>
+		<li>
+		<i>ical.js</i> 
+		von u.a.
+		<a href="https://github.com/kewisch/ical.js" target="_blank"><b>Philipp Kewisch (Mozilla)</b></a>,
+		bereitgestellt über 
+		<a href="https://cdnjs.com/" target="_blank"><b>cdnjs</b></a>
+		</li>
+		<li>
+		<i>linkify.js</i>
+		von 
+		<a href="https://linkify.js.org/" target="_blank"><b>Nick Frasser</b></a>
+		</li>
+		</ul>
 		</p>
 		<p>
 		<i>

@@ -573,6 +573,22 @@ function openModal(event) {
     };
     document.getElementById('modal-body').appendChild(el);
 
+    //el = document.createElement('button');
+    //el.classList.add('toggle-buttons');
+    //el.disabled = true;
+    //el.innerHTML = event.mainCategory;
+    //el.style.backgroundColor = categoryColors[event.mainCategory];
+    //document.getElementById('modal-body').appendChild(el);
+    //console.log(event.allCategoriesRaw);
+    //console.log(event.allCategories);
+    event.allCategories.forEach(cat => {
+        el = document.createElement('button');
+        el.classList.add('toggle-buttons', 'dummy-button');
+        el.disabled = true;
+        el.innerHTML = cat;
+        document.getElementById('modal-body').appendChild(el);
+    });
+
     el = document.createElement('p');
     el.classList.add("eventabstract");
     // now replace all line breaks with <br. tags

@@ -180,6 +180,10 @@ button:hover:not(.setting-buttons, .dummy-button):hover {
 	background-color: var(--rub-green);
 }
 
+.dummy-button {
+	background-color: var(--rub-blue);
+}
+
 .dummy-button:hover {
 	background-image: none;
 	background-color: var(--rub-blue);

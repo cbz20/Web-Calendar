@@ -92,6 +92,12 @@ function parseICS(icsData) {
             allCategories.push("none");
         };
         let mainCategory = allCategories[0];
+        
+        // filter out those events with no matching categories
+        let matchingCategories = categoriesAll.filter( cat => allCategories.includes(cat));
+        if (matchingCategories.length == 0){
+            return {};
+        };
 
         // LOGIC FOR THE NEXT BIT:
         // 
@@ -278,7 +284,7 @@ function displayCalendar() {
         if (event.startDate > lastDayDisplayed) {
             return false;
         };
-        return categoriesAll.includes(event.mainCategory);
+        return true;
     });
 
     // iterate through all displayed days

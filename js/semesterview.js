@@ -399,7 +399,7 @@ function displayCalendar() {
                 currentRow.appendChild(eventTD);
                 // summary column
                 eventTD = document.createElement('td');
-                eventTD.innerHTML = "<i> — keine Veranstaltungen —</i>";
+                eventTD.innerHTML = "<i>keine Veranstaltungen</i>";
                 eventTD.classList.add('no-events-to-display');
                 currentRow.appendChild(eventTD);
                 tbody.appendChild(currentRow);
@@ -508,7 +508,7 @@ function displayCalendar() {
         let currentRow = document.createElement('tr');
         let TDelement = document.createElement('td');
         TDelement.colSpan = "4";
-        TDelement.innerHTML = "<i>— keine Veranstaltungen eingetragen —</i>";
+        TDelement.innerHTML = "<i>keine Veranstaltungen</i>";
         currentRow.appendChild(TDelement);
         tbody.appendChild(currentRow);
     };

@@ -223,6 +223,14 @@ button:hover:not(.setting-buttons, .dummy-button):hover {
 	cursor: pointer;
 }
 
+#togglemode{
+    text-align: center;
+	font-size: 10px;
+	padding: 10px 10px;
+	color: var(--rub-blue);
+	cursor: pointer;
+}
+
 #error-message {
 	color: red;
 	font-weight: 600;
@@ -292,3 +300,43 @@ button:hover:not(.setting-buttons, .dummy-button):hover {
             max-height: 2000px;
             padding: 0px 10px;
 }
+
+@media (max-width: 1300px) {
+
+    .calendar-container {
+        min-width: unset;
+        max-width: 100%;
+        padding: 8px;
+    }
+
+    .calendar-header {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .weekview-col-date,
+    .weekview-col-time,
+    .weekview-col-location {
+        width: auto;
+    }
+
+    .calendar-weekview {
+        font-size: 14px;
+    }
+
+    .weekview-event-summary {
+        white-space: normal;
+        word-break: break-word;
+    }
+
+    .weekview-event-time,
+    .weekview-event-location {
+        padding: 2px 4px;
+    }
+    
+    .mobile-button-wrapper{
+        width: 100%;
+        text-align: center;
+    }
+}
+

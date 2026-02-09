@@ -27,6 +27,7 @@ let categoriesAll;
 let categoryColors;
 let svgFiles;
 let weekview = true;
+let is_mobile = window.matchMedia("(max-width: 1300px)").matches;
 
 // main function to call the script
 function loadICS(name, colours, links,svgs) {
@@ -176,12 +177,30 @@ function parse_event(event,category) {
 }
 
 function displayCalendar() {
-    if (weekview) {
+    if (weekview || is_mobile) {
         drawWeekView();
     } else {
         drawMonthView();
     };
     drawToggleButtons();
+    toggleMode();
+}
+
+function toggleMode() {
+    let div = document.getElementById('togglemode');
+    if (is_mobile){
+        div.innerHTML = 'Kalender im Desktopmodus betrachten';
+        div.addEventListener('click', function() {
+            is_mobile = false;
+            displayCalendar();
+        });
+    } else {
+        div.innerHTML = 'Kalender im Mobilmodus betrachten';
+        div.addEventListener('click', function() {
+            is_mobile = true;
+            displayCalendar();
+        });
+    };
 }
 
 function drawWeekView() {
@@ -205,43 +224,87 @@ function drawWeekView() {
     // page title with navigation buttons
     document.getElementById('calendar-header').innerHTML = "";
     let el = document.createElement('button');
-    el.classList.add("setting-buttons");
-    el.title = "linke Pfeiltaste drücken";
-    el.innerHTML = "< Vorherige Woche";
-    el.addEventListener('click', function() {
-        changeWeek(-1);
-    });
-    document.getElementById('calendar-header').appendChild(el);
-
-    el = document.createElement('div');
-    el.id = 'calendar-title';
-    el.title = "springe zur aktuellen Woche";
-    el.addEventListener('click', function(event) {
-        BackToToday();
-    });
-    el.innerHTML = calendarName + "<br>Woche vom " +
-        firstDayDisplayed.toLocaleString('de-DE', {
-            month: 'numeric',
-            year: 'numeric',
-            day: 'numeric'
-        }) +
-        "­ bis " +
-        lastDayDisplayed.toLocaleString('de-DE', {
-            month: 'numeric',
-            year: 'numeric',
-            day: 'numeric'
+    if (is_mobile){
+        el = document.createElement('div');
+        el.id = 'calendar-title';
+        el.title = "springe zur aktuellen Woche";
+        el.addEventListener('click', function(event) {
+            BackToToday();
         });
-    document.getElementById('calendar-header').appendChild(el);
+        el.innerHTML = calendarName + "<br>Woche vom " +
+            firstDayDisplayed.toLocaleString('de-DE', {
+                month: 'numeric',
+                year: 'numeric',
+                day: 'numeric'
+            }) +
+            "­ bis " +
+            lastDayDisplayed.toLocaleString('de-DE', {
+                month: 'numeric',
+                year: 'numeric',
+                day: 'numeric'
+            });
+        document.getElementById('calendar-header').appendChild(el);
+        
+        wrapper = document.createElement('div');
+        el = document.createElement('button');
+        el.classList.add("setting-buttons");
+        el.title = "linke Pfeiltaste drücken";
+        el.innerHTML = "<";
+        el.addEventListener('click', function() {
+            changeWeek(-1);
+        });
+        wrapper.appendChild(el);
+        wrapper.classList.add("mobile-button-wrapper");
 
-    el = document.createElement('button');
-    el.classList.add("setting-buttons");
-    el.title = "rechte Pfeiltaste drücken";
-    el.addEventListener('click', function() {
-        changeWeek(1);
-    });
-    el.innerHTML = "Nächste Woche >";
-    document.getElementById('calendar-header').appendChild(el);
+        el = document.createElement('button');
+        el.classList.add("setting-buttons");
+        el.title = "rechte Pfeiltaste drücken";
+        el.addEventListener('click', function() {
+            changeWeek(1);
+        });
+        el.innerHTML = ">";
+        wrapper.appendChild(el);
+        
+        document.getElementById('calendar-header').appendChild(wrapper);
+    } else {
+        el = document.createElement('button');
+        el.classList.add("setting-buttons");
+        el.title = "linke Pfeiltaste drücken";
+        el.innerHTML = "< Vorherige Woche";
+        el.addEventListener('click', function() {
+            changeWeek(-1);
+        });
+        document.getElementById('calendar-header').appendChild(el);
 
+        el = document.createElement('div');
+        el.id = 'calendar-title';
+        el.title = "springe zur aktuellen Woche";
+        el.addEventListener('click', function(event) {
+            BackToToday();
+        });
+        el.innerHTML = calendarName + "<br>Woche vom " +
+            firstDayDisplayed.toLocaleString('de-DE', {
+                month: 'numeric',
+                year: 'numeric',
+                day: 'numeric'
+            }) +
+            "­ bis " +
+            lastDayDisplayed.toLocaleString('de-DE', {
+                month: 'numeric',
+                year: 'numeric',
+                day: 'numeric'
+            });
+        document.getElementById('calendar-header').appendChild(el);
+
+        el = document.createElement('button');
+        el.classList.add("setting-buttons");
+        el.title = "rechte Pfeiltaste drücken";
+        el.addEventListener('click', function() {
+            changeWeek(1);
+        });
+        el.innerHTML = "Nächste Woche >";
+        document.getElementById('calendar-header').appendChild(el);
+    };
     // calendar headings
     document.getElementById('calendar-monthview').innerHTML = '';
     let calendar = document.getElementById('calendar-weekview');
@@ -420,7 +483,7 @@ function drawWeekView() {
                 currentRow.appendChild(eventTD);
                 // summary column
                 eventTD = document.createElement('td');
-                eventTD.innerHTML = "<i> — keine Veranstaltungen —</i>";
+                eventTD.innerHTML = "<i>keine Veranstaltungen</i>";
                 eventTD.classList.add('no-events-to-display');
                 currentRow.appendChild(eventTD);
             };
@@ -589,6 +652,7 @@ function drawMonthView() {
 function drawToggleButtons() {
     let buttons = document.getElementById('toggle-buttons-header');
     buttons.innerHTML = '';
+    if (is_mobile){ return; };
     // Toggle Week/Month View Button
     button = document.createElement('button');
     buttonImage = document.createElement('img');

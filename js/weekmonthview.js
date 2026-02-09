@@ -710,11 +710,11 @@ function openModal(event) {
     };
     document.getElementById('modal-body').innerHTML = "";
     el = document.createElement('div');
-    el.classList.add("eventsummary");
+    el.classList.add("summary");
     el.innerHTML = event.summary;
     document.getElementById('modal-body').appendChild(el);
     el = document.createElement('div');
-    el.classList.add("eventlocation");
+    el.classList.add("location");
     if (event.location == missingEntrySymbol) {
         el.innerHTML = "Ort unbekannt";
     } else {
@@ -744,7 +744,7 @@ function openModal(event) {
     });
 
     el = document.createElement('p');
-    el.classList.add("eventabstract");
+    el.classList.add("abstract");
     // now replace all line breaks with <br. tags
     // the following regex hack is taken from
     // https://stackoverflow.com/questions/784539/how-do-i-replace-all-line-breaks-in-a-string-with-br-elements

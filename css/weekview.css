@@ -35,7 +35,7 @@
 }
 
 .calendar-weekview th {
-	color: var(--rub-blue);
+	color: var(--rub-calendar-blue);
 }
 
 .calendar-weekview tr hr {
@@ -45,16 +45,16 @@
 	margin: 0;
 }
 
-.today-separator-top td {
+.calendar-today-separator-top td {
 	padding: 0 2px 2px 2px;
 }
 
-.today-separator-bottom td {
+.calendar-today-separator-bottom td {
 	padding: 2px 2px 0 2px;
 }
 
-.today-separator td hr {
-	border: 2px solid var(--rub-blue);
+.calendar-today-separator td hr {
+	border: 2px solid var(--rub-calendar-blue);
 }
 
 .weekview-col-date {
@@ -75,7 +75,7 @@
 .weekview-event {
 	color: white;
 	cursor: pointer;
-	background-color: var(--rub-grey);
+	background-color: var(--rub-calendar-grey);
 	border-color: #ddd;
 }
 
@@ -100,8 +100,8 @@
 	padding: 2px 6px;
 }
 
-.weekview-today-date {
+.weekview-calendar-today-date {
 	font-weight: bold;
 	padding: 6px 0;
-	color: var(--rub-blue);
+	color: var(--rub-calendar-blue);
 }

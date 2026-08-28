@@ -41,7 +41,7 @@ function loadICS(name, colours, links,svgs) {
     	.catch(error => {
             console.error('FATAL ERROR: Fehler beim Laden der ICS-Dateien:', error);
             displayCalendar()
-            document.getElementById('error-message').innerHTML = "Fehler beim Laden der Kalender-Quelldateien.<br/>Bitte kontaktieren Sie <div class='modal-center-container'>Termine-Mathe@ruhr-uni-bochum.de.</div>";
+            document.getElementById('calendar-error-message').innerHTML = "Fehler beim Laden der Kalender-Quelldateien.<br/>Bitte kontaktieren Sie <div class='calendar-modal-center-container'>Termine-Mathe@ruhr-uni-bochum.de.</div>";
         });
 }
 
@@ -90,7 +90,7 @@ function parse_event(event,category) {
 
         // other event details are optional
         let description = event.getFirstPropertyValue('description') || '';
-        let location = event.getFirstPropertyValue('location') || missingEntrySymbol;
+        let location = event.getFirstPropertyValue('calendar-location') || missingEntrySymbol;
         let allCategories = [category];
 
         try {
@@ -187,7 +187,7 @@ function displayCalendar() {
 }
 
 function toggleMode() {
-    let div = document.getElementById('togglemode');
+    let div = document.getElementById('calendar-togglemode');
     if (is_mobile){
         div.innerHTML = 'Kalender im Desktopmodus betrachten';
         div.addEventListener('click', function() {
@@ -247,17 +247,17 @@ function drawWeekView() {
         
         wrapper = document.createElement('div');
         el = document.createElement('button');
-        el.classList.add("setting-buttons");
+        el.classList.add("setting-calendar-buttons");
         el.title = "linke Pfeiltaste drücken";
         el.innerHTML = "<";
         el.addEventListener('click', function() {
             changeWeek(-1);
         });
         wrapper.appendChild(el);
-        wrapper.classList.add("mobile-button-wrapper");
+        wrapper.classList.add("mobile-calendar-button-wrapper");
 
         el = document.createElement('button');
-        el.classList.add("setting-buttons");
+        el.classList.add("setting-calendar-buttons");
         el.title = "rechte Pfeiltaste drücken";
         el.addEventListener('click', function() {
             changeWeek(1);
@@ -268,7 +268,7 @@ function drawWeekView() {
         document.getElementById('calendar-header').appendChild(wrapper);
     } else {
         el = document.createElement('button');
-        el.classList.add("setting-buttons");
+        el.classList.add("setting-calendar-buttons");
         el.title = "linke Pfeiltaste drücken";
         el.innerHTML = "< Vorherige Woche";
         el.addEventListener('click', function() {
@@ -297,7 +297,7 @@ function drawWeekView() {
         document.getElementById('calendar-header').appendChild(el);
 
         el = document.createElement('button');
-        el.classList.add("setting-buttons");
+        el.classList.add("setting-calendar-buttons");
         el.title = "rechte Pfeiltaste drücken";
         el.addEventListener('click', function() {
             changeWeek(1);
@@ -391,8 +391,8 @@ function drawWeekView() {
         if (isToday) {
             // thick horizontal separator
             let currentRow = document.createElement('tr');
-            currentRow.classList.add('today-separator');
-            currentRow.classList.add('today-separator-top');
+            currentRow.classList.add('calendar-today-separator');
+            currentRow.classList.add('calendar-today-separator-top');
             TDelement = document.createElement('td');
             TDelement.colSpan = "4";
             HRelement = document.createElement('hr');
@@ -410,7 +410,7 @@ function drawWeekView() {
             FirstColumnEntry.rowSpan = NumberOfDayEvents;
         };
         if (isToday) {
-            FirstColumnEntry.classList.add('weekview-today-date');
+            FirstColumnEntry.classList.add('weekview-calendar-today-date');
             FirstColumnEntry.innerHTML = "heute<br>" + currentDay.toLocaleDateString('de', {
                 weekday: "short",
                 month: "numeric",
@@ -492,8 +492,8 @@ function drawWeekView() {
         if (isToday) {
             // thick horizontal separator
             currentRow = document.createElement('tr');
-            currentRow.classList.add('today-separator');
-            currentRow.classList.add('today-separator-bottom');
+            currentRow.classList.add('calendar-today-separator');
+            currentRow.classList.add('calendar-today-separator-bottom');
             TDelement = document.createElement('td');
             TDelement.colSpan = "4";
             HRelement = document.createElement('hr');
@@ -526,7 +526,7 @@ function drawMonthView() {
     // page title with navigation buttons
     document.getElementById('calendar-header').innerHTML = "";
     let el = document.createElement('button');
-    el.classList.add("setting-buttons");
+    el.classList.add("setting-calendar-buttons");
     el.title = "linke Pfeiltaste drücken";
     el.innerHTML = "< Vorheriger Monat";
     el.addEventListener('click', function() {
@@ -547,7 +547,7 @@ function drawMonthView() {
     document.getElementById('calendar-header').appendChild(el);
 
     el = document.createElement('button');
-    el.classList.add("setting-buttons");
+    el.classList.add("setting-calendar-buttons");
     el.title = "rechte Pfeiltaste drücken";
     el.addEventListener('click', function() {
         changeMonth(1);
@@ -650,7 +650,7 @@ function drawMonthView() {
 }
 
 function drawToggleButtons() {
-    let buttons = document.getElementById('toggle-buttons-header');
+    let buttons = document.getElementById('toggle-calendar-buttons-header');
     buttons.innerHTML = '';
     if (is_mobile){ return; };
     // Toggle Week/Month View Button
@@ -663,9 +663,9 @@ function drawToggleButtons() {
         buttonImage.src = svgFiles['week'];
         button.title = "zur Wochenansicht wechseln";
     };
-    buttonImage.classList.add('svg-icon');
-    button.classList.add('toggle-buttons');
-    button.classList.add('setting-buttons');
+    buttonImage.classList.add('calendar-svg-icon');
+    button.classList.add('toggle-calendar-buttons');
+    button.classList.add('setting-calendar-buttons');
     button.appendChild(buttonImage);
     button.addEventListener('click', function() {
         toggleWeekMonth();
@@ -674,8 +674,9 @@ function drawToggleButtons() {
     // Toggle-Buttons generieren
     for (const category of categoriesAll) {
         button = document.createElement('a');
-        button.classList.add("toggle-buttons");
+        button.classList.add("toggle-calendar-buttons");
         input = document.createElement('input');
+        input.classList.add('calendar-checkbox');
         input.type = "checkbox";
         input.id = category;
         input.title = "Kalender ein- bzw. ausschalten";
@@ -695,6 +696,7 @@ function drawToggleButtons() {
         button.appendChild(input);
         label = document.createElement('label');
         label.textContent = category;
+        label.classList.add("calendar-label");
         label.htmlFor = category;
         if (categoriesSelected.includes(category)) { // Kategorie an
             button.classList.remove('label-switched-off');
@@ -709,7 +711,7 @@ function drawToggleButtons() {
     help = document.createElement('a');
     help.title = "Hilfe anzeigen";
     help.innerHTML = "Hilfe";
-    help.id = "help";
+    help.id = "calendar-help";
     help.addEventListener('click', function() {
         showHelp();
     });
@@ -717,9 +719,9 @@ function drawToggleButtons() {
     // Save URL Parameters Button
     button = document.createElement('button');
     buttonImage = document.createElement('img');
-    buttonImage.classList.add('svg-icon');
+    buttonImage.classList.add('calendar-svg-icon');
     buttonImage.src = svgFiles['save'];
-    button.classList.add('toggle-buttons', 'setting-buttons');
+    button.classList.add('toggle-calendar-buttons', 'setting-calendar-buttons');
     button.title = "kopiere alle Anzeigeeinstellungen in die URL\n(z.B. um sie als Lesezeichen im Browser zu speichern)";
     button.appendChild(buttonImage);
     button.addEventListener('click', function() {
@@ -729,9 +731,9 @@ function drawToggleButtons() {
 }
 
 function openModal(event) {
-    document.body.classList.add('no-scroll');
+    document.body.classList.add('calendar-no-scroll');
     if (event.singleDayEvent) {
-        document.getElementById('modal-title').textContent =
+        document.getElementById('calendar-modal-title').textContent =
             event.startDate.toLocaleDateString('de-de', {
                 weekday: "long",
                 year: "numeric",
@@ -740,7 +742,7 @@ function openModal(event) {
             });
     } else if (event.allDayEvent) {
         // event.singleDayEvent = false 
-        document.getElementById('modal-title').textContent =
+        document.getElementById('calendar-modal-title').textContent =
             event.startDate.toLocaleDateString('de-de', {
                 weekday: "long",
                 year: "numeric",
@@ -754,7 +756,7 @@ function openModal(event) {
                 day: "numeric",
             });
     } else {
-        document.getElementById('modal-title').textContent =
+        document.getElementById('calendar-modal-title').textContent =
             event.startDate.toLocaleDateString('de-de', {
                 weekday: "long",
                 year: "numeric",
@@ -772,31 +774,31 @@ function openModal(event) {
                 minute: "2-digit"
             });
     };
-    document.getElementById('modal-body').innerHTML = "";
+    document.getElementById('calendar-modal-body').innerHTML = "";
     el = document.createElement('div');
-    el.classList.add("summary");
+    el.classList.add("calendar-summary");
     el.innerHTML = event.summary;
-    document.getElementById('modal-body').appendChild(el);
+    document.getElementById('calendar-modal-body').appendChild(el);
     el = document.createElement('div');
-    el.classList.add("location");
+    el.classList.add("calendar-location");
     if (event.location == missingEntrySymbol) {
         el.innerHTML = "Ort unbekannt";
     } else {
         el.innerHTML = event.location;
     };
-    document.getElementById('modal-body').appendChild(el);
+    document.getElementById('calendar-modal-body').appendChild(el);
 
     //el = document.createElement('button');
-    //el.classList.add('toggle-buttons');
+    //el.classList.add('toggle-calendar-buttons');
     //el.disabled = true;
     //el.innerHTML = event.mainCategory;
     //el.style.backgroundColor = categoryColors[event.mainCategory];
-    //document.getElementById('modal-body').appendChild(el);
+    //document.getElementById('calendar-modal-body').appendChild(el);
     //console.log(event.allCategoriesRaw);
     //console.log(event.allCategories);
     event.allCategories.forEach(cat => {
         el = document.createElement('button');
-        el.classList.add('toggle-buttons', 'dummy-button');
+        el.classList.add('toggle-calendar-buttons', 'dummy-calendar-button');
         el.disabled = true;
         el.innerHTML = cat;
         if (categoriesAll.includes(cat)) {
@@ -804,31 +806,31 @@ function openModal(event) {
         } else {
             el.style.backgroundColor = categoryColors[event.mainCategory];
         };
-        document.getElementById('modal-body').appendChild(el);
+        document.getElementById('calendar-modal-body').appendChild(el);
     });
 
     el = document.createElement('p');
-    el.classList.add("abstract");
+    el.classList.add("calendar-abstract");
     // now replace all line breaks with <br. tags
     // the following regex hack is taken from
     // https://stackoverflow.com/questions/784539/how-do-i-replace-all-line-breaks-in-a-string-with-br-elements
-    el.innerHTML = linkifyStr(event.description,{className: "linkInAbstract"}).replace(/(?:\r\n|\r|\n)/g, '<br>');
-    document.getElementById('modal-body').appendChild(el);
-    document.getElementById('modal-body').appendChild(closeModalButton());
-    document.getElementById('event-modal').style.display = 'flex'; //necessary to show modal
+    el.innerHTML = linkifyStr(event.description,{className: "linkInCalendarAbstract"}).replace(/(?:\r\n|\r|\n)/g, '<br>');
+    document.getElementById('calendar-modal-body').appendChild(el);
+    document.getElementById('calendar-modal-body').appendChild(closeModalButton());
+    document.getElementById('event-calendar-modal').style.display = 'flex'; //necessary to show modal
 }
 
 function showHelp(event) {
-    document.body.classList.add('no-scroll');
-    document.getElementById('modal-title').textContent = "Hilfe zur Benutzung des Fakultätskalenders";
-    let urls = "<li><b>";
+    document.body.classList.add('calendar-no-scroll');
+    document.getElementById('calendar-modal-title').textContent = "Hilfe zur Benutzung des Fakultätskalenders";
+    let urls = "<li><b class='calendar-blue'>";
     urls += "alle Kalender";
     urls += ": </b>"; 
     urls += copyButton("https://mail.ruhr-uni-bochum.de/SOGo/dav/public/termixxd/Calendar/");
     urls += "https://mail.ruhr-uni-bochum.de/SOGo/dav/public/termixxd/Calendar/"
     urls += "</li>";
     for (const category of categoriesAll){
-    	urls += "<li><b>";
+    	urls += "<li><b class='calendar-blue'>";
     	urls += category;
     	urls += ": </b>";
     	urls += copyButton(links[category]);
@@ -837,7 +839,7 @@ function showHelp(event) {
     };
     let urls_with_auth = "";
     for (const category of categoriesAll){
-    	urls_with_auth += "<li><b>";
+    	urls_with_auth += "<li><b class='calendar-blue'>";
     	urls_with_auth += category;
     	urls_with_auth += ": </b>";
     	urls_with_auth += copyButton(links[category].replace(/public\//g,'').replace(/.ics/g,'\/'));
@@ -845,46 +847,46 @@ function showHelp(event) {
     	urls_with_auth += "</li>";
     };
     
-    document.getElementById('modal-body').innerHTML = "";
+    document.getElementById('calendar-modal-body').innerHTML = "";
     
-    document.getElementById('modal-body').innerHTML += accordionElement(
+    document.getElementById('calendar-modal-body').innerHTML += accordionElement(
     	"Grundlegende Anzeigefunktionen des Kalenders",
     	`<p> 
-	<b>Zwischen Wochen- und Monatsansicht wechseln</b>
+	<b class='calendar-blue'>Zwischen Wochen- und Monatsansicht wechseln</b>
 	</p>
 	<p> 
 		Klicken Sie dazu den Schalter 
-		<button class='toggle-buttons setting-buttons dummy-button' disabled>
-		<img src="`+svgFiles['week']+`" class="svg-icon">
+		<button class='toggle-calendar-buttons setting-calendar-buttons dummy-calendar-button' disabled>
+		<img src="`+svgFiles['week']+`" class="calendar-svg-icon">
 		</button> 
 		bzw.
-		<button class='toggle-buttons setting-buttons dummy-button' disabled>
-		<img src="`+svgFiles['month']+`" class="svg-icon">
+		<button class='toggle-calendar-buttons setting-calendar-buttons dummy-calendar-button' disabled>
+		<img src="`+svgFiles['month']+`" class="calendar-svg-icon">
 		</button>
 		oben links über dem Kalender.
 	</p>
 	<p> 
-	<b>Veranstaltungen bestimmter Fachbereiche ein- und ausblenden</b>
+	<b class='calendar-blue'>Veranstaltungen bestimmter Fachbereiche ein- und ausblenden</b>
 	</p>
 	<p> 
 		Klicken Sie dazu die Kontrollkästchen
-		<a class="toggle-buttons dummy-checkbox">
-		<input type="checkbox" class="dummy-checkbox" checked>
-		<label class='dummy-checkbox'>
+		<a class="toggle-calendar-buttons calendar-dummy-checkbox">
+		<input type="checkbox" class="calendar-dummy-checkbox calendar-checkbox" checked>
+		<label class='calendar-dummy-checkbox calendar-label'>
 		Fachbereich
 		</label>
 		</a>
 		direkt über dem Kalender.
 	</p>
 	<p> 
-	<b>Gewählte Anzeigeeinstellungen abspeichern</b>
+	<b class='calendar-blue'>Gewählte Anzeigeeinstellungen abspeichern</b>
 	</p>
 	<p>
 		Klicken Sie den Schalter 
 		</p>
-		<div class="modal-center-container">
-		<button class='toggle-buttons setting-buttons dummy-button' disabled>
-		<img src="`+svgFiles['save']+`" class="svg-icon">
+		<div class="calendar-modal-center-container">
+		<button class='toggle-calendar-buttons setting-calendar-buttons dummy-calendar-button' disabled>
+		<img src="`+svgFiles['save']+`" class="calendar-svg-icon">
 		</button> 
 		</div>
 		<p>
@@ -892,18 +894,18 @@ function showHelp(event) {
 		</p>
 	</p>
 	<p> 
-	<b>Navigation</b>
+	<b class='calendar-blue'>Navigation</b>
 	</p>
 	<p> 
 		Mit der rechten oder linken Pfeiltaste (←/→) auf Ihrer Tastatur können Sie eine Woche bzw. einen Monat vor oder zurück navigieren.  Alternativ klicken Sie die entsprechenden Schalter oberhalb des Kalenders. 
 	</p>
 	<p> 
-	<b>Details zu Veranstaltungen anzeigen</b>
+	<b class='calendar-blue'>Details zu Veranstaltungen anzeigen</b>
 	</p>
 	<p> 
 		Klicken Sie einfach auf eine Veranstaltung, so erscheint ein Fenster mit allen verfügbaren Details.
 	</p>`);
-	document.getElementById('modal-body').innerHTML += accordionElement(
+	document.getElementById('calendar-modal-body').innerHTML += accordionElement(
 		"Kalender abonnieren",
 		`<p> 
 		Um die Kalender der Fachbereiche in einem Programm wie Thunderbird anzuzeigen, können folgende URLs genutzt werden:
@@ -914,7 +916,7 @@ function showHelp(event) {
 		Diese URLs geben Sie als Adresse beim Hinzufügen eines neuen Kalenders in dem entsprechenden Dialog bzw. den Einstellungen Ihres Kalenderprogramms an.
 		</p>
 		<p> 
-		<b>Wichtige Hinweise fürs Abonnieren</b>
+		<b class='calendar-blue'>Wichtige Hinweise fürs Abonnieren</b>
 		<ul>
 		<li>	
 		Abonnieren Sie keinen Kalender, den Sie auch editieren möchten, sondern folgen Sie stattdessen den Anweisungen im nächsten Abschnitt.
@@ -924,7 +926,7 @@ function showHelp(event) {
 		</li>
 		</ul>
 		</p>`);
-	document.getElementById('modal-body').innerHTML += accordionElement(
+	document.getElementById('calendar-modal-body').innerHTML += accordionElement(
 		"Kalender editieren",
 		`<p> 
 		Kalendereinträge hinzufügen, bearbeiten und löschen können nur authentifizierte Benutzer.  
@@ -932,20 +934,20 @@ function showHelp(event) {
 		Zudem müssen für den Benutzer entsprechende Zugriffsrechte im SOGo-System hinterlegt sein.
 		Professoren und deren Sekretariate haben in der Regel nur Zugriffsrecht auf den Kalender Ihres jeweiligen Fachbereichs. 
 		Falls Sie neue Zugriffsrechte wünschen, wenden Sie sich bitte per E-Mail an 
-		<div class="modal-center-container">Termine-Mathe@ruhr-uni-bochum.de.</div>
+		<div class="calendar-modal-center-container">Termine-Mathe@ruhr-uni-bochum.de.</div>
 		</p>
 		<p>
 		Kalendereinträge können auf zwei Art und Weisen editiert werden: 
 		</p>
 		<p>
-		<b>Option 1:</b> 
+		<b class='calendar-blue'>Option 1:</b> 
 		Falls Sie bereits ein Kalenderprogramm benutzen, 
 		ist das die einfachste Option.
 		</p>
 		<p>
 		Voraussetzung ist, 
 		dass Ihr Kalenderprogramm den offenen Standard CalDAV unterstützt. 
-		Dies ist bei Programmen wie beispielsweise Thunderbird und Apple iCal der Fall, bei Google Calendar jedoch nicht; siehe auch <b><a href="https://de.wikipedia.org/wiki/CalDAV#Client" target="_blank">diese Liste</a></b> bei Wikipedia.
+		Dies ist bei Programmen wie beispielsweise Thunderbird und Apple iCal der Fall, bei Google Calendar jedoch nicht; siehe auch <b class='calendar-blue'><a href="https://de.wikipedia.org/wiki/CalDAV#Client" target="_blank">diese Liste</a></b> bei Wikipedia.
 		</p>
 		<p>
 		Abonnieren Sie den Kalender in Ihrem Programm mit Schreibberechtigungen unter Verwendung der folgenden URLs (die von den oben angegebenen URLs abweichen!): 
@@ -956,11 +958,11 @@ function showHelp(event) {
 		Anschließend können Sie jederzeit Einträge bequem über Ihr Kalenderprogramm editieren. 
 		</p>
 		<p>
-		<b>Option 2:</b> Alternativ können Sie im Browser über die Benutzeroberfläche des SOGo-Kalenders den entsprechenden Kalender abonnieren.  Folgen Sie dazu <b><a href="https://mail.ruhr-uni-bochum.de/SOGo/" target="_blank">diesem Link</a></b> und melden sich mit Ihrer RUB-Benutzerkennung und Passwort an. Sie gelangen so zu Ihrem persönlichem SOGo-Kalender.  Dort klicken Sie in der linken Spalte auf <i>Abonnements</i> und suchen in dem neu geöffneten Feld nach dem virtuellen Benutzer <i>Termine-Mathe</i>. Es erscheint eine Liste aller verfügbaren Kalender. Wählen Sie nun die Kalender aus, die Sie abonnieren wollen.  Falls Sie Schreibberechtigungen haben (siehe oben), können sie nun Termine editieren.
+		<b class='calendar-blue'>Option 2:</b> Alternativ können Sie im Browser über die Benutzeroberfläche des SOGo-Kalenders den entsprechenden Kalender abonnieren.  Folgen Sie dazu <b class='calendar-blue'><a href="https://mail.ruhr-uni-bochum.de/SOGo/" target="_blank">diesem Link</a></b> und melden sich mit Ihrer RUB-Benutzerkennung und Passwort an. Sie gelangen so zu Ihrem persönlichem SOGo-Kalender.  Dort klicken Sie in der linken Spalte auf <i>Abonnements</i> und suchen in dem neu geöffneten Feld nach dem virtuellen Benutzer <i>Termine-Mathe</i>. Es erscheint eine Liste aller verfügbaren Kalender. Wählen Sie nun die Kalender aus, die Sie abonnieren wollen.  Falls Sie Schreibberechtigungen haben (siehe oben), können sie nun Termine editieren.
 		</p>
 		
 		<p> 
-		<b>Wichtige Hinweise fürs Editieren</b>
+		<b class='calendar-blue'>Wichtige Hinweise fürs Editieren</b>
 		<ul>
 		<li>
 		Die Kalender sind primär für solche Veranstaltungen an der Fakultät bestimmt, die sich an einen größeren Kreis von Personen innerhalb der Fakultät richten. 
@@ -968,11 +970,11 @@ function showHelp(event) {
 		Lehrveranstaltungen fallen in der Regel nicht darunter.
 		</li>
 		<li>
-		Alle Einträge erscheinen <b>öffentlich</b>!
+		Alle Einträge erscheinen <b class='calendar-blue'>öffentlich</b>!
 		Daher ist bei neuen Einträgen Vorsicht geboten, dass Sie tatsächlich den richtigen Kalender auswählen, insbesondere bei privaten Terminen.  
 		</li>
 		<li>
-		Soll ein Eintrag auch in Semesterkalendern (siehe beispielweise <b><a href="https://math.ruhr-uni-bochum.de/fakultaet/arbeitsbereiche/topologie/oberseminar-topologie/" target="_blank">hier</a></b>) angezeigt werden, so muss für den Termin die entsprechende Kategorie (wie etwa <i>Oberseminar Topologie</i>) angegeben werden. 
+		Soll ein Eintrag auch in Semesterkalendern (siehe beispielweise <b class='calendar-blue'><a href="https://math.ruhr-uni-bochum.de/fakultaet/arbeitsbereiche/topologie/oberseminar-topologie/" target="_blank">hier</a></b>) angezeigt werden, so muss für den Termin die entsprechende Kategorie (wie etwa <i>Oberseminar Topologie</i>) angegeben werden. 
 		Es empfielt sich, Kalendereinträge zu kopieren statt neu zu erstellen.
 		</li>
 		<li>
@@ -983,11 +985,11 @@ function showHelp(event) {
 		</li>
 		</ul>
 		</p>`);
-	document.getElementById('modal-body').innerHTML += accordionElement(
+	document.getElementById('calendar-modal-body').innerHTML += accordionElement(
 		"Weitergehende Informationen",
 		`<p>
 		Der Quellcode für den Kalender ist unter AGPL-3.0-Lizenz 
-		<a href="https://github.com/cbz20/Web-Calendar" target="_blank"><b>hier</b></a> veröffentlicht. 
+		<a href="https://github.com/cbz20/Web-Calendar" target="_blank"><b class='calendar-blue'>hier</b></a> veröffentlicht. 
 		</p>
 		<p> 
 		Dank an die Autoren der verwendeten Javascript-Plugins:
@@ -995,14 +997,14 @@ function showHelp(event) {
 		<li>
 		<i>ical.js</i> 
 		von u.a.
-		<a href="https://github.com/kewisch/ical.js" target="_blank"><b>Philipp Kewisch (Mozilla)</b></a>,
+		<a href="https://github.com/kewisch/ical.js" target="_blank"><b class='calendar-blue'>Philipp Kewisch (Mozilla)</b></a>,
 		bereitgestellt über 
-		<a href="https://cdnjs.com/" target="_blank"><b>cdnjs</b></a>
+		<a href="https://cdnjs.com/" target="_blank"><b class='calendar-blue'>cdnjs</b></a>
 		</li>
 		<li>
 		<i>linkify.js</i>
 		von 
-		<a href="https://linkify.js.org/" target="_blank"><b>Nick Frasser</b></a>
+		<a href="https://linkify.js.org/" target="_blank"><b class='calendar-blue'>Nick Frasser</b></a>
 		</li>
 		</ul>
 		</p>
@@ -1010,15 +1012,15 @@ function showHelp(event) {
 		<i>
 		Bei technischen Problemen oder Fragen wenden Sie sich bitte per E-Mail an 
 		</i>
-		<div class="modal-center-container"><i>Termine-Mathe@ruhr-uni-bochum.de.</i></div>
+		<div class="calendar-modal-center-container"><i>Termine-Mathe@ruhr-uni-bochum.de.</i></div>
 		</p>`);
-    document.getElementById('modal-body').appendChild(closeModalButton());
-    document.getElementById('event-modal').style.display = 'flex'; //necessary to show modal
+    document.getElementById('calendar-modal-body').appendChild(closeModalButton());
+    document.getElementById('event-calendar-modal').style.display = 'flex'; //necessary to show modal
 }
 
 function copyButton(url) {
     return `<button 
-    	class='toggle-buttons setting-buttons' 
+    	class='toggle-calendar-buttons setting-calendar-buttons' 
     	title="url kopieren" 
     	onclick='navigator.clipboard.writeText("` + url + `").then(function() {
 	    console.log("copied url");
@@ -1027,32 +1029,32 @@ function copyButton(url) {
 	});'>
 	<img 
 		src="`+svgFiles['copy']+`" 
-		class="svg-icon">
+		class="calendar-svg-icon">
 	</button> `
 };
 
 function closeModalButton() {
     let el = document.createElement('div');
-    el.classList.add("modal-center-container");
+    el.classList.add("calendar-modal-center-container");
     let button = document.createElement('button');
-    button.classList.add('toggle-buttons', "setting-buttons");
+    button.classList.add('toggle-calendar-buttons', "setting-calendar-buttons");
     button.innerHTML = "Schließen";
     button.addEventListener('click', function() {
-        document.getElementById('event-modal').style.display = 'none';
-        document.body.classList.remove('no-scroll');
+        document.getElementById('event-calendar-modal').style.display = 'none';
+        document.body.classList.remove('calendar-no-scroll');
     });
     el.appendChild(button);
     return el;
 };
 
 // close modal 
-document.getElementById('event-modal').addEventListener('click', function(event) {
+document.getElementById('event-calendar-modal').addEventListener('click', function(event) {
     // only close if we click in the transparent area outside the modal content
     if (event.currentTarget !== event.target) {
         return;
     }
-    document.getElementById('event-modal').style.display = 'none';
-    document.body.classList.remove('no-scroll');
+    document.getElementById('event-calendar-modal').style.display = 'none';
+    document.body.classList.remove('calendar-no-scroll');
 });
 
 // Funktion, um den Monat zu ändern
@@ -1181,35 +1183,35 @@ function updateToday() {
 }
 
 function accordionElement(title,content){
-	return `<div class="accordion">
-        <div class="accordion-header" onclick="toggleAccordion(this)">`+title+`<span class="arrow"></span></div>
-        <div class="accordion-content">`+content+`</div>
+	return `<div class="calendar-accordion">
+        <div class="calendar-accordion-header" onclick="toggleAccordion(this)">`+title+`<span class="calendar-arrow"></span></div>
+        <div class="calendar-accordion-content">`+content+`</div>
     </div>
     `
 }
 function toggleAccordion(element) {
             var content = element.nextElementSibling;
-            var arrow = element.querySelector('.arrow');
+            var arrow = element.querySelector('.calendar-arrow');
             
-            if (element.classList.contains("active")) {
-                element.classList.remove("active");
+            if (element.classList.contains("calendar-active")) {
+                element.classList.remove("calendar-active");
             } else {
-                element.classList.add("active");
+                element.classList.add("calendar-active");
             }
        }
 function toggleAccordion(element) {
-            var accordions = document.querySelectorAll('.accordion-header');
+            var accordions = document.querySelectorAll('.calendar-accordion-header');
             accordions.forEach(header => {
                 if (header !== element) {
-                    header.classList.remove("active");
+                    header.classList.remove("calendar-active");
                     header.nextElementSibling.style.maxHeight = null;
                     header.nextElementSibling.style.padding = "0 10px";
                 }
             });
             
-            element.classList.toggle("active");
+            element.classList.toggle("calendar-active");
             var content = element.nextElementSibling;
-            if (element.classList.contains("active")) {
+            if (element.classList.contains("calendar-active")) {
                 content.style.maxHeight = "2000px";
                 content.style.padding = "10px";
                 element.scrollIntoView({ behavior: "smooth", block: "start" });

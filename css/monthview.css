@@ -25,7 +25,7 @@
 }
 
 .monthview-day-header {
-	color: var(--rub-blue);
+	color: var(--rub-calendar-blue);
 	font-weight: bold;
 	text-align: center;
 	padding: 10px 0;
@@ -33,7 +33,7 @@
 }
 
 .monthview-weekend-header {
-	color: var(--rub-blue);
+	color: var(--rub-calendar-blue);
 	font-weight: bold;
 	text-align: center;
 	padding: 10px 0;
@@ -61,9 +61,9 @@
 }
 
 .monthview-today {
-	border: 2px solid var(--rub-blue);
+	border: 2px solid var(--rub-calendar-blue);
 	font-weight: bold;
-	background-color: var(--rub-grey);
+	background-color: var(--rub-calendar-grey);
 }
 
 .monthview-day-outside-month .monthview-today {

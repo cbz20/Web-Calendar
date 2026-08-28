@@ -32,19 +32,19 @@
 
 <body>
     <div class="calendar-container">
-        <div id="error-message"></div>
+        <div id="calendar-error-message"></div>
         <div class="calendar-header" id="calendar-header">...Kalender wird geladen...</div>
-        <div class="toggle-buttons-header" id="toggle-buttons-header"></div>
+        <div class="toggle-calendar-buttons-header" id="toggle-calendar-buttons-header"></div>
         <div class="calendar-monthview" id="calendar-monthview"></div>
         <table class="calendar-weekview" id="calendar-weekview"></table>
-        <div id="togglemode"></div>
+        <div id="calendar-togglemode"></div>
     </div>
 
     <!-- modal for event details -->
-    <div id="event-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header" id="modal-title"></div>
-            <div class="modal-body" id="modal-body"></div>
+    <div id="event-calendar-modal" class="calendar-modal">
+        <div class="calendar-modal-content">
+            <div class="calendar-modal-header" id="calendar-modal-title"></div>
+            <div class="calendar-modal-body" id="calendar-modal-body"></div>
         </div>
     </div>
 
@@ -57,7 +57,7 @@
         name = 'Fakultätskalender Mathematik'; // calendar title
         colours = {// categories of displayed events and their colors
             // an event needs to belong to at least one of these categories to be displayed
-            'Dekanat': 'var(--rub-blue)',
+            'Dekanat': 'var(--rub-calendar-blue)',
             'Algebra': '#347037',
             'Analysis': '#b61e3e',//rub-darkred
             'Didaktik': '#be9800',//rub-yellow, but with some grey tones added

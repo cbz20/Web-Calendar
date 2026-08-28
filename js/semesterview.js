@@ -34,7 +34,7 @@ function loadICS(icsFile, name, categories) {
         .catch(error => {
             console.error('FATAL ERROR: Fehler beim Laden der ICS-Datei:', error);
             parseICS("BEGIN:VCALENDAR\nEND:VCALENDAR");
-            document.getElementById('error-message').innerHTML = "Fehler beim Laden der Kalender-Quelldateien.<br/>Bitte kontaktieren Sie <div class='modal-center-container'>Termine-Mathe@ruhr-uni-bochum.de.</div>";
+            document.getElementById('calendar-error-message').innerHTML = "Fehler beim Laden der Kalender-Quelldateien.<br/>Bitte kontaktieren Sie <div class='calendar-modal-center-container'>Termine-Mathe@ruhr-uni-bochum.de.</div>";
         });
 }
 
@@ -70,7 +70,7 @@ function parseICS(icsData) {
 
         // other event details are optional
         let description = event.getFirstPropertyValue('description') || '';
-        let location = event.getFirstPropertyValue('location') || missingEntrySymbol;
+        let location = event.getFirstPropertyValue('calendar-location') || missingEntrySymbol;
         let allCategories = [];
 
         try {
@@ -199,7 +199,7 @@ function displayCalendar() {
     // page title with navigation buttons
     document.getElementById('calendar-header').innerHTML = "";
     let el = document.createElement('button');
-    el.classList.add("setting-buttons");
+    el.classList.add("setting-calendar-buttons");
     el.title = "linke Pfeiltaste drücken";
     el.innerHTML = "< Früheres Semester";
     el.addEventListener('click', function() {
@@ -232,7 +232,7 @@ function displayCalendar() {
     document.getElementById('calendar-header').appendChild(el);
 
     el = document.createElement('button');
-    el.classList.add("setting-buttons");
+    el.classList.add("setting-calendar-buttons");
     el.title = "rechte Pfeiltaste drücken";
     el.addEventListener('click', function() {
         changeTerm(1);
@@ -320,8 +320,8 @@ function displayCalendar() {
 
             // thick horizontal separator
             currentRow = document.createElement('tr');
-            currentRow.classList.add('today-separator');
-            currentRow.classList.add('today-separator-top');
+            currentRow.classList.add('calendar-today-separator');
+            currentRow.classList.add('calendar-today-separator-top');
             TDelement = document.createElement('td');
             TDelement.colSpan = "4";
             HRelement = document.createElement('hr');
@@ -337,7 +337,7 @@ function displayCalendar() {
             if (NumberOfDayEvents > 1) {
                 FirstColumnEntry.rowSpan = NumberOfDayEvents;
             };
-            FirstColumnEntry.classList.add('semesterview-today-date');
+            FirstColumnEntry.classList.add('semesterview-calendar-today-date');
             FirstColumnEntry.innerHTML = "heute<br>" + currentDay.toLocaleDateString('de', {
                 weekday: "short",
                 month: "numeric",
@@ -357,7 +357,7 @@ function displayCalendar() {
 
                 // time
                 let eventTD = document.createElement('td');
-                eventTD.classList.add('semesterview-event', 'semesterview-event-time', 'semesterview-today-event');
+                eventTD.classList.add('semesterview-event', 'semesterview-event-time', 'semesterview-calendar-today-event');
                 if (event.allDayEvent) {
                     eventTD.innerHTML = missingEntrySymbol;
                 } else {
@@ -373,7 +373,7 @@ function displayCalendar() {
 
                 // details
                 eventTD = document.createElement('td');
-                eventTD.classList.add('semesterview-event', 'semesterview-event-summary', 'semesterview-today-event', 'today-event');
+                eventTD.classList.add('semesterview-event', 'semesterview-event-summary', 'semesterview-calendar-today-event', 'calendar-today-event');
                 el = document.createElement('b');
                 el.innerHTML = event.summary;
                 eventTD.appendChild(el);
@@ -387,7 +387,7 @@ function displayCalendar() {
 
                 // location
                 eventTD = document.createElement('td');
-                eventTD.classList.add('semesterview-event', 'semesterview-event-location', 'semesterview-today-event');
+                eventTD.classList.add('semesterview-event', 'semesterview-event-location', 'semesterview-calendar-today-event');
                 eventTD.innerHTML = event.location;
                 currentRow.appendChild(eventTD);
                 //
@@ -407,8 +407,8 @@ function displayCalendar() {
 
             // thick horizontal separator
             currentRow = document.createElement('tr');
-            currentRow.classList.add('today-separator');
-            currentRow.classList.add('today-separator-bottom');
+            currentRow.classList.add('calendar-today-separator');
+            currentRow.classList.add('calendar-today-separator-bottom');
             TDelement = document.createElement('td');
             TDelement.colSpan = "4";
             HRelement = document.createElement('hr');
@@ -504,7 +504,7 @@ function displayCalendar() {
         };
     }
     if (noEventsShown) {
-        document.getElementById('table-head').classList.add('hide-me');
+        document.getElementById('table-head').classList.add('calendar-hide-me');
         let currentRow = document.createElement('tr');
         let TDelement = document.createElement('td');
         TDelement.colSpan = "4";
@@ -516,9 +516,9 @@ function displayCalendar() {
 }
 
 function openModal(event) {
-    document.body.classList.add('no-scroll');
+    document.body.classList.add('calendar-no-scroll');
     if (event.singleDayEvent) {
-        document.getElementById('modal-title').textContent =
+        document.getElementById('calendar-modal-title').textContent =
             event.startDate.toLocaleDateString('de-de', {
                 weekday: "long",
                 year: "numeric",
@@ -527,7 +527,7 @@ function openModal(event) {
             });
     } else if (event.allDayEvent) {
         // event.singleDayEvent = false 
-        document.getElementById('modal-title').textContent =
+        document.getElementById('calendar-modal-title').textContent =
             event.startDate.toLocaleDateString('de-de', {
                 weekday: "long",
                 year: "numeric",
@@ -541,7 +541,7 @@ function openModal(event) {
                 day: "numeric",
             });
     } else {
-        document.getElementById('modal-title').textContent =
+        document.getElementById('calendar-modal-title').textContent =
             event.startDate.toLocaleDateString('de-de', {
                 weekday: "long",
                 year: "numeric",
@@ -559,69 +559,69 @@ function openModal(event) {
                 minute: "2-digit"
             });
     };
-    document.getElementById('modal-body').innerHTML = "";
+    document.getElementById('calendar-modal-body').innerHTML = "";
     el = document.createElement('div');
-    el.classList.add("summary");
+    el.classList.add("calendar-summary");
     el.innerHTML = event.summary;
-    document.getElementById('modal-body').appendChild(el);
+    document.getElementById('calendar-modal-body').appendChild(el);
     el = document.createElement('div');
-    el.classList.add("location");
+    el.classList.add("calendar-location");
     if (event.location == missingEntrySymbol) {
         el.innerHTML = "Ort unbekannt";
     } else {
         el.innerHTML = event.location;
     };
-    document.getElementById('modal-body').appendChild(el);
+    document.getElementById('calendar-modal-body').appendChild(el);
 
     //el = document.createElement('button');
-    //el.classList.add('toggle-buttons');
+    //el.classList.add('toggle-calendar-buttons');
     //el.disabled = true;
     //el.innerHTML = event.mainCategory;
     //el.style.backgroundColor = categoryColors[event.mainCategory];
-    //document.getElementById('modal-body').appendChild(el);
+    //document.getElementById('calendar-modal-body').appendChild(el);
     //console.log(event.allCategoriesRaw);
     //console.log(event.allCategories);
     event.allCategories.forEach(cat => {
         el = document.createElement('button');
-        el.classList.add('toggle-buttons', 'dummy-button');
+        el.classList.add('toggle-calendar-buttons', 'dummy-calendar-button');
         el.disabled = true;
         el.innerHTML = cat;
-        document.getElementById('modal-body').appendChild(el);
+        document.getElementById('calendar-modal-body').appendChild(el);
     });
 
     el = document.createElement('p');
-    el.classList.add("abstract");
+    el.classList.add("calendar-abstract");
     // now replace all line breaks with <br. tags
     // the following regex hack is taken from
     // https://stackoverflow.com/questions/784539/how-do-i-replace-all-line-breaks-in-a-string-with-br-elements
-    el.innerHTML = linkifyStr(event.description,{className: "linkInAbstract"}).replace(/(?:\r\n|\r|\n)/g, '<br>');
-    document.getElementById('modal-body').appendChild(el);
-    document.getElementById('modal-body').appendChild(closeModalButton());
-    document.getElementById('event-modal').style.display = 'flex'; //necessary to show modal
+    el.innerHTML = linkifyStr(event.description,{className: "linkInCalendarAbstract"}).replace(/(?:\r\n|\r|\n)/g, '<br>');
+    document.getElementById('calendar-modal-body').appendChild(el);
+    document.getElementById('calendar-modal-body').appendChild(closeModalButton());
+    document.getElementById('event-calendar-modal').style.display = 'flex'; //necessary to show modal
 }
 
 function closeModalButton() {
     let el = document.createElement('div');
-    el.classList.add("modal-center-container");
+    el.classList.add("calendar-modal-center-container");
     let button = document.createElement('button');
-    button.classList.add('toggle-buttons', "setting-buttons");
+    button.classList.add('toggle-calendar-buttons', "setting-calendar-buttons");
     button.innerHTML = "Schließen";
     button.addEventListener('click', function() {
-        document.getElementById('event-modal').style.display = 'none';
-        document.body.classList.remove('no-scroll');
+        document.getElementById('event-calendar-modal').style.display = 'none';
+        document.body.classList.remove('calendar-no-scroll');
     });
     el.appendChild(button);
     return el;
 };
 
 // close modal
-document.getElementById('event-modal').addEventListener('click', function(event) {
+document.getElementById('event-calendar-modal').addEventListener('click', function(event) {
     // only close if we click in the transparent area outside the modal content
     if (event.currentTarget !== event.target) {
         return;
     }
-    document.getElementById('event-modal').style.display = 'none';
-    document.body.classList.remove('no-scroll');
+    document.getElementById('event-calendar-modal').style.display = 'none';
+    document.body.classList.remove('calendar-no-scroll');
 });
 
 function changeTerm(offset) {

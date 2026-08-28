@@ -35,7 +35,7 @@
 }
 
 .calendar-semesterview th {
-	color: var(--rub-blue);
+	color: var(--rub-calendar-blue);
 }
 
 .calendar-semesterview tr hr {
@@ -45,27 +45,27 @@
 	margin: 0;
 }
 
-.today-event {
+.calendar-today-event {
 	padding: 20px 5px 5px 5px;
 }
 
-.today-event p {
+.calendar-today-event p {
 	text-align: justify;
 	word-wrap: break-word;
 	padding: 10px 5px 10px 5px;
 	margin: 0;
 }
 
-.today-separator-top td {
+.calendar-today-separator-top td {
 	padding: 0 2px 2px 2px;
 }
 
-.today-separator-bottom td {
+.calendar-today-separator-bottom td {
 	padding: 2px 2px 0 2px;
 }
 
-.today-separator td hr {
-	border: 2px solid var(--rub-blue);
+.calendar-today-separator td hr {
+	border: 2px solid var(--rub-calendar-blue);
 }
 
 .semesterview-col-date {
@@ -92,7 +92,7 @@
 .semesterview-event {
 	cursor: pointer;
 	color: black;
-	background-color: var(--rub-grey);
+	background-color: var(--rub-calendar-grey);
 	border-color: #ddd;
 }
 
@@ -127,12 +127,12 @@
 	padding: 2px 6px;
 }
 
-.semesterview-today-date {
+.semesterview-calendar-today-date {
 	font-weight: bold;
 	padding: 6px 0;
-	color: var(--rub-blue);
+	color: var(--rub-calendar-blue);
 }
 
-.semesterview-today-event {
+.semesterview-calendar-today-event {
 	cursor: default;
 }

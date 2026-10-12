@@ -90,7 +90,7 @@ function parse_event(event,category) {
 
         // other event details are optional
         let description = event.getFirstPropertyValue('description') || '';
-        let location = event.getFirstPropertyValue('calendar-location') || missingEntrySymbol;
+        let location = event.getFirstPropertyValue('location') || missingEntrySymbol;
         let allCategories = [category];
 
         try {

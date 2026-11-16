@@ -938,6 +938,12 @@ function closeModalButton() {
     return el;
 };
 
+// The event window must not be covered by fixed elements of the surrounding
+// page (such as a website's header bar). A high z-index alone is not enough if
+// the page puts the calendar into its own stacking context, so the window is
+// moved to the end of <body>.
+document.body.appendChild(document.getElementById('event-calendar-modal'));
+
 // close modal 
 document.getElementById('event-calendar-modal').addEventListener('click', function(event) {
     // only close if we click in the transparent area outside the modal content
@@ -1100,25 +1106,54 @@ function accordionElement(title,content){
     `
 }
 function toggleAccordion(element) {
-            var accordions = document.querySelectorAll('.calendar-accordion-header');
-            accordions.forEach(header => {
-                if (header !== element) {
-                    header.classList.remove("calendar-active");
-                    header.nextElementSibling.style.maxHeight = null;
-                    header.nextElementSibling.style.padding = "0 10px";
-                }
-            });
-            
-            element.classList.toggle("calendar-active");
-            var content = element.nextElementSibling;
-            if (element.classList.contains("calendar-active")) {
-                content.style.maxHeight = "2000px";
-                content.style.padding = "10px";
-                element.scrollIntoView({ behavior: "smooth", block: "start" });
-            } else {
-                content.style.maxHeight = null;
-                content.style.padding = "0 10px";
-            }
+    // close all other sections
+    document.querySelectorAll('.calendar-accordion-header').forEach(header => {
+        if (header !== element && header.classList.contains("calendar-active")) {
+            closeAccordionSection(header);
         }
+    });
+    if (element.classList.contains("calendar-active")) {
+        closeAccordionSection(element);
+    } else {
+        openAccordionSection(element);
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+}
+
+function openAccordionSection(header) {
+    let content = header.nextElementSibling;
+    content.style.padding = "10px";
+    // measure while the section is still closed: reading scrollHeight makes
+    // the browser apply the current styles, and the animation must start
+    // from the closed height (0), not from the open style ("none")
+    let height = content.scrollHeight;
+    header.classList.add("calendar-active");
+    // animate to the section's actual height (a fixed maximum would cut off
+    // long sections on narrow screens), then remove the limit altogether,
+    // so that nothing is cut off later either (e.g. after rotating the phone)
+    content.style.maxHeight = height + "px";
+    content.addEventListener('transitionend', function done(event) {
+        if (event.propertyName !== 'max-height') {
+            return;
+        }
+        content.removeEventListener('transitionend', done);
+        if (header.classList.contains("calendar-active")) {
+            content.style.maxHeight = "none";
+        }
+    });
+}
+
+function closeAccordionSection(header) {
+    let content = header.nextElementSibling;
+    // an animation cannot start from "none": fix the current height first
+    content.style.maxHeight = content.scrollHeight + "px";
+    // Reading offsetHeight makes the browser apply this height now (the value
+    // itself is not needed). Otherwise it would combine this change with the
+    // collapse below, and the section would close without the animation.
+    void content.offsetHeight;
+    header.classList.remove("calendar-active");
+    content.style.maxHeight = null;
+    content.style.padding = "0 10px";
+}
 
 setInterval(updateToday, 60000); // check every minute if today's date has changed

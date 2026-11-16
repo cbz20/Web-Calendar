@@ -695,6 +695,12 @@ function closeModalButton() {
     return el;
 };
 
+// The event window must not be covered by fixed elements of the surrounding
+// page (such as a website's header bar). A high z-index alone is not enough if
+// the page puts the calendar into its own stacking context, so the window is
+// moved to the end of <body>.
+document.body.appendChild(document.getElementById('event-calendar-modal'));
+
 // close modal
 document.getElementById('event-calendar-modal').addEventListener('click', function(event) {
     // only close if we click in the transparent area outside the modal content

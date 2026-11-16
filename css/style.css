@@ -76,7 +76,7 @@
 .calendar-modal {
 	display: none;
 	position: fixed;
-	z-index: 1;
+	z-index: 100000; /* above fixed elements of the surrounding page */
 	left: 0;
 	top: 0;
 	width: 100%;
@@ -296,7 +296,7 @@
 }
 
 .calendar-active + .calendar-accordion-content {
-            max-height: 2000px;
+            max-height: none; /* the actual height is set by the script */
             padding: 0px 10px;
 }
 

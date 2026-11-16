@@ -314,6 +314,18 @@ const HELP = {
 			<li>
 			Mehrtägige Veranstaltungen werden grundsätzlich als ganztägige Veranstaltungen angezeigt.
 			</li>
+			<li>
+			Titel und Beschreibungen können Formeln in TeX-Notation enthalten:
+			<code>$...$</code> oder <code>\\(...\\)</code> für Formeln im Fließtext,
+			<code>$$...$$</code> oder <code>\\[...\\]</code> für abgesetzte Formeln.
+			Dabei ist Folgendes zu beachten:
+			<ul>
+			<li>Im Titel bitte <code>\\lt</code> statt <code>&lt;</code> schreiben, da der Titel sonst nicht korrekt angezeigt wird.</li>
+			<li>Eine Formel in der Beschreibung darf nicht über einen Zeilenumbruch hinweggehen.</li>
+			<li>Ein Dollarzeichen, das keine Formel einleiten soll, schreibt man als <code>\\$</code>.</li>
+			<li>Kalenderprogramme speichern Backslashes automatisch korrekt. Nur wer ICS-Dateien direkt bearbeitet, muss Backslashes verdoppeln (also <code>\\\\alpha</code> statt <code>\\alpha</code>).</li>
+			</ul>
+			</li>
 			</ul>
 			</p>`,
 
@@ -475,6 +487,18 @@ const HELP = {
 			</li>
 			<li>
 			Events lasting several days are always displayed as all-day events.
+			</li>
+			<li>
+			Titles and descriptions can contain formulas in TeX notation:
+			<code>$...$</code> or <code>\\(...\\)</code> for inline formulas,
+			<code>$$...$$</code> or <code>\\[...\\]</code> for displayed formulas.
+			Please note:
+			<ul>
+			<li>In titles, write <code>\\lt</code> instead of <code>&lt;</code>; otherwise the title is not displayed correctly.</li>
+			<li>A formula in a description must not span a line break.</li>
+			<li>To write a dollar sign that does not start a formula, use <code>\\$</code>.</li>
+			<li>Calendar programs store backslashes correctly by themselves. Only if you edit ICS files directly do you need to double backslashes (<code>\\\\alpha</code> instead of <code>\\alpha</code>).</li>
+			</ul>
 			</li>
 			</ul>
 			</p>`,

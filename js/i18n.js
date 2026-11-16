@@ -47,6 +47,7 @@ const I18N = {
         tipLeftKey: 'linke Pfeiltaste drücken',
         tipRightKey: 'rechte Pfeiltaste drücken',
         tipCurrentWeek: 'springe zur aktuellen Woche',
+        todayButton: 'Heute',
         tipCurrentMonth: 'springe zum aktuellen Monat',
         tipCurrentSemester: 'springe zum aktuellen Semester',
 
@@ -95,6 +96,7 @@ const I18N = {
         tipLeftKey: 'press the left arrow key',
         tipRightKey: 'press the right arrow key',
         tipCurrentWeek: 'jump to the current week',
+        todayButton: 'Today',
         tipCurrentMonth: 'jump to the current month',
         tipCurrentSemester: 'jump to the current semester',
 

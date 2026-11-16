@@ -229,8 +229,8 @@
 /* accordion */
 
 .calendar-accordion {
-            width: 100%;
             width: 670px;
+            max-width: 100%; /* fit narrow screens */
             margin: 5px auto;
             border: 0px solid var(--rub-calendar-grey);
             border-radius: 5px;
@@ -287,6 +287,88 @@
             padding: 0px 10px;
 }
 
+/* mobile view: the calendar container has the class calendar-mobile whenever
+   the mobile view is shown, also when it is chosen on a wide screen */
+
+.calendar-mobile .calendar-header {
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.calendar-mobile .calendar-weekview {
+    font-size: 14px;
+}
+
+.calendar-mobile .weekview-event-summary {
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+/* title: calendar name, with the week range smaller below it */
+.calendar-mobile #calendar-title {
+    font-size: 19px;
+    padding: 6px 4px;
+}
+
+.calendar-mobile .calendar-title-range {
+    font-size: 15px;
+    font-weight: normal;
+}
+
+/* navigation: large touch targets */
+.mobile-calendar-button-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.mobile-calendar-button-wrapper button {
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 18px;
+    margin: 0;
+}
+
+.mobile-calendar-button-wrapper .mobile-calendar-today-button {
+    font-size: 16px;
+    padding: 6px 16px;
+}
+
+/* calendar filters, help and save button: compact and wrapping */
+.calendar-mobile .toggle-calendar-buttons-header {
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.calendar-mobile .toggle-calendar-buttons-header .toggle-calendar-buttons {
+    font-size: 14px;
+    padding: 6px 6px;
+}
+
+.calendar-mobile #calendar-help {
+    font-size: 14px;
+    padding: 6px 8px;
+}
+
+/* events: summary cell has the rounded right end (no location column) */
+.weekview-event-summary-mobile {
+    border-radius: 0 4px 4px 0;
+    padding: 4px 6px;
+}
+
+.weekview-event-location-inline {
+    font-size: 12px;
+    opacity: 0.85;
+    margin-top: 2px;
+}
+
+/* narrow screens (both views) */
 @media (max-width: 1300px) {
 
     .calendar-container {
@@ -310,19 +392,28 @@
         font-size: 14px;
     }
 
-    .weekview-event-calendar-summary {
+    .weekview-event-summary {
         white-space: normal;
-        word-break: break-word;
+        overflow-wrap: anywhere;
     }
 
     .weekview-event-time,
     .weekview-event-location {
         padding: 2px 4px;
     }
-    
-    .mobile-calendar-button-wrapper{
-        width: 100%;
-        text-align: center;
+
+    /* event window and help: small margin to the screen edges */
+    .calendar-modal-content {
+        max-width: calc(100% - 16px);
+        box-sizing: border-box;
+    }
+
+    .calendar-modal-body {
+        max-height: 70vh;
+    }
+
+    #calendar-togglemode {
+        font-size: 12px;
     }
 }
 

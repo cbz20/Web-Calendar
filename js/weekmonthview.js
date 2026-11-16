@@ -194,10 +194,10 @@ function weekTitle(firstDay, lastDay) {
         year: 'numeric',
         day: 'numeric'
     };
-    return calendarName + "<br>" + t('weekRange', {
+    return calendarName + "<br><span class='calendar-title-range'>" + t('weekRange', {
         from: firstDay.toLocaleDateString(locale, options),
         to: lastDay.toLocaleDateString(locale, options)
-    });
+    }) + "</span>";
 }
 
 // display name of a category in the current language
@@ -209,6 +209,8 @@ function categoryLabel(category) {
 
 function displayCalendar() {
     if (typeof clearMath === 'function') clearMath(); // forget old formulas before redrawing
+    // the mobile styles apply whenever the mobile view is shown, whatever the screen width
+    document.querySelector('.calendar-container').classList.toggle('calendar-mobile', is_mobile);
     if (weekview || is_mobile) {
         drawWeekView();
     } else {
@@ -221,18 +223,20 @@ function displayCalendar() {
 
 function toggleMode() {
     let div = document.getElementById('calendar-togglemode');
+    // onclick (not addEventListener): this runs on every redraw,
+    // and the handler must be replaced, not added once more
     if (is_mobile){
         div.innerHTML = t('viewDesktop');
-        div.addEventListener('click', function() {
+        div.onclick = function() {
             is_mobile = false;
             displayCalendar();
-        });
+        };
     } else {
         div.innerHTML = t('viewMobile');
-        div.addEventListener('click', function() {
+        div.onclick = function() {
             is_mobile = true;
             displayCalendar();
-        });
+        };
     };
 }
 
@@ -267,7 +271,7 @@ function drawWeekView() {
         el.innerHTML = weekTitle(firstDayDisplayed, lastDayDisplayed);
         document.getElementById('calendar-header').appendChild(el);
         
-        wrapper = document.createElement('div');
+        let wrapper = document.createElement('div');
         el = document.createElement('button');
         el.classList.add("setting-calendar-buttons");
         el.title = t('tipLeftKey');
@@ -277,6 +281,15 @@ function drawWeekView() {
         });
         wrapper.appendChild(el);
         wrapper.classList.add("mobile-calendar-button-wrapper");
+
+        el = document.createElement('button');
+        el.classList.add("setting-calendar-buttons", "mobile-calendar-today-button");
+        el.title = t('tipCurrentWeek');
+        el.textContent = t('todayButton');
+        el.addEventListener('click', function() {
+            BackToToday();
+        });
+        wrapper.appendChild(el);
 
         el = document.createElement('button');
         el.classList.add("setting-calendar-buttons");
@@ -321,6 +334,7 @@ function drawWeekView() {
     let calendar = document.getElementById('calendar-weekview');
     calendar.innerHTML = '';
 
+    let numberOfColumns = is_mobile ? 3 : 4; // no location column on mobile
     let colGroup = document.createElement('colgroup');
     let col = document.createElement('col');
     col.classList.add('weekview-col-date');
@@ -331,9 +345,11 @@ function drawWeekView() {
     col = document.createElement('col');
     col.classList.add('weekview-col-summary');
     colGroup.appendChild(col);
-    col = document.createElement('col');
-    col.classList.add('weekview-col-location');
-    colGroup.appendChild(col);
+    if (!is_mobile) { // on mobile, the location is shown below the summary
+        col = document.createElement('col');
+        col.classList.add('weekview-col-location');
+        colGroup.appendChild(col);
+    };
     calendar.appendChild(colGroup);
 
     let tableHead = document.createElement('thead');
@@ -350,7 +366,9 @@ function drawWeekView() {
     elementTH = document.createElement('th');
     elementTH.textContent = t('colLocation');
     tableHead.appendChild(elementTH);
-    calendar.appendChild(tableHead);
+    if (!is_mobile) { // the column headings are self-evident and take up space on mobile
+        calendar.appendChild(tableHead);
+    };
 
     // prefilter events (for better performance)
     let weekEvents = events.filter(event => {
@@ -393,7 +411,7 @@ function drawWeekView() {
         // horizontal separators
         let currentRow = document.createElement('tr');
         let TDelement = document.createElement('td');
-        TDelement.colSpan = "4";
+        TDelement.colSpan = numberOfColumns;
         let HRelement = document.createElement('hr');
         TDelement.appendChild(HRelement);
         currentRow.appendChild(TDelement);
@@ -405,7 +423,7 @@ function drawWeekView() {
             currentRow.classList.add('calendar-today-separator');
             currentRow.classList.add('calendar-today-separator-top');
             TDelement = document.createElement('td');
-            TDelement.colSpan = "4";
+            TDelement.colSpan = numberOfColumns;
             HRelement = document.createElement('hr');
             TDelement.appendChild(HRelement);
             currentRow.appendChild(TDelement);
@@ -472,6 +490,19 @@ function drawWeekView() {
             });
             currentRow.appendChild(eventTD);
 
+            if (is_mobile) {
+                // location as a small second line below the summary (if known)
+                eventTD.classList.add('weekview-event-summary-mobile');
+                if (event.location != missingEntrySymbol) {
+                    let locationLine = document.createElement('div');
+                    locationLine.classList.add('weekview-event-location-inline');
+                    locationLine.innerHTML = event.location;
+                    eventTD.appendChild(locationLine);
+                };
+                tbody.appendChild(currentRow);
+                return; // no location column on mobile
+            };
+
             // location
             eventTD = document.createElement('td');
             eventTD.classList.add('weekview-event');
@@ -506,7 +537,7 @@ function drawWeekView() {
             currentRow.classList.add('calendar-today-separator');
             currentRow.classList.add('calendar-today-separator-bottom');
             TDelement = document.createElement('td');
-            TDelement.colSpan = "4";
+            TDelement.colSpan = numberOfColumns;
             HRelement = document.createElement('hr');
             TDelement.appendChild(HRelement);
             currentRow.appendChild(TDelement);
@@ -663,25 +694,26 @@ function drawMonthView() {
 function drawToggleButtons() {
     let buttons = document.getElementById('toggle-calendar-buttons-header');
     buttons.innerHTML = '';
-    if (is_mobile){ return; };
-    // Toggle Week/Month View Button
-    button = document.createElement('button');
-    buttonImage = document.createElement('img');
-    if (weekview) {
-        buttonImage.src = svgFiles['month'];
-        button.title = t('tipToMonth');
-    } else {
-        buttonImage.src = svgFiles['week'];
-        button.title = t('tipToWeek');
+    // Toggle Week/Month View Button (desktop only; mobile always shows the week view)
+    if (!is_mobile) {
+        button = document.createElement('button');
+        buttonImage = document.createElement('img');
+        if (weekview) {
+            buttonImage.src = svgFiles['month'];
+            button.title = t('tipToMonth');
+        } else {
+            buttonImage.src = svgFiles['week'];
+            button.title = t('tipToWeek');
+        };
+        buttonImage.classList.add('calendar-svg-icon');
+        button.classList.add('toggle-calendar-buttons');
+        button.classList.add('setting-calendar-buttons');
+        button.appendChild(buttonImage);
+        button.addEventListener('click', function() {
+            toggleWeekMonth();
+        });
+        buttons.appendChild(button);
     };
-    buttonImage.classList.add('calendar-svg-icon');
-    button.classList.add('toggle-calendar-buttons');
-    button.classList.add('setting-calendar-buttons');
-    button.appendChild(buttonImage);
-    button.addEventListener('click', function() {
-        toggleWeekMonth();
-    });
-    buttons.appendChild(button);
     // Toggle-Buttons generieren
     for (const category of categoriesAll) {
         button = document.createElement('a');
@@ -1002,6 +1034,25 @@ function addParamsToURL() {
 
 // keyboard navigation
 document.addEventListener("keydown", logKey);
+
+// swipe left/right on the calendar to go to the next/previous week (mobile only)
+let swipeStart = null;
+document.addEventListener('touchstart', function(event) {
+    swipeStart = null;
+    if (!is_mobile || event.touches.length != 1) { return; };
+    if (!event.target.closest('.calendar-weekview')) { return; };
+    swipeStart = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+}, { passive: true });
+document.addEventListener('touchend', function(event) {
+    if (!swipeStart) { return; };
+    let dx = event.changedTouches[0].clientX - swipeStart.x;
+    let dy = event.changedTouches[0].clientY - swipeStart.y;
+    swipeStart = null;
+    // only clearly horizontal swipes, so that scrolling the page still works
+    if (Math.abs(dx) > 60 && Math.abs(dx) > 2 * Math.abs(dy)) {
+        changeWeek(dx < 0 ? 1 : -1);
+    };
+}, { passive: true });
 
 function logKey(event) {
     if (event.which == '37') {

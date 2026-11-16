@@ -208,6 +208,7 @@ function categoryLabel(category) {
 }
 
 function displayCalendar() {
+    if (typeof clearMath === 'function') clearMath(); // forget old formulas before redrawing
     if (weekview || is_mobile) {
         drawWeekView();
     } else {
@@ -215,6 +216,7 @@ function displayCalendar() {
     };
     drawToggleButtons();
     toggleMode();
+    if (typeof typesetMath === 'function') typesetMath(); // typeset TeX in the new content
 }
 
 function toggleMode() {
@@ -740,6 +742,7 @@ function drawToggleButtons() {
 }
 
 function openModal(event) {
+    if (typeof clearMath === 'function') clearMath(); // forget old formulas before redrawing
     document.body.classList.add('calendar-no-scroll');
     if (event.singleDayEvent) {
         document.getElementById('calendar-modal-title').textContent =
@@ -827,9 +830,11 @@ function openModal(event) {
     document.getElementById('calendar-modal-body').appendChild(el);
     document.getElementById('calendar-modal-body').appendChild(closeModalButton());
     document.getElementById('event-calendar-modal').style.display = 'flex'; //necessary to show modal
+    if (typeof typesetMath === 'function') typesetMath(); // typeset TeX in the new content
 }
 
 function showHelp(event) {
+    if (typeof clearMath === 'function') clearMath(); // forget old formulas before redrawing
     document.body.classList.add('calendar-no-scroll');
     document.getElementById('calendar-modal-title').textContent = t('helpTitle');
     let urls = "<li><b class='calendar-blue'>";

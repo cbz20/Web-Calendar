@@ -177,6 +177,7 @@ function parseICS(icsData) {
 }
 
 function displayCalendar() {
+    if (typeof clearMath === 'function') clearMath(); // forget old formulas before redrawing
     let referenceMonth = (referenceDate.getMonth() + 3) % 6;
     // first day of semester containing referenceDate
     let firstDayDisplayed = new Date(referenceDate.valueOf());
@@ -514,9 +515,11 @@ function displayCalendar() {
         tbody.appendChild(currentRow);
     };
     calendar.appendChild(tbody);
+    if (typeof typesetMath === 'function') typesetMath(); // typeset TeX in the new content
 }
 
 function openModal(event) {
+    if (typeof clearMath === 'function') clearMath(); // forget old formulas before redrawing
     document.body.classList.add('calendar-no-scroll');
     if (event.singleDayEvent) {
         document.getElementById('calendar-modal-title').textContent =
@@ -599,6 +602,7 @@ function openModal(event) {
     document.getElementById('calendar-modal-body').appendChild(el);
     document.getElementById('calendar-modal-body').appendChild(closeModalButton());
     document.getElementById('event-calendar-modal').style.display = 'flex'; //necessary to show modal
+    if (typeof typesetMath === 'function') typesetMath(); // typeset TeX in the new content
 }
 
 function closeModalButton() {

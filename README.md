@@ -12,4 +12,5 @@
 ## Acknowledgement of third party software used in this project
 - _ical.js_ by (among others) [Philipp Kewisch (Mozilla)](https://github.com/kewisch/ical.js), hosted on [cdnjs](https://cdnjs.com/)
 - _linkify.js_ by [Nick Frasser](https://linkify.js.org/)
+- _MathJax_ by [Davide Cervone, Volker Sorge and other contributors](https://www.mathjax.org/), hosted on [jsdeliver](https://www.jsdelivr.com/)
 

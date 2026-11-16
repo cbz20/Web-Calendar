@@ -352,6 +352,13 @@ const HELP = {
 			von 
 			<a href="https://linkify.js.org/" target="_blank"><b class='calendar-blue'>Nick Frasser</b></a>
 			</li>
+			<li>
+			<i>MathJax</i>
+			von u.a.
+			<a href="https://www.mathjax.org/" target="_blank"><b class='calendar-blue'>Davide Cervone und Volker Sorge</b></a>, 
+			bereitgestellt über
+			<a href="https://www.jsdelivr.com/" target="_blank"><b class='calendar-blue'>jsdeliver</b></a>
+			</li>
 			</ul>
 			</p>
 			<p>
@@ -543,6 +550,13 @@ const HELP = {
 			<i>linkify.js</i>
 			by 
 			<a href="https://linkify.js.org/" target="_blank"><b class='calendar-blue'>Nick Frasser</b></a>
+			</li>
+			<li>
+			<i>MathJax</i>
+			by, among others,
+			<a href="https://www.mathjax.org/" target="_blank"><b class='calendar-blue'>Davide Cervone and Volker Sorge</b></a>, 
+			provided via 
+			<a href="https://www.jsdelivr.com/" target="_blank"><b class='calendar-blue'>jsdeliver</b></a>
 			</li>
 			</ul>
 			</p>

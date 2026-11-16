@@ -137,6 +137,11 @@
 	cursor: default;
 }
 
+/* help button below the calendar */
+.calendar-footer-buttons {
+	margin-top: 16px;
+}
+
 /* mobile view (the calendar container has the class calendar-mobile) */
 
 .calendar-mobile .calendar-semesterview {

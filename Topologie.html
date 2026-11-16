@@ -31,8 +31,9 @@
     <div class="calendar-container">
         <div id="calendar-error-message"></div>
         <div class="calendar-header" id="calendar-header"></div> <!-- filled with t('loading') by loadICS -->
-        <div class="toggle-calendar-buttons-header" id="toggle-calendar-buttons-header"></div>
         <table class="calendar-semesterview" id="calendar-semesterview"></table>
+        <!-- help button, below the calendar -->
+        <div class="toggle-calendar-buttons-header calendar-footer-buttons" id="toggle-calendar-buttons-header"></div>
     </div>
 
     <!-- modal for event details -->
@@ -100,9 +101,15 @@
             // event categories as they appear in the ics file (do not translate);
             // an event needs to belong to at least one of them to be displayed
             const categories = ["Oberseminar Topologie", "Oberseminar"];
+            // the help text names the first of these categories
+            // link to the faculty calendar in the help text, per language
+            const facultyCalendarUrl = {
+                de: 'https://math.ruhr-uni-bochum.de/news/kalender/',
+                en: 'https://math.ruhr-uni-bochum.de/en/news/kalender/'
+            };
             // the language is taken from <html lang="...">;
-            // to force a language, add { lang: 'en' } as a fourth argument
-            loadICS(icsFile, calendarTitle, categories);
+            // to force a language, add lang: 'en' to the options object
+            loadICS(icsFile, calendarTitle, categories, { facultyCalendarUrl: facultyCalendarUrl });
         }
     </script>
 </body>

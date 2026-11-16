@@ -81,7 +81,8 @@ const I18N = {
         helpSubscribeTitle: 'Kalender abonnieren',
         helpEditTitle: 'Kalender editieren',
         helpAboutTitle: 'Weitergehende Informationen',
-        allCalendars: 'alle Kalender'
+        allCalendars: 'alle Kalender',
+        helpSeminarTitle: 'Hilfe zu diesem Kalender'
     },
     en: {
         loading: '...loading calendar...',
@@ -130,7 +131,8 @@ const I18N = {
         helpSubscribeTitle: 'Subscribing to the calendars',
         helpEditTitle: 'Editing the calendars',
         helpAboutTitle: 'Further information',
-        allCalendars: 'all calendars'
+        allCalendars: 'all calendars',
+        helpSeminarTitle: 'Help for this calendar'
     }
 };
 
@@ -357,6 +359,24 @@ const HELP = {
 			Bei technischen Problemen oder Fragen wenden Sie sich bitte per E-Mail an 
 			</i>
 			<div class="calendar-modal-center-container"><i>${CALENDAR_CONTACT}.</i></div>
+			</p>`,
+
+        // short help for the semester view (e.g. Topologie.html)
+        // url:      link to the faculty calendar (may be empty)
+        // category: the category that events need in order to appear
+        seminar: (url, category) => `<p>
+			Die Termine auf dieser Seite stammen aus dem Fakultätskalender.
+			Abonnieren und Bearbeiten funktionieren daher genau wie beim Fakultätskalender.
+			Eine Schritt-für-Schritt-Anleitung finden Sie dort unter <b class='calendar-blue'>Hilfe</b>.
+			</p>
+			${url ? `<div class="calendar-modal-center-container">
+			<a class="calendar-link-button" href="${url}" target="_blank">Zum Fakultätskalender</a>
+			</div>` : ''}
+			<p>
+			<b class='calendar-blue'>Wichtig:</b>
+			Damit ein Termin hier erscheint, muss er die Kategorie
+			<b class='calendar-blue'>${category}</b> haben (genau so geschrieben).
+			Am einfachsten kopieren Sie dazu einen bestehenden Termin aus diesem Kalender und ändern ihn ab.
 			</p>`
     },
 
@@ -531,6 +551,21 @@ const HELP = {
 			For technical problems or questions, please email 
 			</i>
 			<div class="calendar-modal-center-container"><i>${CALENDAR_CONTACT}.</i></div>
+			</p>`,
+
+        seminar: (url, category) => `<p>
+			The events on this page come from the faculty calendar.
+			Subscribing and editing therefore work exactly as for the faculty calendar.
+			Step-by-step instructions are available there under <b class='calendar-blue'>Help</b>.
+			</p>
+			${url ? `<div class="calendar-modal-center-container">
+			<a class="calendar-link-button" href="${url}" target="_blank">Go to the faculty calendar</a>
+			</div>` : ''}
+			<p>
+			<b class='calendar-blue'>Important:</b>
+			For an event to appear here, it must have the category
+			<b class='calendar-blue'>${category}</b> (spelt exactly like this).
+			The easiest way is to copy an existing event from this calendar and change it.
 			</p>`
     }
 };

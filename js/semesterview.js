@@ -40,8 +40,11 @@ if (mobileQuery.addEventListener) {
     mobileQuery.addListener(onScreenWidthChange);
 };
 let categoriesAll;
+let facultyCalendarUrl; // link in the help text (optional)
 
 // main function to call the script
+// (options.facultyCalendarUrl: link to the faculty calendar for the help text;
+//  a string, or an object like {de: '...', en: '...'})
 // name:       calendar title; a string, or an object like {de: '...', en: '...'}
 // categories: CATEGORIES values from the ics file; these must not be translated
 // options:    optional settings
@@ -51,6 +54,7 @@ function loadICS(icsFile, name, categories, options = {}) {
     document.getElementById('calendar-header').innerHTML = t('loading');
     categoriesAll = categories;
     calendarName = translateValue(name);
+    facultyCalendarUrl = translateValue(options.facultyCalendarUrl);
     fetch(icsFile)
         .then(response => response.text())
         .then(data => parseICS(data))
@@ -287,6 +291,8 @@ function displayCalendar() {
         header.appendChild(title);
         header.appendChild(next);
     };
+
+    drawHelpButton();
 
     // calendar headings
     let calendar = document.getElementById('calendar-semesterview');
@@ -679,6 +685,32 @@ function openModal(event) {
     document.getElementById('calendar-modal-body').appendChild(closeModalButton());
     document.getElementById('event-calendar-modal').style.display = 'flex'; //necessary to show modal
     if (typeof typesetMath === 'function') typesetMath(); // typeset TeX in the new content
+}
+
+// centred help button (same style as in index.html); Topologie.html places it below the calendar
+function drawHelpButton() {
+    let buttons = document.getElementById('toggle-calendar-buttons-header');
+    buttons.innerHTML = '';
+    let help = document.createElement('button');
+    help.classList.add('toggle-calendar-buttons');
+    help.id = "calendar-help";
+    help.title = t('tipHelp');
+    help.textContent = t('help');
+    help.addEventListener('click', function() {
+        showHelp();
+    });
+    buttons.appendChild(help);
+}
+
+function showHelp() {
+    if (typeof clearMath === 'function') clearMath(); // forget old formulas before redrawing
+    document.body.classList.add('calendar-no-scroll');
+    document.getElementById('calendar-modal-title').textContent = t('helpSeminarTitle');
+    let body = document.getElementById('calendar-modal-body');
+    // the first category is the one to name in the help text
+    body.innerHTML = helpText('seminar', facultyCalendarUrl, categoriesAll[0]);
+    body.appendChild(closeModalButton());
+    document.getElementById('event-calendar-modal').style.display = 'flex'; //necessary to show modal
 }
 
 function closeModalButton() {

@@ -199,6 +199,22 @@
 	user-select: none;
 }
 
+/* prominent link in a help text, shown as a button */
+.calendar-link-button {
+	display: inline-block;
+	margin: 4px 0 8px 0;
+	padding: 10px 18px;
+	border-radius: 4px;
+	background-color: var(--rub-calendar-blue);
+	color: white !important; /* also against link colours of the surrounding page */
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.calendar-link-button:hover {
+	background-color: var(--rub-calendar-green);
+}
+
 /* help and save buttons: side by side, vertically centred */
 .calendar-action-buttons {
 	display: inline-flex;
@@ -425,6 +441,11 @@
 
     .calendar-modal-body {
         max-height: 70vh;
+    }
+
+    /* justified text leaves large gaps in a narrow window */
+    .calendar-modal-content p {
+        text-align: left;
     }
 
     #calendar-togglemode {

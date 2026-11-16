@@ -3,7 +3,7 @@ ics/merge-ics-with-cats.sh
 ics/merge-ics.sh
 index-new.html
 js/closure-compiler-v20240317.jar
-js/ical.min.js
+*/unused/*
 minify-js
 notes.md
 original-index.html

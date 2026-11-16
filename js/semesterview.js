@@ -22,6 +22,23 @@ let referenceDate = new Date(); // used for navigation
 let events = [];
 let calendarName = "";
 let missingEntrySymbol = "&#x2022;";
+// mobile view on narrow screens (same width as index.html); there is no
+// separate desktop/mobile switch here, so the view follows the screen width,
+// also when a phone is rotated or a window resized
+const mobileQuery = window.matchMedia("(max-width: 1300px)");
+let is_mobile = mobileQuery.matches;
+let calendarDrawn = false;
+function onScreenWidthChange(query) {
+    is_mobile = query.matches;
+    if (calendarDrawn) {
+        displayCalendar();
+    };
+}
+if (mobileQuery.addEventListener) {
+    mobileQuery.addEventListener('change', onScreenWidthChange);
+} else { // older Safari
+    mobileQuery.addListener(onScreenWidthChange);
+};
 let categoriesAll;
 
 // main function to call the script
@@ -178,6 +195,10 @@ function parseICS(icsData) {
 
 function displayCalendar() {
     if (typeof clearMath === 'function') clearMath(); // forget old formulas before redrawing
+    calendarDrawn = true;
+    // the mobile styles apply whenever the mobile view is shown
+    document.querySelector('.calendar-container').classList.toggle('calendar-mobile', is_mobile);
+    let numberOfColumns = is_mobile ? 3 : 4; // no location column on mobile
     let referenceMonth = (referenceDate.getMonth() + 3) % 6;
     // first day of semester containing referenceDate
     let firstDayDisplayed = new Date(referenceDate.valueOf());
@@ -204,43 +225,68 @@ function displayCalendar() {
     //console.log(lastDayDisplayed);
 
     // page title with navigation buttons
-    document.getElementById('calendar-header').innerHTML = "";
-    let el = document.createElement('button');
-    el.classList.add("setting-calendar-buttons");
-    el.title = t('tipLeftKey');
-    el.innerHTML = t('prevSemester');
-    el.addEventListener('click', function() {
-        changeTerm(-1);
-    });
-    document.getElementById('calendar-header').appendChild(el);
-
-    el = document.createElement('div');
-    el.id = 'calendar-title';
-    el.title = t('tipCurrentSemester');
-    el.addEventListener('click', function(event) {
+    let header = document.getElementById('calendar-header');
+    header.innerHTML = "";
+    let title = document.createElement('div');
+    title.id = 'calendar-title';
+    title.title = t('tipCurrentSemester');
+    title.addEventListener('click', function(event) {
         BackToToday();
     });
-    el.innerHTML = calendarName;
+    // semester in its own span, so the mobile view can show it smaller
+    // (built as one string: the span must be complete when it is assigned)
+    let semesterName;
     if (winterterm) {
-        el.innerHTML += "<br>" + t('winterSemester', {
+        semesterName = t('winterSemester', {
             y1: firstDayDisplayed.getFullYear(),
             y2: lastDayDisplayed.getFullYear()
         });
     } else {
-        el.innerHTML += "<br>" + t('summerSemester', {
+        semesterName = t('summerSemester', {
             y: firstDayDisplayed.getFullYear()
         });
     };
-    document.getElementById('calendar-header').appendChild(el);
+    title.innerHTML = calendarName + "<br><span class='calendar-title-range'>" + semesterName + "</span>";
 
-    el = document.createElement('button');
-    el.classList.add("setting-calendar-buttons");
-    el.title = t('tipRightKey');
-    el.addEventListener('click', function() {
+    let prev = document.createElement('button');
+    prev.classList.add("setting-calendar-buttons");
+    prev.title = t('tipLeftKey');
+    prev.addEventListener('click', function() {
+        changeTerm(-1);
+    });
+    let next = document.createElement('button');
+    next.classList.add("setting-calendar-buttons");
+    next.title = t('tipRightKey');
+    next.addEventListener('click', function() {
         changeTerm(1);
     });
-    el.innerHTML = t('nextSemester');
-    document.getElementById('calendar-header').appendChild(el);
+
+    let el;
+    if (is_mobile) {
+        // title on top, then large buttons: < Today >
+        header.appendChild(title);
+        let wrapper = document.createElement('div');
+        wrapper.classList.add("mobile-calendar-button-wrapper");
+        prev.innerHTML = "<";
+        wrapper.appendChild(prev);
+        el = document.createElement('button');
+        el.classList.add("setting-calendar-buttons", "mobile-calendar-today-button");
+        el.title = t('tipCurrentSemester');
+        el.textContent = t('todayButton');
+        el.addEventListener('click', function() {
+            BackToToday();
+        });
+        wrapper.appendChild(el);
+        next.innerHTML = ">";
+        wrapper.appendChild(next);
+        header.appendChild(wrapper);
+    } else {
+        prev.innerHTML = t('prevSemester');
+        next.innerHTML = t('nextSemester');
+        header.appendChild(prev);
+        header.appendChild(title);
+        header.appendChild(next);
+    };
 
     // calendar headings
     let calendar = document.getElementById('calendar-semesterview');
@@ -256,9 +302,11 @@ function displayCalendar() {
     col = document.createElement('col');
     col.classList.add('semesterview-col-summary');
     colGroup.appendChild(col);
-    col = document.createElement('col');
-    col.classList.add('semesterview-col-location');
-    colGroup.appendChild(col);
+    if (!is_mobile) { // on mobile, the location is shown below the summary
+        col = document.createElement('col');
+        col.classList.add('semesterview-col-location');
+        colGroup.appendChild(col);
+    };
     calendar.appendChild(colGroup);
 
     let tableHead = document.createElement('thead');
@@ -276,6 +324,9 @@ function displayCalendar() {
     elementTH = document.createElement('th');
     elementTH.textContent = t('colLocation');
     tableHead.appendChild(elementTH);
+    if (is_mobile) { // the column headings are self-evident and take up space on mobile
+        tableHead.classList.add('calendar-hide-me');
+    };
     calendar.appendChild(tableHead);
 
     // prefilter events (for better performance)
@@ -314,7 +365,7 @@ function displayCalendar() {
             // standard horizontal separator
             let currentRow = document.createElement('tr');
             let TDelement = document.createElement('td');
-            TDelement.colSpan = "4";
+            TDelement.colSpan = numberOfColumns;
             let HRelement = document.createElement('hr');
             TDelement.appendChild(HRelement);
             currentRow.appendChild(TDelement);
@@ -325,7 +376,7 @@ function displayCalendar() {
             currentRow.classList.add('calendar-today-separator');
             currentRow.classList.add('calendar-today-separator-top');
             TDelement = document.createElement('td');
-            TDelement.colSpan = "4";
+            TDelement.colSpan = numberOfColumns;
             HRelement = document.createElement('hr');
             TDelement.appendChild(HRelement);
             currentRow.appendChild(TDelement);
@@ -379,6 +430,9 @@ function displayCalendar() {
                 el = document.createElement('b');
                 el.innerHTML = event.summary;
                 eventTD.appendChild(el);
+                if (is_mobile) {
+                    addLocationLine(eventTD, event);
+                };
                 el = document.createElement('p');
                 // now replace all line breaks with <br. tags
                 // the following regex hack is taken from
@@ -386,6 +440,10 @@ function displayCalendar() {
                 el.innerHTML = linkifyStr(event.description,{className: "linkInCalendarAbstract"}).replace(/(?:\r\n|\r|\n)/g, '<br>');
                 eventTD.appendChild(el);
                 currentRow.appendChild(eventTD);
+                if (is_mobile) {
+                    tbody.appendChild(currentRow);
+                    return; // no location column on mobile
+                };
 
                 // location
                 eventTD = document.createElement('td');
@@ -412,7 +470,7 @@ function displayCalendar() {
             currentRow.classList.add('calendar-today-separator');
             currentRow.classList.add('calendar-today-separator-bottom');
             TDelement = document.createElement('td');
-            TDelement.colSpan = "4";
+            TDelement.colSpan = numberOfColumns;
             HRelement = document.createElement('hr');
             TDelement.appendChild(HRelement);
             currentRow.appendChild(TDelement);
@@ -427,7 +485,7 @@ function displayCalendar() {
                     firstevent = false;
                     // horizontal separator
                     let TDelement = document.createElement('td');
-                    TDelement.colSpan = "4";
+                    TDelement.colSpan = numberOfColumns;
                     let HRelement = document.createElement('hr');
                     TDelement.appendChild(HRelement);
                     currentRow.appendChild(TDelement);
@@ -482,6 +540,11 @@ function displayCalendar() {
                     openModal(event);
                 });
                 currentRow.appendChild(eventTD);
+                if (is_mobile) {
+                    addLocationLine(eventTD, event);
+                    tbody.appendChild(currentRow);
+                    return; // no location column on mobile
+                };
 
                 // location
                 eventTD = document.createElement('td');
@@ -509,13 +572,26 @@ function displayCalendar() {
         document.getElementById('table-head').classList.add('calendar-hide-me');
         let currentRow = document.createElement('tr');
         let TDelement = document.createElement('td');
-        TDelement.colSpan = "4";
+        TDelement.colSpan = numberOfColumns;
         TDelement.innerHTML = "<i>" + t('noEvents') + "</i>";
         currentRow.appendChild(TDelement);
         tbody.appendChild(currentRow);
     };
     calendar.appendChild(tbody);
     if (typeof typesetMath === 'function') typesetMath(); // typeset TeX in the new content
+}
+
+// mobile view: location as a small line inside the summary cell (if known);
+// the summary cell then also gets the rounded right end
+function addLocationLine(summaryTD, event) {
+    summaryTD.classList.add('semesterview-event-summary-mobile');
+    if (event.location == missingEntrySymbol) {
+        return;
+    };
+    let locationLine = document.createElement('div');
+    locationLine.classList.add('semesterview-event-location-inline');
+    locationLine.innerHTML = event.location;
+    summaryTD.appendChild(locationLine);
 }
 
 function openModal(event) {
@@ -636,6 +712,25 @@ function changeTerm(offset) {
 
 // keyboard navigation
 document.addEventListener("keydown", logKey);
+
+// swipe left/right on the calendar to go to the next/previous semester (mobile only)
+let swipeStart = null;
+document.addEventListener('touchstart', function(event) {
+    swipeStart = null;
+    if (!is_mobile || event.touches.length != 1) { return; };
+    if (!event.target.closest('.calendar-semesterview')) { return; };
+    swipeStart = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+}, { passive: true });
+document.addEventListener('touchend', function(event) {
+    if (!swipeStart) { return; };
+    let dx = event.changedTouches[0].clientX - swipeStart.x;
+    let dy = event.changedTouches[0].clientY - swipeStart.y;
+    swipeStart = null;
+    // only clearly horizontal swipes, so that scrolling the page still works
+    if (Math.abs(dx) > 60 && Math.abs(dx) > 2 * Math.abs(dy)) {
+        changeTerm(dx < 0 ? 1 : -1);
+    };
+}, { passive: true });
 
 function logKey(event) {
     if (event.which == '37') {

@@ -136,3 +136,44 @@
 .semesterview-calendar-today-event {
 	cursor: default;
 }
+
+/* mobile view (the calendar container has the class calendar-mobile) */
+
+.calendar-mobile .calendar-semesterview {
+	font-size: 14px;
+}
+
+.calendar-mobile .semesterview-event-summary {
+	overflow-wrap: anywhere;
+}
+
+/* summary cell has the rounded right end (no location column);
+   the colours repeat those of the cells' other borders */
+.semesterview-event-summary-mobile {
+	border-right: 1px solid #ddd;
+	border-radius: 0 4px 4px 0;
+	padding: 4px 6px;
+}
+
+.semesterview-event-past.semesterview-event-summary-mobile {
+	border-right-color: #e4e4e4;
+}
+
+/* justified text leaves large gaps in a narrow column */
+.calendar-mobile .calendar-today-event p {
+	text-align: left;
+}
+
+.semesterview-event-location-inline {
+	font-size: 12px;
+	color: #555;
+	margin-top: 2px;
+	font-weight: normal;
+}
+
+/* wide displayed formulas scroll instead of overflowing the cell */
+.calendar-mobile .semesterview-event-summary mjx-container[display="true"] {
+	overflow-x: auto;
+	overflow-y: hidden;
+	max-width: 100%;
+}

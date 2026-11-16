@@ -383,7 +383,7 @@ function displayCalendar() {
                 // now replace all line breaks with <br. tags
                 // the following regex hack is taken from
                 // https://stackoverflow.com/questions/784539/how-do-i-replace-all-line-breaks-in-a-string-with-br-elements
-                el.innerHTML = event.description.replace(/(?:\r\n|\r|\n)/g, '<br>');
+                el.innerHTML = linkifyStr(event.description,{className: "linkInCalendarAbstract"}).replace(/(?:\r\n|\r|\n)/g, '<br>');
                 eventTD.appendChild(el);
                 currentRow.appendChild(eventTD);
 

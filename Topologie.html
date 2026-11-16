@@ -23,10 +23,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="svg/favicon.svg">
     <title>Kalender des Oberseminars Topologie</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
-    <link rel="stylesheet" type="text/css" href="css/semesterview.css"/>
+    <!-- stylesheets and scripts are added by the loader at the end of <body> -->
 </head>
 
 <body>
@@ -45,23 +43,67 @@
         </div>
     </div>
 
-    <!-- load the newest version of the ical.js library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ical.js/1.5.0/ical.min.js"></script>
-    <script src="js/linkify/linkify.min.js"></script>
-    <script src="js/linkify/linkify-string.min.js"></script>
-    <script src="js/i18n.min.js"></script>
-    <script src="js/semesterview.min.js"></script>
     <script>
-        icsFile = 'ics/Topologie.ics'; //calendar source file/url
-        // calendar title, per language (a plain string also works)
-        // (not called 'name': that would overwrite window.name, which only holds strings)
-        calendarTitle = {
-            de: 'Oberseminar Topologie',
-            en: 'Topology Research Seminar'
-        };
-        categories = ["Oberseminar Topologie", "Oberseminar"]; // event categories
-        // an event needs to belong to at least one of the above categories to be displayed
-        loadICS(icsFile, calendarTitle, categories);
+        // ===== the only line to change for a new version =====
+        const CALENDAR_DIR = '.';
+        // e.g.: 
+        //const CALENDAR_DIR = '/fileadmin/content/Mathematik/Kalender/v0.7';
+        // =====================================================
+
+        const calendarStyles = [
+            CALENDAR_DIR + '/css/style.css',
+            CALENDAR_DIR + '/css/semesterview.css'
+        ];
+        const calendarScripts = [ // executed in this order
+            'https://cdnjs.cloudflare.com/ajax/libs/ical.js/1.5.0/ical.min.js',
+            CALENDAR_DIR + '/js/linkify/linkify.min.js',
+            CALENDAR_DIR + '/js/linkify/linkify-string.min.js',
+            CALENDAR_DIR + '/js/i18n.min.js',
+            CALENDAR_DIR + '/js/mathsupport.min.js', // TeX via MathJax (loads MathJax itself); remove this line to switch it off
+            CALENDAR_DIR + '/js/semesterview.min.js'
+        ];
+
+        // add a <link> or <script> element; the promise resolves once the file has loaded
+        function addFile(tag, attributes) {
+            return new Promise((resolve, reject) => {
+                const el = document.createElement(tag);
+                Object.assign(el, attributes);
+                el.onload = resolve;
+                el.onerror = () => reject(new Error('could not load ' + (attributes.href || attributes.src)));
+                (tag === 'link' ? document.head : document.body).appendChild(el);
+            });
+        }
+
+        // all files download in parallel; async = false keeps the scripts' execution order;
+        // the calendar starts once every stylesheet and script is ready
+        Promise.all([
+            ...calendarStyles.map(href => addFile('link', { rel: 'stylesheet', href: href })),
+            ...calendarScripts.map(src => addFile('script', { src: src, async: false }))
+        ])
+            .then(startCalendar)
+            .catch(error => {
+                console.error('FATAL ERROR: Could not load the calendar files:', error);
+                document.getElementById('calendar-error-message').textContent =
+                    'Fehler beim Laden des Kalenders / Error loading the calendar.';
+            });
+
+        function startCalendar() {
+            // calendar source file/url
+            // (calendar data, not part of a version, so not inside CALENDAR_DIR)
+            const icsFile = 'ics/Topologie.ics';
+            // calendar title, per language (a plain string also works)
+            // (not called 'name': that would overwrite window.name, which only holds strings)
+            const calendarTitle = {
+                de: 'Oberseminar Topologie',
+                en: 'Topology Research Seminar'
+            };
+            // event categories as they appear in the ics file (do not translate);
+            // an event needs to belong to at least one of them to be displayed
+            const categories = ["Oberseminar Topologie", "Oberseminar"];
+            // the language is taken from <html lang="...">;
+            // to force a language, add { lang: 'en' } as a fourth argument
+            loadICS(icsFile, calendarTitle, categories);
+        }
     </script>
 </body>
 

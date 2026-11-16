@@ -199,11 +199,24 @@
 	user-select: none;
 }
 
+/* help and save buttons: side by side, vertically centred */
+.calendar-action-buttons {
+	display: inline-flex;
+	align-items: stretch;
+	vertical-align: middle;
+}
+
+/* help button: white with a thin blue line; the line is drawn with an
+   inset shadow, so that the button keeps the size of the other buttons */
 #calendar-help {
-	font-size: 16px;
-	padding: 10px 10px;
+	background-color: white;
 	color: var(--rub-calendar-blue);
-	cursor: pointer;
+	box-shadow: inset 0 0 0 1px var(--rub-calendar-blue);
+}
+
+#calendar-help:hover {
+	color: var(--rub-calendar-green);
+	box-shadow: inset 0 0 0 1px var(--rub-calendar-green);
 }
 
 #calendar-togglemode{
@@ -351,9 +364,11 @@
     padding: 6px 6px;
 }
 
-.calendar-mobile #calendar-help {
-    font-size: 14px;
-    padding: 6px 8px;
+/* help and save buttons in a line of their own */
+.calendar-mobile .calendar-action-buttons {
+    flex-basis: 100%;
+    justify-content: center;
+    margin-top: 4px;
 }
 
 /* events: summary cell has the rounded right end (no location column) */

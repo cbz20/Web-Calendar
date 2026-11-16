@@ -750,15 +750,19 @@ function drawToggleButtons() {
         button.appendChild(label);
         buttons.appendChild(button);
     };
+    // help and save buttons, kept together (on mobile in a line of their own)
+    let actionButtons = document.createElement('span');
+    actionButtons.classList.add('calendar-action-buttons');
     // Show Help Button
-    help = document.createElement('a');
+    help = document.createElement('button');
+    help.classList.add('toggle-calendar-buttons');
     help.title = t('tipHelp');
     help.innerHTML = t('help');
     help.id = "calendar-help";
     help.addEventListener('click', function() {
         showHelp();
     });
-    buttons.appendChild(help);
+    actionButtons.appendChild(help);
     // Save URL Parameters Button
     button = document.createElement('button');
     buttonImage = document.createElement('img');
@@ -770,7 +774,8 @@ function drawToggleButtons() {
     button.addEventListener('click', function() {
         addParamsToURL();
     });
-    buttons.appendChild(button);
+    actionButtons.appendChild(button);
+    buttons.appendChild(actionButtons);
 }
 
 function openModal(event) {

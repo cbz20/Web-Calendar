@@ -23,11 +23,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="svg/favicon.svg">
     <title>Kalender der Fakultät für Mathematik an der Ruhr-Universität Bochum</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
-    <link rel="stylesheet" type="text/css" href="css/weekview.css"/>
-    <link rel="stylesheet" type="text/css" href="css/monthview.css"/>
+    <!-- stylesheets and scripts are added by the loader at the end of <body> -->
 </head>
 
 <body>
@@ -48,59 +45,100 @@
         </div>
     </div>
 
-    <!-- load the newest version of the ical.js library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ical.js/1.5.0/ical.min.js"></script>
-    <script src="js/linkify/linkify.min.js"></script>
-    <script src="js/linkify/linkify-string.min.js"></script>
-    <script src="js/i18n.min.js"></script>
-    <script src="js/weekmonthview.min.js"></script>
     <script>
-        // calendar title, per language (a plain string also works)
-        // (not called 'name': that would overwrite window.name, which only holds strings)
-        calendarTitle = {
-            de: 'Fakultätskalender Mathematik',
-            en: 'Faculty of Mathematics Calendar'
-        };
-        colours = {// categories of displayed events and their colors
-            // an event needs to belong to at least one of these categories to be displayed
-            'Dekanat': 'var(--rub-calendar-blue)',
-            'Algebra': '#347037',
-            'Analysis': '#b61e3e',//rub-darkred
-            'Didaktik': '#be9800',//rub-yellow, but with some grey tones added
-            'Numerik': '#0073ff',//rub-blue but all grey tones removed
-            'Stochastik': '#ed7102',//rub-orange
-            'Topologie': '#8e44ad'
-        };
-        links = {// keys must agree with the keys of 'colours'
-            'Dekanat': 'ics/Dekanat.ics',
-            'Algebra': 'ics/Algebra.ics',
-            'Analysis': 'ics/Analysis.ics',
-            'Didaktik': 'ics/Didaktik.ics',
-            'Numerik': 'ics/Numerik.ics',
-            'Stochastik': 'ics/Stochastik.ics',
-            'Topologie': 'ics/Topologie.ics'
-        };
-        svgs = {
-            'month':'svg/month.svg',
-            'week':'svg/week.svg',
-            'save':'svg/save-icon.svg',
-            'copy':'svg/copy-icon.svg',
-            'question': 'svg/question-mark.svg'
-        };
-        // display names of the categories; the keys above stay unchanged
-        // because they are also used in the URL parameters (e.g. ?Numerik=0)
-        labels = {
-            en: {
-                'Dekanat': "Dean's Office",
-                'Didaktik': 'Mathematics Education',
-                'Numerik': 'Numerical Analysis',
-                'Stochastik': 'Stochastics',
-                'Topologie': 'Topology'
-            }
-        };
-        // the language is taken from <html lang="...">;
-        // to force a language, add lang: 'en' to the options object
-        loadICS(calendarTitle, colours, links, svgs, { labels: labels });
+        // ===== the only line to change for a new version =====
+        const CALENDAR_DIR = '';
+        // e.g.: 
+        //const CALENDAR_DIR = '/fileadmin/content/Mathematik/Kalender/v0.7';
+        // =====================================================
+
+        const calendarStyles = [
+            CALENDAR_DIR + '/css/style.css',
+            CALENDAR_DIR + '/css/weekview.css',
+            CALENDAR_DIR + '/css/monthview.css'
+        ];
+        const calendarScripts = [ // executed in this order
+            'https://cdnjs.cloudflare.com/ajax/libs/ical.js/1.5.0/ical.min.js',
+            CALENDAR_DIR + '/js/linkify/linkify.min.js',
+            CALENDAR_DIR + '/js/linkify/linkify-string.min.js',
+            CALENDAR_DIR + '/js/i18n.min.js',
+            CALENDAR_DIR + '/js/weekmonthview.min.js',
+            'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+        ];
+
+        // add a <link> or <script> element; the promise resolves once the file has loaded
+        function addFile(tag, attributes) {
+            return new Promise((resolve, reject) => {
+                const el = document.createElement(tag);
+                Object.assign(el, attributes);
+                el.onload = resolve;
+                el.onerror = () => reject(new Error('could not load ' + (attributes.href || attributes.src)));
+                (tag === 'link' ? document.head : document.body).appendChild(el);
+            });
+        }
+
+        // all files download in parallel; async = false keeps the scripts' execution order;
+        // the calendar starts once every stylesheet and script is ready
+        Promise.all([
+            ...calendarStyles.map(href => addFile('link', { rel: 'stylesheet', href: href })),
+            ...calendarScripts.map(src => addFile('script', { src: src, async: false }))
+        ])
+            .then(startCalendar)
+            .catch(error => {
+                console.error('FATAL ERROR: Could not load the calendar files:', error);
+                document.getElementById('calendar-error-message').textContent =
+                    'Fehler beim Laden des Kalenders / Error loading the calendar.';
+            });
+
+        function startCalendar() {
+            // calendar title, per language (a plain string also works)
+            // (not called 'name': that would overwrite window.name, which only holds strings)
+            const calendarTitle = {
+                de: 'Fakultätskalender Mathematik',
+                en: 'Faculty of Mathematics Calendar'
+            };
+            const colours = {// categories of displayed events and their colors
+                // an event needs to belong to at least one of these categories to be displayed
+                'Dekanat': 'var(--rub-calendar-blue)',
+                'Algebra': '#347037',
+                'Analysis': '#b61e3e',//rub-darkred
+                'Didaktik': '#be9800',//rub-yellow, but with some grey tones added
+                'Numerik': '#0073ff',//rub-blue but all grey tones removed
+                'Stochastik': '#ed7102',//rub-orange
+                'Topologie': '#8e44ad'
+            };
+            const links = {// keys must agree with the keys of 'colours'
+                // (calendar data, not part of a version, so not inside CALENDAR_DIR)
+                'Dekanat': 'ics/Dekanat.ics',
+                'Algebra': 'ics/Algebra.ics',
+                'Analysis': 'ics/Analysis.ics',
+                'Didaktik': 'ics/Didaktik.ics',
+                'Numerik': 'ics/Numerik.ics',
+                'Stochastik': 'ics/Stochastik.ics',
+                'Topologie': 'ics/Topologie.ics'
+            };
+            const svgs = {
+                'month': CALENDAR_DIR + '/svg/month.svg',
+                'week': CALENDAR_DIR + '/svg/week.svg',
+                'save': CALENDAR_DIR + '/svg/save-icon.svg',
+                'copy': CALENDAR_DIR + '/svg/copy-icon.svg',
+                'question': CALENDAR_DIR + '/svg/question-mark.svg'
+            };
+            // display names of the categories; the keys above stay unchanged
+            // because they are also used in the URL parameters (e.g. ?Numerik=0)
+            const labels = {
+                en: {
+                    'Dekanat': "Dean's Office",
+                    'Didaktik': 'Didactics',
+                    'Numerik': 'Numerics',
+                    'Stochastik': 'Stochastics',
+                    'Topologie': 'Topology'
+                }
+            };
+            // the language is taken from <html lang="...">;
+            // to force a language, add lang: 'en' to the options object
+            loadICS(calendarTitle, colours, links, svgs, { labels: labels });
+        }
     </script>
 </body>
 

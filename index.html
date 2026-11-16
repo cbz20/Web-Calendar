@@ -4,7 +4,7 @@
 <!-- 
     web-calendar to display multiple ics-calendars in a browser
     source code available at https://github.com/cbz20/Web-Calendar/
-    Copyright (C) 2025 Claudius Zibrowius
+    Copyright (C) 2025–2026 Claudius Zibrowius
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published
@@ -33,7 +33,7 @@
 <body>
     <div class="calendar-container">
         <div id="calendar-error-message"></div>
-        <div class="calendar-header" id="calendar-header">...Kalender wird geladen...</div>
+        <div class="calendar-header" id="calendar-header"></div> <!-- filled with t('loading') by loadICS -->
         <div class="toggle-calendar-buttons-header" id="toggle-calendar-buttons-header"></div>
         <div class="calendar-monthview" id="calendar-monthview"></div>
         <table class="calendar-weekview" id="calendar-weekview"></table>
@@ -52,9 +52,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ical.js/1.5.0/ical.min.js"></script>
     <script src="js/linkify/linkify.min.js"></script>
     <script src="js/linkify/linkify-string.min.js"></script>
-    <script src="js/weekmonthview.js"></script>
+    <script src="js/i18n.min.js"></script>
+    <script src="js/weekmonthview.min.js"></script>
     <script>
-        name = 'Fakultätskalender Mathematik'; // calendar title
+        // calendar title, per language (a plain string also works)
+        // (not called 'name': that would overwrite window.name, which only holds strings)
+        calendarTitle = {
+            de: 'Fakultätskalender Mathematik',
+            en: 'Faculty of Mathematics Calendar'
+        };
         colours = {// categories of displayed events and their colors
             // an event needs to belong to at least one of these categories to be displayed
             'Dekanat': 'var(--rub-calendar-blue)',
@@ -81,7 +87,20 @@
             'copy':'svg/copy-icon.svg',
             'question': 'svg/question-mark.svg'
         };
-        loadICS(name, colours, links, svgs);
+        // display names of the categories; the keys above stay unchanged
+        // because they are also used in the URL parameters (e.g. ?Numerik=0)
+        labels = {
+            en: {
+                'Dekanat': "Dean's Office",
+                'Didaktik': 'Mathematics Education',
+                'Numerik': 'Numerical Analysis',
+                'Stochastik': 'Stochastics',
+                'Topologie': 'Topology'
+            }
+        };
+        // the language is taken from <html lang="...">;
+        // to force a language, add lang: 'en' to the options object
+        loadICS(calendarTitle, colours, links, svgs, { labels: labels });
     </script>
 </body>
 

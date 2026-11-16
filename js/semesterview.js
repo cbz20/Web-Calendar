@@ -1,7 +1,7 @@
 /*
     web-calendar to display multiple ics-calendars in a browser
     source code available at https://github.com/cbz20/Web-Calendar/
-    Copyright (C) 2025 Claudius Zibrowius
+    Copyright (C) 2025–2026 Claudius Zibrowius
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published
@@ -25,16 +25,22 @@ let missingEntrySymbol = "&#x2022;";
 let categoriesAll;
 
 // main function to call the script
-function loadICS(icsFile, name, categories) {
+// name:       calendar title; a string, or an object like {de: '...', en: '...'}
+// categories: CATEGORIES values from the ics file; these must not be translated
+// options:    optional settings
+//             options.lang – display language ('de', 'en'); default: lang attribute of <html>
+function loadICS(icsFile, name, categories, options = {}) {
+    initLanguage(options.lang);
+    document.getElementById('calendar-header').innerHTML = t('loading');
     categoriesAll = categories;
-    calendarName = name;
+    calendarName = translateValue(name);
     fetch(icsFile)
         .then(response => response.text())
         .then(data => parseICS(data))
         .catch(error => {
-            console.error('FATAL ERROR: Fehler beim Laden der ICS-Datei:', error);
+            console.error('FATAL ERROR: Could not load the ICS file:', error);
             parseICS("BEGIN:VCALENDAR\nEND:VCALENDAR");
-            document.getElementById('calendar-error-message').innerHTML = "Fehler beim Laden der Kalender-Quelldateien.<br/>Bitte kontaktieren Sie <div class='calendar-modal-center-container'>Termine-Mathe@ruhr-uni-bochum.de.</div>";
+            document.getElementById('calendar-error-message').innerHTML = t('loadError', {contact: CALENDAR_CONTACT + '.'});
         });
 }
 
@@ -200,8 +206,8 @@ function displayCalendar() {
     document.getElementById('calendar-header').innerHTML = "";
     let el = document.createElement('button');
     el.classList.add("setting-calendar-buttons");
-    el.title = "linke Pfeiltaste drücken";
-    el.innerHTML = "< Früheres Semester";
+    el.title = t('tipLeftKey');
+    el.innerHTML = t('prevSemester');
     el.addEventListener('click', function() {
         changeTerm(-1);
     });
@@ -209,35 +215,30 @@ function displayCalendar() {
 
     el = document.createElement('div');
     el.id = 'calendar-title';
-    el.title = "springe zum aktuellen Semester";
+    el.title = t('tipCurrentSemester');
     el.addEventListener('click', function(event) {
         BackToToday();
     });
     el.innerHTML = calendarName;
     if (winterterm) {
-        el.innerHTML += "<br>Wintersemester " +
-            firstDayDisplayed.toLocaleString('de-DE', {
-                year: 'numeric'
-            }) +
-            "­/" +
-            lastDayDisplayed.toLocaleString('de-DE', {
-                year: 'numeric'
-            });
+        el.innerHTML += "<br>" + t('winterSemester', {
+            y1: firstDayDisplayed.getFullYear(),
+            y2: lastDayDisplayed.getFullYear()
+        });
     } else {
-        el.innerHTML += "<br>Sommersemester " +
-            firstDayDisplayed.toLocaleString('de-DE', {
-                year: 'numeric'
-            })
+        el.innerHTML += "<br>" + t('summerSemester', {
+            y: firstDayDisplayed.getFullYear()
+        });
     };
     document.getElementById('calendar-header').appendChild(el);
 
     el = document.createElement('button');
     el.classList.add("setting-calendar-buttons");
-    el.title = "rechte Pfeiltaste drücken";
+    el.title = t('tipRightKey');
     el.addEventListener('click', function() {
         changeTerm(1);
     });
-    el.innerHTML = "Nächstes Semester >";
+    el.innerHTML = t('nextSemester');
     document.getElementById('calendar-header').appendChild(el);
 
     // calendar headings
@@ -262,17 +263,17 @@ function displayCalendar() {
     let tableHead = document.createElement('thead');
     tableHead.id = "table-head";
     let elementTH = document.createElement('th');
-    elementTH.textContent = "Datum";
+    elementTH.textContent = t('colDate');
     elementTH.classList.add('semesterview-day');
     tableHead.appendChild(elementTH);
     elementTH = document.createElement('th');
-    elementTH.textContent = "Uhrzeit";
+    elementTH.textContent = t('colTime');
     tableHead.appendChild(elementTH);
     elementTH = document.createElement('th');
-    elementTH.textContent = "Beschreibung";
+    elementTH.textContent = t('colSummary');
     tableHead.appendChild(elementTH);
     elementTH = document.createElement('th');
-    elementTH.textContent = "Ort";
+    elementTH.textContent = t('colLocation');
     tableHead.appendChild(elementTH);
     calendar.appendChild(tableHead);
 
@@ -338,7 +339,7 @@ function displayCalendar() {
                 FirstColumnEntry.rowSpan = NumberOfDayEvents;
             };
             FirstColumnEntry.classList.add('semesterview-calendar-today-date');
-            FirstColumnEntry.innerHTML = "heute<br>" + currentDay.toLocaleDateString('de', {
+            FirstColumnEntry.innerHTML = t('today') + "<br>" + currentDay.toLocaleDateString(locale, {
                 weekday: "short",
                 month: "numeric",
                 day: "numeric",
@@ -361,10 +362,10 @@ function displayCalendar() {
                 if (event.allDayEvent) {
                     eventTD.innerHTML = missingEntrySymbol;
                 } else {
-                    eventTD.innerHTML = event.startDate.toLocaleTimeString('de', {
+                    eventTD.innerHTML = event.startDate.toLocaleTimeString(locale, {
                         hour: "2-digit",
                         minute: "2-digit"
-                    }) + "<br>–<br>" + event.endDate.toLocaleTimeString('de', {
+                    }) + "<br>–<br>" + event.endDate.toLocaleTimeString(locale, {
                         hour: "2-digit",
                         minute: "2-digit"
                     });
@@ -399,7 +400,7 @@ function displayCalendar() {
                 currentRow.appendChild(eventTD);
                 // summary column
                 eventTD = document.createElement('td');
-                eventTD.innerHTML = "<i>keine Veranstaltungen</i>";
+                eventTD.innerHTML = "<i>" + t('noEvents') + "</i>";
                 eventTD.classList.add('no-events-to-display');
                 currentRow.appendChild(eventTD);
                 tbody.appendChild(currentRow);
@@ -440,7 +441,7 @@ function displayCalendar() {
                         FirstColumnEntry.classList.add('semesterview-day');
                     };
                     FirstColumnEntry.rowSpan = NumberOfDayEvents;
-                    FirstColumnEntry.textContent = currentDay.toLocaleDateString('de', {
+                    FirstColumnEntry.textContent = currentDay.toLocaleDateString(locale, {
                         weekday: "short",
                         month: "numeric",
                         day: "numeric",
@@ -458,7 +459,7 @@ function displayCalendar() {
                 if (event.allDayEvent) {
                     eventTD.innerHTML = missingEntrySymbol;
                 } else {
-                    eventTD.textContent = event.startDate.toLocaleTimeString('de', {
+                    eventTD.textContent = event.startDate.toLocaleTimeString(locale, {
                         hour: "2-digit",
                         minute: "2-digit"
                     });
@@ -508,7 +509,7 @@ function displayCalendar() {
         let currentRow = document.createElement('tr');
         let TDelement = document.createElement('td');
         TDelement.colSpan = "4";
-        TDelement.innerHTML = "<i>keine Veranstaltungen</i>";
+        TDelement.innerHTML = "<i>" + t('noEvents') + "</i>";
         currentRow.appendChild(TDelement);
         tbody.appendChild(currentRow);
     };
@@ -519,7 +520,7 @@ function openModal(event) {
     document.body.classList.add('calendar-no-scroll');
     if (event.singleDayEvent) {
         document.getElementById('calendar-modal-title').textContent =
-            event.startDate.toLocaleDateString('de-de', {
+            event.startDate.toLocaleDateString(locale, {
                 weekday: "long",
                 year: "numeric",
                 month: "long",
@@ -528,13 +529,13 @@ function openModal(event) {
     } else if (event.allDayEvent) {
         // event.singleDayEvent = false 
         document.getElementById('calendar-modal-title').textContent =
-            event.startDate.toLocaleDateString('de-de', {
+            event.startDate.toLocaleDateString(locale, {
                 weekday: "long",
                 year: "numeric",
                 month: "long",
                 day: "numeric",
             }) + " – " +
-            event.endDate.toLocaleDateString('de-de', {
+            event.endDate.toLocaleDateString(locale, {
                 weekday: "long",
                 year: "numeric",
                 month: "long",
@@ -542,19 +543,19 @@ function openModal(event) {
             });
     } else {
         document.getElementById('calendar-modal-title').textContent =
-            event.startDate.toLocaleDateString('de-de', {
+            event.startDate.toLocaleDateString(locale, {
                 weekday: "long",
                 year: "numeric",
                 month: "long",
                 day: "numeric",
             }) +
             ", " +
-            event.startDate.toLocaleTimeString('de-de', {
+            event.startDate.toLocaleTimeString(locale, {
                 hour: "numeric",
                 minute: "2-digit"
             }) +
             "–" +
-            event.endDate.toLocaleTimeString('de-de', {
+            event.endDate.toLocaleTimeString(locale, {
                 hour: "numeric",
                 minute: "2-digit"
             });
@@ -567,7 +568,7 @@ function openModal(event) {
     el = document.createElement('div');
     el.classList.add("calendar-location");
     if (event.location == missingEntrySymbol) {
-        el.innerHTML = "Ort unbekannt";
+        el.innerHTML = t('unknownLocation');
     } else {
         el.innerHTML = event.location;
     };
@@ -605,7 +606,7 @@ function closeModalButton() {
     el.classList.add("calendar-modal-center-container");
     let button = document.createElement('button');
     button.classList.add('toggle-calendar-buttons', "setting-calendar-buttons");
-    button.innerHTML = "Schließen";
+    button.innerHTML = t('close');
     button.addEventListener('click', function() {
         document.getElementById('event-calendar-modal').style.display = 'none';
         document.body.classList.remove('calendar-no-scroll');

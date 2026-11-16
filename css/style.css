@@ -1,7 +1,7 @@
 /*
     web-calendar to display multiple ics-calendars in a browser
     source code available at https://github.com/cbz20/Web-Calendar/
-    Copyright (C) 2025 Claudius Zibrowius
+    Copyright (C) 2025–2026 Claudius Zibrowius
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published
@@ -263,20 +263,23 @@
 	margin-bottom: 1em;
 }
 
+/* chevron drawn with CSS borders (no icon font needed):
+   two sides of a small square, rotated so the corner points right */
 .calendar-arrow {
-            font-family: FontAwesome;
+            display: inline-block;
+            flex-shrink: 0;
+            width: 0.45em;
+            height: 0.45em;
+            margin: 0 0.3em;
+            border-top: 0.15em solid currentColor;
+            border-right: 0.15em solid currentColor;
+            transform: rotate(45deg);
             transition: transform 0.3s ease;
 }
 
-.calendar-arrow::before {
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    content: "\f054";
-}
-
-
+/* open section: chevron points down */
 .calendar-active .calendar-arrow {
-            transform: rotate(90deg);
+            transform: rotate(135deg);
 }
 
 .calendar-active + .calendar-accordion-content {

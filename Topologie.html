@@ -4,7 +4,7 @@
 <!--
     web-calendar to display multiple ics-calendars in a browser
     source code available at https://github.com/cbz20/Web-Calendar/
-    Copyright (C) 2025 Claudius Zibrowius
+    Copyright (C) 2025–2026 Claudius Zibrowius
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published
@@ -32,7 +32,7 @@
 <body>
     <div class="calendar-container">
         <div id="calendar-error-message"></div>
-        <div class="calendar-header" id="calendar-header">...Kalender wird geladen...</div>
+        <div class="calendar-header" id="calendar-header"></div> <!-- filled with t('loading') by loadICS -->
         <div class="toggle-calendar-buttons-header" id="toggle-calendar-buttons-header"></div>
         <table class="calendar-semesterview" id="calendar-semesterview"></table>
     </div>
@@ -49,13 +49,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ical.js/1.5.0/ical.min.js"></script>
     <script src="js/linkify/linkify.min.js"></script>
     <script src="js/linkify/linkify-string.min.js"></script>
+    <script src="js/i18n.min.js"></script>
     <script src="js/semesterview.min.js"></script>
     <script>
         icsFile = 'ics/Topologie.ics'; //calendar source file/url
-        name = 'Oberseminar Topologie'; // calendar title
+        // calendar title, per language (a plain string also works)
+        // (not called 'name': that would overwrite window.name, which only holds strings)
+        calendarTitle = {
+            de: 'Oberseminar Topologie',
+            en: 'Topology Research Seminar'
+        };
         categories = ["Oberseminar Topologie", "Oberseminar"]; // event categories
         // an event needs to belong to at least one of the above categories to be displayed
-        loadICS(icsFile, name, categories);
+        loadICS(icsFile, calendarTitle, categories);
     </script>
 </body>
 

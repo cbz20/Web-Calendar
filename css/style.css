@@ -19,7 +19,7 @@
 
 :root {
 	--rub-calendar-blue: #17365c;
-	--rub-calendar-green: #667e0c; /* RUB green, darkened for readable contrast (RUB green is #8dae10) */
+	--rub-calendar-green: #8dae10;
 	--rub-calendar-grey: #e7e7e7;
 }
 

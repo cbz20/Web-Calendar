@@ -21,7 +21,11 @@ let today = new Date();
 let referenceDate = new Date(); // used for navigation
 let events = [];
 let calendarName = "";
-let missingEntrySymbol = "&#x2022;";
+// SECURITY: titles, locations and categories come from the ics files, which
+// anyone with write access to a calendar can edit. They are therefore always
+// inserted as text (textContent), never as HTML (innerHTML), so that they cannot
+// run scripts on the page. Descriptions are escaped by formatDescription().
+let missingEntrySymbol = "\u2022"; // "•" as a character, so that it also works as plain text
 // mobile view on narrow screens (same width as index.html); there is no
 // separate desktop/mobile switch here, so the view follows the screen width,
 // also when a phone is rotated or a window resized
@@ -434,7 +438,7 @@ function displayCalendar() {
                 eventTD = document.createElement('td');
                 eventTD.classList.add('semesterview-event', 'semesterview-event-summary', 'semesterview-calendar-today-event', 'calendar-today-event');
                 el = document.createElement('b');
-                el.innerHTML = event.summary;
+                el.textContent = event.summary;
                 eventTD.appendChild(el);
                 if (is_mobile) {
                     addLocationLine(eventTD, event);
@@ -454,7 +458,7 @@ function displayCalendar() {
                 // location
                 eventTD = document.createElement('td');
                 eventTD.classList.add('semesterview-event', 'semesterview-event-location', 'semesterview-calendar-today-event');
-                eventTD.innerHTML = event.location;
+                eventTD.textContent = event.location;
                 currentRow.appendChild(eventTD);
                 //
                 tbody.appendChild(currentRow);
@@ -541,7 +545,7 @@ function displayCalendar() {
                 } else {
                     eventTD.classList.add('semesterview-event', 'semesterview-event-summary');
                 };
-                eventTD.innerHTML = event.summary;
+                eventTD.textContent = event.summary;
                 eventTD.addEventListener('click', function() {
                     openModal(event);
                 });
@@ -559,7 +563,7 @@ function displayCalendar() {
                 } else {
                     eventTD.classList.add('semesterview-event', 'semesterview-event-location');
                 };
-                eventTD.innerHTML = event.location;
+                eventTD.textContent = event.location;
                 eventTD.addEventListener('click', function() {
                     openModal(event);
                 });
@@ -596,7 +600,7 @@ function addLocationLine(summaryTD, event) {
     };
     let locationLine = document.createElement('div');
     locationLine.classList.add('semesterview-event-location-inline');
-    locationLine.innerHTML = event.location;
+    locationLine.textContent = event.location;
     summaryTD.appendChild(locationLine);
 }
 
@@ -648,14 +652,14 @@ function openModal(event) {
     document.getElementById('calendar-modal-body').innerHTML = "";
     el = document.createElement('div');
     el.classList.add("calendar-summary");
-    el.innerHTML = event.summary;
+    el.textContent = event.summary;
     document.getElementById('calendar-modal-body').appendChild(el);
     el = document.createElement('div');
     el.classList.add("calendar-location");
     if (event.location == missingEntrySymbol) {
         el.innerHTML = t('unknownLocation');
     } else {
-        el.innerHTML = event.location;
+        el.textContent = event.location;
     };
     document.getElementById('calendar-modal-body').appendChild(el);
 
@@ -671,7 +675,7 @@ function openModal(event) {
         el = document.createElement('button');
         el.classList.add('toggle-calendar-buttons', 'dummy-calendar-button');
         el.disabled = true;
-        el.innerHTML = cat;
+        el.textContent = cat;
         document.getElementById('calendar-modal-body').appendChild(el);
     });
 

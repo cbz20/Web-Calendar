@@ -31,7 +31,9 @@
 //
 // Inline maths: $...$ or \(...\)    Displayed maths: $$...$$ or \[...\]
 
-const MATHJAX_URL = 'https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js';
+// An exact version, so that a new MathJax release is only used after it has
+// been tested here (fonts and extensions are loaded with the same version).
+const MATHJAX_URL = 'https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js';
 
 let mathQueue = Promise.resolve();
 
@@ -80,6 +82,11 @@ function clearMath(elements = calendarMathElements()) {
         return;
     }
     window.MathJax = {
+        loader: {
+            // filters potentially harmful TeX commands, such as \href links
+            // to javascript: addresses or arbitrary CSS via \style
+            load: ['ui/safe']
+        },
         tex: {
             inlineMath: [['$', '$'], ['\\(', '\\)']]
         },

@@ -324,7 +324,6 @@ const HELP = {
 			<code>$$...$$</code> oder <code>\\[...\\]</code> für abgesetzte Formeln.
 			Dabei ist Folgendes zu beachten:
 			<ul>
-			<li>Im Titel bitte <code>\\lt</code> statt <code>&lt;</code> schreiben, da der Titel sonst nicht korrekt angezeigt wird.</li>
 			<li>Eine Formel in der Beschreibung darf nicht über einen Zeilenumbruch hinweggehen.</li>
 			<li>Ein Dollarzeichen, das keine Formel einleiten soll, schreibt man als <code>\\$</code>.</li>
 			<li>Kalenderprogramme speichern Backslashes automatisch korrekt. Nur wer ICS-Dateien direkt bearbeitet, muss Backslashes verdoppeln (also <code>\\\\alpha</code> statt <code>\\alpha</code>).</li>
@@ -343,9 +342,7 @@ const HELP = {
 			<li>
 			<i>ical.js</i> 
 			von u.a.
-			<a href="https://github.com/kewisch/ical.js" target="_blank"><b class='calendar-blue'>Philipp Kewisch (Mozilla)</b></a>,
-			bereitgestellt über 
-			<a href="https://cdnjs.com/" target="_blank"><b class='calendar-blue'>cdnjs</b></a>
+			<a href="https://github.com/kewisch/ical.js" target="_blank"><b class='calendar-blue'>Philipp Kewisch (Mozilla)</b></a>
 			</li>
 			<li>
 			<i>linkify.js</i>
@@ -523,7 +520,6 @@ const HELP = {
 			<code>$$...$$</code> or <code>\\[...\\]</code> for displayed formulas.
 			Please note:
 			<ul>
-			<li>In titles, write <code>\\lt</code> instead of <code>&lt;</code>; otherwise the title is not displayed correctly.</li>
 			<li>A formula in a description must not span a line break.</li>
 			<li>To write a dollar sign that does not start a formula, use <code>\\$</code>.</li>
 			<li>Calendar programs store backslashes correctly by themselves. Only if you edit ICS files directly do you need to double backslashes (<code>\\\\alpha</code> instead of <code>\\alpha</code>).</li>
@@ -542,9 +538,7 @@ const HELP = {
 			<li>
 			<i>ical.js</i> 
 			by, among others,
-			<a href="https://github.com/kewisch/ical.js" target="_blank"><b class='calendar-blue'>Philipp Kewisch (Mozilla)</b></a>,
-			provided via 
-			<a href="https://cdnjs.com/" target="_blank"><b class='calendar-blue'>cdnjs</b></a>
+			<a href="https://github.com/kewisch/ical.js" target="_blank"><b class='calendar-blue'>Philipp Kewisch (Mozilla)</b></a>
 			</li>
 			<li>
 			<i>linkify.js</i>

@@ -22,7 +22,11 @@ let referenceDate = new Date(); // used for navigation
 let events = [];
 let categoriesSelected = []; // toggled catgeories
 let calendarName = "";
-let missingEntrySymbol = "&#x2022;";
+// SECURITY: titles, locations and categories come from the ics files, which
+// anyone with write access to a calendar can edit. They are therefore always
+// inserted as text (textContent), never as HTML (innerHTML), so that they cannot
+// run scripts on the page. Descriptions are escaped by formatDescription().
+let missingEntrySymbol = "\u2022"; // "•" as a character, so that it also works as plain text
 let categoriesAll;
 let categoryColors;
 let svgFiles;
@@ -496,7 +500,7 @@ function drawWeekView() {
                 if (event.location != missingEntrySymbol) {
                     let locationLine = document.createElement('div');
                     locationLine.classList.add('weekview-event-location-inline');
-                    locationLine.innerHTML = event.location;
+                    locationLine.textContent = event.location;
                     eventTD.appendChild(locationLine);
                 };
                 tbody.appendChild(currentRow);
@@ -508,7 +512,7 @@ function drawWeekView() {
             eventTD.classList.add('weekview-event');
             eventTD.classList.add('weekview-event-location');
             eventTD.style.backgroundColor = categoryColors[event.mainCategory];
-            eventTD.innerHTML = event.location;
+            eventTD.textContent = event.location;
             eventTD.addEventListener('click', function() {
                 openModal(event);
             });
@@ -826,14 +830,14 @@ function openModal(event) {
     document.getElementById('calendar-modal-body').innerHTML = "";
     el = document.createElement('div');
     el.classList.add("calendar-summary");
-    el.innerHTML = event.summary;
+    el.textContent = event.summary;
     document.getElementById('calendar-modal-body').appendChild(el);
     el = document.createElement('div');
     el.classList.add("calendar-location");
     if (event.location == missingEntrySymbol) {
         el.innerHTML = t('unknownLocation');
     } else {
-        el.innerHTML = event.location;
+        el.textContent = event.location;
     };
     document.getElementById('calendar-modal-body').appendChild(el);
 
@@ -849,7 +853,7 @@ function openModal(event) {
         el = document.createElement('button');
         el.classList.add('toggle-calendar-buttons', 'dummy-calendar-button');
         el.disabled = true;
-        el.innerHTML = categoryLabel(cat);
+        el.textContent = categoryLabel(cat);
         if (categoriesAll.includes(cat)) {
             el.style.backgroundColor = categoryColors[cat];
         } else {

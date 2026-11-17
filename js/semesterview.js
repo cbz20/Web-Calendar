@@ -119,6 +119,7 @@ function parseICS(icsData) {
         // Remove whitespace from both ends of each category
         // Also replace multiple consecutive whitespaces by a single whitespace
         allCategories = allCategories.map(cat => cat.trim().replace(/[ ]+/g, ' '));
+        allCategories = [...new Set(allCategories)]; // each category only once (order kept)
         if (allCategories.length == 0) {
             allCategories.push("none");
         };
@@ -724,8 +725,7 @@ function closeModalButton() {
     button.classList.add('toggle-calendar-buttons', "setting-calendar-buttons");
     button.innerHTML = t('close');
     button.addEventListener('click', function() {
-        document.getElementById('event-calendar-modal').style.display = 'none';
-        document.body.classList.remove('calendar-no-scroll');
+        closeModal();
     });
     el.appendChild(button);
     return el;
@@ -743,8 +743,7 @@ document.getElementById('event-calendar-modal').addEventListener('click', functi
     if (event.currentTarget !== event.target) {
         return;
     }
-    document.getElementById('event-calendar-modal').style.display = 'none';
-    document.body.classList.remove('calendar-no-scroll');
+    closeModal();
 });
 
 function changeTerm(offset) {
@@ -774,14 +773,53 @@ document.addEventListener('touchend', function(event) {
     };
 }, { passive: true });
 
+// Arrow keys are only used by the calendar when they are meant for it: not while
+// someone types in a text field elsewhere on the page (e.g. a site search),
+// not while the event or help window is open, and not together with Ctrl, Alt,
+// Shift or Cmd (e.g. Alt+left arrow is "back" in the browser).
+function arrowKeysAreForCalendar(event) {
+    if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
+        return false;
+    };
+    if (calendarModalIsOpen()) {
+        return false;
+    };
+    let target = event.target;
+    if (target.isContentEditable || (target.closest && target.closest('textarea, select'))) {
+        return false;
+    };
+    // inputs in which the arrow keys move the cursor or change the value;
+    // checkboxes and buttons (e.g. the calendar filters) do not count
+    if (target.tagName == 'INPUT' && !['checkbox', 'button', 'submit', 'reset', 'image'].includes(target.type)) {
+        return false;
+    };
+    return true;
+}
+
+function calendarModalIsOpen() {
+    return document.getElementById('event-calendar-modal').style.display == 'flex';
+}
+
+function closeModal() {
+    document.getElementById('event-calendar-modal').style.display = 'none';
+    document.body.classList.remove('calendar-no-scroll');
+}
+
+// keyboard: left/right arrow keys go back/forward, Escape closes the window
 function logKey(event) {
-    if (event.which == '37') {
-        // left arrow: backwards
-        changeTerm(-1);
-    } else if (event.which == '39') {
-        // right arrow: forwards
-        changeTerm(1);
-    }
+    if (event.key == 'Escape') {
+        if (calendarModalIsOpen()) {
+            closeModal();
+        };
+        return;
+    };
+    if (event.key != 'ArrowLeft' && event.key != 'ArrowRight') {
+        return;
+    };
+    if (!arrowKeysAreForCalendar(event)) {
+        return;
+    };
+    changeTerm((event.key == 'ArrowLeft') ? -1 : 1);
 };
 
 function BackToToday() {

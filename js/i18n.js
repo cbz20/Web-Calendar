@@ -37,6 +37,9 @@ const I18N = {
     de: {
         loading: '...Kalender wird geladen...',
         loadError: 'Fehler beim Laden der Kalender-Quelldateien.<br/>Bitte kontaktieren Sie <div class=\'calendar-modal-center-container\'>{contact}</div>',
+        // some of the calendars could not be loaded (the others are shown)
+        loadErrorOne: 'Der Kalender <b>{calendars}</b> konnte nicht geladen werden und fehlt daher in der Anzeige.<br/>Bitte kontaktieren Sie <div class=\'calendar-modal-center-container\'>{contact}</div>',
+        loadErrorMany: 'Die Kalender <b>{calendars}</b> konnten nicht geladen werden und fehlen daher in der Anzeige.<br/>Bitte kontaktieren Sie <div class=\'calendar-modal-center-container\'>{contact}</div>',
 
         prevWeek: '< Vorherige Woche',
         nextWeek: 'Nächste Woche >',
@@ -87,6 +90,8 @@ const I18N = {
     en: {
         loading: '...loading calendar...',
         loadError: 'Error loading the calendar source files.<br/>Please contact <div class=\'calendar-modal-center-container\'>{contact}</div>',
+        loadErrorOne: 'The calendar <b>{calendars}</b> could not be loaded and is therefore missing.<br/>Please contact <div class=\'calendar-modal-center-container\'>{contact}</div>',
+        loadErrorMany: 'The calendars <b>{calendars}</b> could not be loaded and are therefore missing.<br/>Please contact <div class=\'calendar-modal-center-container\'>{contact}</div>',
 
         prevWeek: '< Previous week',
         nextWeek: 'Next week >',

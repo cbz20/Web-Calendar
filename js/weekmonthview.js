@@ -51,31 +51,62 @@ function loadICS(name, colours, links, svgs, options = {}) {
     icsLinks = links;
     categoryLabels = options.labels || {};
     parseURLparams();
-    parseICS(links)
-    	.then(() => displayCalendar())
-    	.catch(error => {
-            console.error('FATAL ERROR: Could not load the ICS files:', error);
-            displayCalendar()
-            document.getElementById('calendar-error-message').innerHTML = t('loadError', {contact: CALENDAR_CONTACT + '.'});
-        });
+    // the calendar is drawn once every calendar file has either arrived or failed
+    parseICS(links).then(failed => {
+        displayCalendar();
+        showLoadError(failed);
+    });
 }
 
+// Load all calendar files independently of each other: if one of them cannot
+// be loaded (e.g. a server problem or a damaged file), the others are still
+// shown. Returns the categories whose files could not be loaded.
 async function parseICS(links) {
-    //console.log(links);
-    await Promise.all(categoriesAll.map(async category => {
-    	const response = await fetch(links[category]);
-	if (!response.ok) {
-	   throw new Error(`Response status: ${response.status}`);
-	}
-	let data = await response.text();
-	let jcalData = ICAL.parse(data);
-	let vcalendar = new ICAL.Component(jcalData);
-	let vevents = vcalendar.getAllSubcomponents('vevent');
-	let newevents = vevents.map(event => parse_event(event,category));
-	newevents = newevents.filter(event => Object.keys(event).length > 0);
-	events.push(...newevents);
-        //console.log(events);
-    }));
+    const results = await Promise.allSettled(categoriesAll.map(category => loadCalendar(category, links[category])));
+    let failed = [];
+    results.forEach((result, i) => {
+        if (result.status == 'rejected') {
+            console.error(`ERROR: Could not load the calendar '${categoriesAll[i]}' from ${links[categoriesAll[i]]}:`, result.reason);
+            failed.push(categoriesAll[i]);
+        }
+    });
+    return failed;
+}
+
+async function loadCalendar(category, url) {
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+    }
+    let data = await response.text();
+    let jcalData = ICAL.parse(data);
+    let vcalendar = new ICAL.Component(jcalData);
+    let vevents = vcalendar.getAllSubcomponents('vevent');
+    let newevents = vevents.map(event => parse_event(event, category));
+    newevents = newevents.filter(event => Object.keys(event).length > 0);
+    // only added once the whole file has been read without errors
+    events.push(...newevents);
+}
+
+// message above the calendar if some or all calendar files could not be loaded
+function showLoadError(failed) {
+    let message = document.getElementById('calendar-error-message');
+    if (failed.length == 0) {
+        message.innerHTML = '';
+        return;
+    }
+    let contact = CALENDAR_CONTACT + '.';
+    if (failed.length == categoriesAll.length) {
+        message.innerHTML = t('loadError', {contact: contact});
+        return;
+    }
+    // e.g. "Numerik, Stochastik und Topologie" (the names come from the
+    // configuration in the html page, not from the calendar files)
+    let names = failed.map(category => categoryLabel(category));
+    let list = (typeof Intl.ListFormat === 'function')
+        ? new Intl.ListFormat(locale, {type: 'conjunction'}).format(names)
+        : names.join(', ');
+    message.innerHTML = t(failed.length == 1 ? 'loadErrorOne' : 'loadErrorMany', {calendars: list, contact: contact});
 }
 
 function parse_event(event,category) {

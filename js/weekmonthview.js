@@ -289,6 +289,7 @@ function drawWeekView() {
     let lastDayDisplayed = new Date(referenceDate.valueOf());
     lastDayDisplayed.setDate(lastDayDisplayed.getDate() + 7 - referenceDay);
     lastDayDisplayed.setHours(23, 59, 59, 999);
+    showTimeZoneNote(document.getElementById('calendar-weekview')); // see i18n.js
     // iterator for date
     let currentDay = new Date(firstDayDisplayed.valueOf());
     //console.log(referenceDate);
@@ -602,6 +603,7 @@ function drawMonthView() {
     let lastDayDisplayed = new Date(lastDay.valueOf());
     lastDayDisplayed.setDate(lastDayDisplayed.getDate() + 6 - lastDay.getDay());
     lastDayDisplayed.setHours(23, 59, 59, 999);
+    showTimeZoneNote(document.getElementById('calendar-monthview')); // see i18n.js
     // iterator for date
     let currentDay = new Date(firstDayDisplayed.valueOf());
 

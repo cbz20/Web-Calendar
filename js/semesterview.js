@@ -219,6 +219,7 @@ function displayCalendar() {
     lastDayDisplayed.setMonth(lastDayDisplayed.getMonth() - referenceMonth + 6);
     lastDayDisplayed.setDate(0);
     lastDayDisplayed.setHours(23, 59, 59, 999);
+    showTimeZoneNote(document.getElementById('calendar-semesterview')); // see i18n.js
     // decide if semester is a winter term
     let winterterm = true;
     let currentYear = firstDayDisplayed.getYear();

@@ -85,7 +85,13 @@ const I18N = {
         helpEditTitle: 'Kalender editieren',
         helpAboutTitle: 'Weitergehende Informationen',
         allCalendars: 'alle Kalender',
-        helpSeminarTitle: 'Hilfe zu diesem Kalender'
+        helpSeminarTitle: 'Hilfe zu diesem Kalender',
+
+        // only shown to visitors in another time zone
+        tzNoteAhead: 'Alle Uhrzeiten sind in deutscher Zeit angegeben. In Bochum ist es derzeit {hours} später als bei Ihnen.',
+        tzNoteBehind: 'Alle Uhrzeiten sind in deutscher Zeit angegeben. In Bochum ist es derzeit {hours} früher als bei Ihnen.',
+        tzOneHour: '1 Stunde',
+        tzHours: '{n} Stunden'
     },
     en: {
         loading: '...loading calendar...',
@@ -137,7 +143,12 @@ const I18N = {
         helpEditTitle: 'Editing the calendars',
         helpAboutTitle: 'Further information',
         allCalendars: 'all calendars',
-        helpSeminarTitle: 'Help for this calendar'
+        helpSeminarTitle: 'Help for this calendar',
+
+        tzNoteAhead: 'All times are given in German time. Bochum is currently {hours} ahead of you.',
+        tzNoteBehind: 'All times are given in German time. Bochum is currently {hours} behind you.',
+        tzOneHour: '1 hour',
+        tzHours: '{n} hours'
     }
 };
 
@@ -713,4 +724,47 @@ function keepFocusInDialog(event) {
         event.preventDefault();
         first.focus();
     }
+}
+
+// ===== time zone note (shared by both views) =====
+// All times are shown as they are stored in the calendars, i.e. in German time
+// (the calendars store them as Europe/Berlin, and they are not converted).
+// Visitors whose clock differs from the time in Bochum get a note above the
+// calendar that says so, together with the current time difference.
+const CALENDAR_TIME_ZONE = 'Europe/Berlin';
+
+// offset of a time zone from UTC at a given moment, in minutes
+function utcOffsetInMinutes(date, timeZone) {
+    let parts = {};
+    new Intl.DateTimeFormat('en-US', {
+        timeZone: timeZone, hourCycle: 'h23',
+        year: 'numeric', month: 'numeric', day: 'numeric',
+        hour: 'numeric', minute: 'numeric', second: 'numeric'
+    }).formatToParts(date).forEach(part => parts[part.type] = Number(part.value));
+    let asUTC = Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second);
+    return Math.round((asUTC - date.getTime()) / 60000);
+}
+
+// note directly above the calendar element (hidden for visitors on German time)
+function showTimeZoneNote(calendarElement) {
+    let note = document.getElementById('calendar-timezone-note');
+    if (!note) {
+        note = document.createElement('div');
+        note.id = 'calendar-timezone-note';
+        note.classList.add('calendar-timezone-note');
+    }
+    calendarElement.parentNode.insertBefore(note, calendarElement);
+    let now = new Date();
+    // minutes by which Bochum is ahead of the visitor (negative: behind)
+    let minutes = utcOffsetInMinutes(now, CALENDAR_TIME_ZONE) + now.getTimezoneOffset();
+    if (minutes == 0) {
+        note.textContent = '';
+        note.hidden = true;
+        return;
+    }
+    let hours = Math.abs(minutes) / 60;
+    let hoursText = (hours == 1) ? t('tzOneHour')
+        : t('tzHours', {n: new Intl.NumberFormat(locale, {maximumFractionDigits: 2}).format(hours)});
+    note.textContent = t(minutes > 0 ? 'tzNoteAhead' : 'tzNoteBehind', {hours: hoursText});
+    note.hidden = false;
 }

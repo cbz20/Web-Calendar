@@ -322,6 +322,7 @@ function drawWeekView() {
         el.addEventListener('click', function(event) {
             BackToToday();
         });
+        makeKeyboardButton(el, BackToToday); // the desktop view has no "Today" button
         el.innerHTML = weekTitle(firstDayDisplayed, lastDayDisplayed);
         document.getElementById('calendar-header').appendChild(el);
 
@@ -489,7 +490,10 @@ function drawWeekView() {
             eventTD = document.createElement('td');
             eventTD.classList.add('weekview-event', 'weekview-event-summary');
             eventTD.style.backgroundColor = categoryColors[event.mainCategory];
-            eventTD.textContent = event.summary;
+            // the title opens the event window from the keyboard (see i18n.js)
+            eventTD.appendChild(eventTitleButton(event.summary, function() {
+                openModal(event);
+            }));
             eventTD.addEventListener('click', function() {
                 openModal(event);
             });
@@ -587,6 +591,7 @@ function drawMonthView() {
     el.addEventListener('click', function(event) {
         BackToToday();
     });
+    makeKeyboardButton(el, BackToToday);
     el.innerHTML = calendarName + "<br>" + firstDay.toLocaleString(locale, {
         month: 'long',
         year: 'numeric'
@@ -685,6 +690,10 @@ function drawMonthView() {
             eventDiv.addEventListener('click', function() {
                 openModal(event);
             });
+            eventDiv.setAttribute('aria-haspopup', 'dialog');
+            makeKeyboardButton(eventDiv, function() {
+                openModal(event);
+            });
             dayCell.appendChild(eventDiv);
         });
         calendar.appendChild(dayCell);
@@ -711,6 +720,8 @@ function drawToggleButtons() {
             button.title = t('tipToWeek');
         };
         buttonImage.classList.add('calendar-svg-icon');
+        buttonImage.alt = ''; // decorative: the button is named by aria-label
+        button.setAttribute('aria-label', button.title);
         button.classList.add('toggle-calendar-buttons');
         button.classList.add('setting-calendar-buttons');
         button.appendChild(buttonImage);
@@ -775,6 +786,8 @@ function drawToggleButtons() {
     buttonImage.src = svgFiles['save'];
     button.classList.add('toggle-calendar-buttons', 'setting-calendar-buttons');
     button.title = t('tipSaveSettings');
+    buttonImage.alt = ''; // decorative: the button is named by aria-label
+    button.setAttribute('aria-label', t('tipSaveSettings'));
     button.appendChild(buttonImage);
     button.addEventListener('click', function() {
         addParamsToURL();
@@ -871,7 +884,7 @@ function openModal(event) {
     el.innerHTML = formatDescription(event.description); // see i18n.js
     document.getElementById('calendar-modal-body').appendChild(el);
     document.getElementById('calendar-modal-body').appendChild(closeModalButton());
-    document.getElementById('event-calendar-modal').style.display = 'flex'; //necessary to show modal
+    showDialog(); // see i18n.js: shows the window and moves the keyboard focus into it
     if (typeof typesetMath === 'function') typesetMath(); // typeset TeX in the new content
 }
 
@@ -911,22 +924,22 @@ function showHelp(event) {
     body.innerHTML += accordionElement(t('helpEditTitle'), helpText('edit', urls_with_auth));
     body.innerHTML += accordionElement(t('helpAboutTitle'), helpText('about'));
     body.appendChild(closeModalButton());
-    document.getElementById('event-calendar-modal').style.display = 'flex'; //necessary to show modal
+    showDialog(); // see i18n.js: shows the window and moves the keyboard focus into it
 }
 
 function copyButton(url) {
-    return `<button 
-    	class='toggle-calendar-buttons setting-calendar-buttons' 
-    	title="` + t('tipCopyUrl') + `" 
-    	onclick='navigator.clipboard.writeText("` + url + `").then(function() {
-	    console.log("copied url");
-	}, function() {
-	    console.warn("error trying to copy url");
-	});'>
-	<img 
-		src="`+svgFiles['copy']+`" 
-		class="calendar-svg-icon">
-	</button> `
+    return `<button
+        class='toggle-calendar-buttons setting-calendar-buttons'
+        title="` + t('tipCopyUrl') + `" aria-label="` + t('tipCopyUrl') + `"
+        onclick='navigator.clipboard.writeText("` + url + `").then(function() {
+            console.log("copied url");
+        }, function() {
+            console.warn("error trying to copy url");
+        });'>
+        <img alt=""
+            src="` + svgFiles['copy'] + `"
+            class="calendar-svg-icon">
+    </button> `
 };
 
 function closeModalButton() {
@@ -947,6 +960,7 @@ function closeModalButton() {
 // the page puts the calendar into its own stacking context, so the window is
 // moved to the end of <body>.
 document.body.appendChild(document.getElementById('event-calendar-modal'));
+setUpDialog(); // see i18n.js: announced as a dialog to screen readers
 
 // close modal 
 document.getElementById('event-calendar-modal').addEventListener('click', function(event) {
@@ -1098,10 +1112,15 @@ function calendarModalIsOpen() {
 function closeModal() {
     document.getElementById('event-calendar-modal').style.display = 'none';
     document.body.classList.remove('calendar-no-scroll');
+    returnFocusAfterDialog(); // see i18n.js
 }
 
 // keyboard: left/right arrow keys go back/forward, Escape closes the window
 function logKey(event) {
+    if (event.key == 'Tab' && calendarModalIsOpen()) {
+        keepFocusInDialog(event); // see i18n.js
+        return;
+    };
     if (event.key == 'Escape') {
         if (calendarModalIsOpen()) {
             closeModal();
@@ -1139,7 +1158,8 @@ function updateToday() {
 
 function accordionElement(title,content){
 	return `<div class="calendar-accordion">
-        <div class="calendar-accordion-header" onclick="toggleAccordion(this)">`+title+`<span class="calendar-arrow"></span></div>
+        <div class="calendar-accordion-header" role="button" tabindex="0" aria-expanded="false"
+            onclick="toggleAccordion(this)" onkeydown="accordionKey(event, this)">`+title+`<span class="calendar-arrow" aria-hidden="true"></span></div>
         <div class="calendar-accordion-content">`+content+`</div>
     </div>
     `
@@ -1159,7 +1179,16 @@ function toggleAccordion(element) {
     }
 }
 
+// Enter or Space on a help section header opens or closes it
+function accordionKey(event, header) {
+    if (event.key == 'Enter' || event.key == ' ') {
+        event.preventDefault();
+        toggleAccordion(header);
+    }
+}
+
 function openAccordionSection(header) {
+    header.setAttribute('aria-expanded', 'true');
     let content = header.nextElementSibling;
     content.style.padding = "10px";
     // measure while the section is still closed: reading scrollHeight makes
@@ -1183,6 +1212,7 @@ function openAccordionSection(header) {
 }
 
 function closeAccordionSection(header) {
+    header.setAttribute('aria-expanded', 'false');
     let content = header.nextElementSibling;
     // an animation cannot start from "none": fix the current height first
     content.style.maxHeight = content.scrollHeight + "px";

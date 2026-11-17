@@ -242,6 +242,9 @@ function displayCalendar() {
     title.addEventListener('click', function(event) {
         BackToToday();
     });
+    if (!is_mobile) { // the mobile view has its own "Today" button
+        makeKeyboardButton(title, BackToToday);
+    };
     // semester in its own span, so the mobile view can show it smaller
     // (built as one string: the span must be complete when it is assigned)
     let semesterName;
@@ -546,7 +549,10 @@ function displayCalendar() {
                 } else {
                     eventTD.classList.add('semesterview-event', 'semesterview-event-summary');
                 };
-                eventTD.textContent = event.summary;
+                // the title opens the event window from the keyboard (see i18n.js)
+                eventTD.appendChild(eventTitleButton(event.summary, function() {
+                    openModal(event);
+                }));
                 eventTD.addEventListener('click', function() {
                     openModal(event);
                 });
@@ -688,7 +694,7 @@ function openModal(event) {
     el.innerHTML = formatDescription(event.description); // see i18n.js
     document.getElementById('calendar-modal-body').appendChild(el);
     document.getElementById('calendar-modal-body').appendChild(closeModalButton());
-    document.getElementById('event-calendar-modal').style.display = 'flex'; //necessary to show modal
+    showDialog(); // see i18n.js: shows the window and moves the keyboard focus into it
     if (typeof typesetMath === 'function') typesetMath(); // typeset TeX in the new content
 }
 
@@ -715,7 +721,7 @@ function showHelp() {
     // the first category is the one to name in the help text
     body.innerHTML = helpText('seminar', facultyCalendarUrl, categoriesAll[0]);
     body.appendChild(closeModalButton());
-    document.getElementById('event-calendar-modal').style.display = 'flex'; //necessary to show modal
+    showDialog(); // see i18n.js: shows the window and moves the keyboard focus into it
 }
 
 function closeModalButton() {
@@ -736,6 +742,7 @@ function closeModalButton() {
 // the page puts the calendar into its own stacking context, so the window is
 // moved to the end of <body>.
 document.body.appendChild(document.getElementById('event-calendar-modal'));
+setUpDialog(); // see i18n.js: announced as a dialog to screen readers
 
 // close modal
 document.getElementById('event-calendar-modal').addEventListener('click', function(event) {
@@ -803,10 +810,15 @@ function calendarModalIsOpen() {
 function closeModal() {
     document.getElementById('event-calendar-modal').style.display = 'none';
     document.body.classList.remove('calendar-no-scroll');
+    returnFocusAfterDialog(); // see i18n.js
 }
 
 // keyboard: left/right arrow keys go back/forward, Escape closes the window
 function logKey(event) {
+    if (event.key == 'Tab' && calendarModalIsOpen()) {
+        keepFocusInDialog(event); // see i18n.js
+        return;
+    };
     if (event.key == 'Escape') {
         if (calendarModalIsOpen()) {
             closeModal();

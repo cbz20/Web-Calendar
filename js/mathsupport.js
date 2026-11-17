@@ -70,6 +70,13 @@ function clearMath(elements = calendarMathElements()) {
     }
 }
 
+// the page's language, if MathJax can read formulas aloud in it, else English
+function mathSpeechLanguage() {
+    const supported = ['af', 'ca', 'da', 'de', 'en', 'es', 'fr', 'hi', 'it', 'ko', 'nb', 'nn', 'sv'];
+    const pageLanguage = (document.documentElement.lang || 'de').toLowerCase().split('-')[0];
+    return supported.includes(pageLanguage) ? pageLanguage : 'en';
+}
+
 (function loadMathJax() {
     if (mathJaxLoaded()) {
         // already loaded by the surrounding page
@@ -89,6 +96,13 @@ function clearMath(elements = calendarMathElements()) {
         },
         tex: {
             inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+            sre: {
+                // language in which screen readers read formulas aloud
+                // (MathJax's default is English, also on German pages)
+                locale: mathSpeechLanguage()
+            }
         },
         startup: {
             typeset: false // only typeset the calendar, not the whole page

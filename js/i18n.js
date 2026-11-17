@@ -193,12 +193,12 @@ const HELP = {
 		</p>
 		<p> 
 			Klicken Sie dazu den Schalter 
-			<button class='toggle-calendar-buttons setting-calendar-buttons dummy-calendar-button' disabled>
-			<img src="${svg['week']}" class="calendar-svg-icon">
+			<button class='toggle-calendar-buttons setting-calendar-buttons dummy-calendar-button' disabled aria-label="Wochenansicht">
+			<img src="${svg['week']}" class="calendar-svg-icon" alt="">
 			</button> 
 			bzw.
-			<button class='toggle-calendar-buttons setting-calendar-buttons dummy-calendar-button' disabled>
-			<img src="${svg['month']}" class="calendar-svg-icon">
+			<button class='toggle-calendar-buttons setting-calendar-buttons dummy-calendar-button' disabled aria-label="Monatsansicht">
+			<img src="${svg['month']}" class="calendar-svg-icon" alt="">
 			</button>
 			oben links über dem Kalender.
 		</p>
@@ -208,7 +208,7 @@ const HELP = {
 		<p> 
 			Klicken Sie dazu die Kontrollkästchen
 			<a class="toggle-calendar-buttons calendar-dummy-checkbox">
-			<input type="checkbox" class="calendar-dummy-checkbox calendar-checkbox" checked>
+			<input type="checkbox" class="calendar-dummy-checkbox calendar-checkbox" checked tabindex="-1" aria-hidden="true">
 			<label class='calendar-dummy-checkbox calendar-label'>
 			Fachbereich
 			</label>
@@ -222,8 +222,8 @@ const HELP = {
 			Klicken Sie den Schalter 
 			</p>
 			<div class="calendar-modal-center-container">
-			<button class='toggle-calendar-buttons setting-calendar-buttons dummy-calendar-button' disabled>
-			<img src="${svg['save']}" class="calendar-svg-icon">
+			<button class='toggle-calendar-buttons setting-calendar-buttons dummy-calendar-button' disabled aria-label="Anzeigeeinstellungen speichern">
+			<img src="${svg['save']}" class="calendar-svg-icon" alt="">
 			</button> 
 			</div>
 			<p>
@@ -395,12 +395,12 @@ const HELP = {
 		</p>
 		<p> 
 			Click the button 
-			<button class='toggle-calendar-buttons setting-calendar-buttons dummy-calendar-button' disabled>
-			<img src="${svg['week']}" class="calendar-svg-icon">
+			<button class='toggle-calendar-buttons setting-calendar-buttons dummy-calendar-button' disabled aria-label="Week view">
+			<img src="${svg['week']}" class="calendar-svg-icon" alt="">
 			</button> 
 			or
-			<button class='toggle-calendar-buttons setting-calendar-buttons dummy-calendar-button' disabled>
-			<img src="${svg['month']}" class="calendar-svg-icon">
+			<button class='toggle-calendar-buttons setting-calendar-buttons dummy-calendar-button' disabled aria-label="Month view">
+			<img src="${svg['month']}" class="calendar-svg-icon" alt="">
 			</button>
 			at the top left above the calendar.
 		</p>
@@ -410,7 +410,7 @@ const HELP = {
 		<p> 
 			Click the checkboxes
 			<a class="toggle-calendar-buttons calendar-dummy-checkbox">
-			<input type="checkbox" class="calendar-dummy-checkbox calendar-checkbox" checked>
+			<input type="checkbox" class="calendar-dummy-checkbox calendar-checkbox" checked tabindex="-1" aria-hidden="true">
 			<label class='calendar-dummy-checkbox calendar-label'>
 			Research area
 			</label>
@@ -424,8 +424,8 @@ const HELP = {
 			Click the button 
 			</p>
 			<div class="calendar-modal-center-container">
-			<button class='toggle-calendar-buttons setting-calendar-buttons dummy-calendar-button' disabled>
-			<img src="${svg['save']}" class="calendar-svg-icon">
+			<button class='toggle-calendar-buttons setting-calendar-buttons dummy-calendar-button' disabled aria-label="Save display settings">
+			<img src="${svg['save']}" class="calendar-svg-icon" alt="">
 			</button> 
 			</div>
 			<p>
@@ -630,4 +630,82 @@ function joinWrappedLines(text) {
 function formatDescription(text) {
     return linkifyStr(joinWrappedLines(text), {className: "linkInCalendarAbstract"})
         .replace(/\n/g, '<br>');
+}
+
+// ===== accessibility (shared by both views) =====
+
+// Make an element work like a button for keyboard and screen-reader users:
+// reachable with Tab, announced as a button, activated with Enter or Space.
+function makeKeyboardButton(el, onActivate) {
+    el.tabIndex = 0;
+    el.setAttribute('role', 'button');
+    el.addEventListener('keydown', function(event) {
+        if (event.key == 'Enter' || event.key == ' ') {
+            event.preventDefault(); // Space would otherwise scroll the page
+            event.stopPropagation();
+            onActivate();
+        }
+    });
+}
+
+// An event title that opens the event window from the keyboard. Inside table
+// cells the title is wrapped in its own element, because a table cell itself
+// must not act as a button (screen readers would lose the table structure).
+// Mouse clicks on the whole cell keep working through the cell's own handler.
+function eventTitleButton(summary, onActivate) {
+    let title = document.createElement('span');
+    title.classList.add('calendar-event-button');
+    title.textContent = summary;
+    title.setAttribute('aria-haspopup', 'dialog');
+    makeKeyboardButton(title, onActivate);
+    return title;
+}
+
+// The event/help window as an accessible dialog: it is announced as a dialog
+// with its title, keyboard focus moves into it when it opens, Tab stays inside
+// it while it is open, and focus returns to where it was when it closes.
+let focusBeforeDialog = null;
+
+function setUpDialog() {
+    let content = document.querySelector('#event-calendar-modal .calendar-modal-content');
+    content.setAttribute('role', 'dialog');
+    content.setAttribute('aria-modal', 'true');
+    content.setAttribute('aria-labelledby', 'calendar-modal-title');
+    content.tabIndex = -1; // can receive focus from the script, but is not a Tab stop
+}
+
+function showDialog() {
+    focusBeforeDialog = document.activeElement;
+    document.getElementById('event-calendar-modal').style.display = 'flex'; //necessary to show modal
+    document.querySelector('#event-calendar-modal .calendar-modal-content').focus({ preventScroll: true });
+}
+
+function returnFocusAfterDialog() {
+    if (focusBeforeDialog && document.contains(focusBeforeDialog)) {
+        focusBeforeDialog.focus({ preventScroll: true });
+    }
+    focusBeforeDialog = null;
+}
+
+// keep Tab and Shift+Tab inside the open dialog
+function keepFocusInDialog(event) {
+    let content = document.querySelector('#event-calendar-modal .calendar-modal-content');
+    let focusable = [...content.querySelectorAll('a[href], button:not([disabled]), [tabindex="0"]')]
+        .filter(el => el.offsetParent !== null); // visible ones only
+    if (focusable.length == 0) {
+        event.preventDefault();
+        return;
+    }
+    let first = focusable[0];
+    let last = focusable[focusable.length - 1];
+    if (event.shiftKey && (document.activeElement == first || document.activeElement == content)) {
+        event.preventDefault();
+        last.focus();
+    } else if (!event.shiftKey && document.activeElement == last) {
+        event.preventDefault();
+        first.focus();
+    } else if (!content.contains(document.activeElement)) {
+        event.preventDefault();
+        first.focus();
+    }
 }

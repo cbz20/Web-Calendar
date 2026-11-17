@@ -97,14 +97,16 @@
                 de: 'Fakultätskalender Mathematik',
                 en: 'Faculty of Mathematics Calendar'
             };
+            // colours need a contrast of at least 4.5 with white (WCAG), because
+            // they are used for white text on coloured bars and coloured labels
             const colours = {// categories of displayed events and their colors
                 // an event needs to belong to at least one of these categories to be displayed
                 'Dekanat': 'var(--rub-calendar-blue)',
                 'Algebra': '#347037',
                 'Analysis': '#b61e3e',//rub-darkred
-                'Didaktik': '#be9800',//rub-yellow, but with some grey tones added
-                'Numerik': '#0073ff',//rub-blue but all grey tones removed
-                'Stochastik': '#ed7102',//rub-orange
+                'Didaktik': '#8e7200',//rub-yellow, darkened for readable contrast
+                'Numerik': '#006ef5',//rub-blue, grey tones removed, slightly darkened for contrast
+                'Stochastik': '#bb5902',//rub-orange, darkened for readable contrast
                 'Topologie': '#8e44ad'
             };
             const links = {// keys must agree with the keys of 'colours'

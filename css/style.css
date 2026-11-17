@@ -453,3 +453,33 @@
     }
 }
 
+
+/* keyboard focus: a clearly visible frame (only for keyboard use, not for
+   mouse clicks, thanks to :focus-visible); currentColor keeps it visible on
+   white text in coloured event bars as well as on dark text */
+.calendar-event-button:focus-visible,
+.monthview-day-event:focus-visible,
+.calendar-accordion-header:focus-visible,
+#calendar-title:focus-visible,
+.calendar-container button:focus-visible,
+.calendar-modal-content button:focus-visible,
+.calendar-modal-content a:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+/* dark blue buttons have white text, so a frame in the text colour would be
+   white on the white page and invisible: they get a blue frame instead,
+   separated from the button by a small white gap (the selectors are more
+   specific than the general rule above, so that this one wins) */
+.calendar-container .setting-calendar-buttons:focus-visible,
+.calendar-modal-content .setting-calendar-buttons:focus-visible,
+.calendar-modal-content .calendar-link-button:focus-visible {
+    outline: 3px solid var(--rub-calendar-blue);
+    outline-offset: 2px;
+}
+
+/* the dialog itself receives focus when it opens, without a frame */
+.calendar-modal-content:focus {
+    outline: none;
+}

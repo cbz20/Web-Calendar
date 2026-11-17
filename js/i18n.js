@@ -588,3 +588,42 @@ function helpText(section, ...args) {
     const help = HELP[lang] || HELP.de;
     return help[section](...args);
 }
+
+// ===== event descriptions (shared by both views) =====
+
+// Line breaks in event descriptions: people often paste text with forced
+// line breaks inside paragraphs (e.g. copied from an email or PDF). Such
+// breaks are removed, while intentional ones are kept:
+//   - an empty line always separates paragraphs;
+//   - a single line break is kept if the line before it is short (a name,
+//     a time, a room), ends with a colon, or if the next line starts a list
+//     item ("- ", "* ", "• ", "1. ", "1) "), a label ("Abstract:") or a web
+//     address;
+//   - otherwise the line break is replaced by a space.
+const SHORT_LINE = 50; // lines shorter than this are taken as intentional
+
+function joinWrappedLines(text) {
+    let lines = text.replace(/\r\n?/g, '\n').split('\n');
+    let result = lines[0];
+    for (let i = 1; i < lines.length; i++) {
+        let previous = lines[i - 1].trim();
+        let next = lines[i].trim();
+        let keepBreak =
+            previous === '' || next === '' ||                        // paragraph break
+            previous.length < SHORT_LINE ||                          // short line
+            /:$/.test(previous) ||                                   // "Programm:"
+            /^([-*•–]\s|\d+[.)]\s)/.test(next) ||                    // list item
+            /^[\p{Lu}][\p{L}\- ]{0,25}:(\s|$)/u.test(next) ||        // label: "Abstract:"
+            /^(https?:\/\/|www\.)/i.test(next);                      // web address
+        result = keepBreak
+            ? result + '\n' + lines[i]
+            : result.replace(/\s+$/, '') + ' ' + lines[i].replace(/^\s+/, '');
+    }
+    return result;
+}
+
+// description as HTML: forced line breaks removed, links clickable
+function formatDescription(text) {
+    return linkifyStr(joinWrappedLines(text), {className: "linkInCalendarAbstract"})
+        .replace(/\n/g, '<br>');
+}

@@ -97,17 +97,19 @@
                 de: 'Fakultätskalender Mathematik',
                 en: 'Faculty of Mathematics Calendar'
             };
-            // colours need a contrast of at least 4.5 with white (WCAG), because
-            // they are used for white text on coloured bars and coloured labels
+            // Colours of the calendars. All of them carry white text, so each needs a
+            // contrast of at least 4.5 with white (WCAG). Within this limit they were
+            // chosen to be as distinct from each other as possible, also for people
+            // with red-green colour weakness, while staying close to the original colours.
             const colours = {// categories of displayed events and their colors
                 // an event needs to belong to at least one of these categories to be displayed
                 'Dekanat': 'var(--rub-calendar-blue)',
-                'Algebra': '#347037',
-                'Analysis': '#b61e3e',//rub-darkred
-                'Didaktik': '#8e7200',//rub-yellow, darkened for readable contrast
-                'Numerik': '#006ef5',//rub-blue, grey tones removed, slightly darkened for contrast
-                'Stochastik': '#bb5902',//rub-orange, darkened for readable contrast
-                'Topologie': '#8e44ad'
+                'Algebra': '#0c5d27', // green, a little deeper than the original #347037
+                'Analysis': '#b72142', // rub-darkred
+                'Didaktik': '#936f00', // rub-yellow, darkened for white text (original #be9800)
+                'Numerik': '#096cfc', // rub-blue
+                'Stochastik': '#727275', // grey (instead of orange, which was too close to red and yellow)
+                'Topologie': '#8d3fa8' // violet
             };
             const links = {// keys must agree with the keys of 'colours'
                 // (calendar data, not part of a version, so not inside CALENDAR_DIR)

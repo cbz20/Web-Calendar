@@ -319,6 +319,11 @@ const HELP = {
 			Mehrtägige Veranstaltungen werden grundsätzlich als ganztägige Veranstaltungen angezeigt.
 			</li>
 			<li>
+			Titel, Ort und Beschreibung werden als reiner Text angezeigt.
+			HTML-Befehle wie <code>&lt;b&gt;</code> oder <code>&lt;a href="..."&gt;</code> werden daher nicht ausgeführt, sondern erscheinen unverändert im Text.
+			Internetadressen (<code>https://...</code>) in der Beschreibung werden automatisch zu Links; Absätze trennt man durch eine Leerzeile.
+			</li>
+			<li>
 			Titel und Beschreibungen können Formeln in TeX-Notation enthalten:
 			<code>$...$</code> oder <code>\\(...\\)</code> für Formeln im Fließtext,
 			<code>$$...$$</code> oder <code>\\[...\\]</code> für abgesetzte Formeln.
@@ -513,6 +518,11 @@ const HELP = {
 			</li>
 			<li>
 			Events lasting several days are always displayed as all-day events.
+			</li>
+			<li>
+			Titles, locations and descriptions are displayed as plain text.
+			HTML tags such as <code>&lt;b&gt;</code> or <code>&lt;a href="..."&gt;</code> are therefore not interpreted, but appear in the text as typed.
+			Web addresses (<code>https://...</code>) in descriptions automatically become links; separate paragraphs with an empty line.
 			</li>
 			<li>
 			Titles and descriptions can contain formulas in TeX notation:
